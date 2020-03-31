@@ -1,0 +1,5 @@
+# Nate's Notes
+
+
+- Hide and lock mouse cursor
+- May need to use rigidbody for physics bc right now it doesn't use in-air physics.
