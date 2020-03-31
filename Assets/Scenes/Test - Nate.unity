@@ -195,6 +195,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   onGround: 0
+  physicsVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &247806816
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5872529bff79da64a91a70a1ef7c22c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
+  mouseSensitivity: 200
 --- !u!1 &1864801247
 GameObject:
   m_ObjectHideFlags: 0

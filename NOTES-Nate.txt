@@ -1,5 +1,7 @@
 # Nate's Notes
 
 
-- Hide and lock mouse cursor
-- May need to use rigidbody for physics bc right now it doesn't use in-air physics.
+- Hide and lock mouse cursor in menu manager type thing
+- May need to use rigidbody for physics bc right now it probably won't use in-air physics.
+- Jump key doesn't always work
+- Movement causes stuttering - https://forum.unity.com/threads/update-or-fixedupdate-for-charactercontroller.177705/

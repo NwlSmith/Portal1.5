@@ -5,7 +5,7 @@ using UnityEngine;
  * Date created: 3/31/2020
  * Creator: Nate Smith
  * 
- * Description: Moves the player
+ * Description: Moves the player in the horizontal plane and handles gravity and jumping;
  */
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,13 +16,12 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool onGround = false;
+    [HideInInspector] public Vector3 physicsVelocity;
 
     private CharacterController charController;
     private float xInput = 0f;
     private float yInput = 0f;
     private float zInput = 0f;
-    private float realJumpHeight;
-    private Vector3 velocity;
 
     void Start()
     {
@@ -31,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log(name + " does not contain a Character Controller.");
         }
-        realJumpHeight = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 
     void Update()
@@ -52,19 +50,19 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement vector.
         Vector3 move = transform.right * xInput + transform.forward * zInput;
 
-        // Move character horizontally.
-        charController.Move(move * speed * Time.fixedDeltaTime);
-
-        // Calculate vertical movement.
+        // Calculate physics movement.
         onGround = Physics.CheckSphere(groundPos.position, groundDistance, groundMask);
+        //onGround = charController.isGrounded;
         if (onGround)
         {
-            if (velocity.y < 0f)
-                velocity.y = -2f;
+            if (physicsVelocity.y < 0f)
+                physicsVelocity.y = -2f;
             if (yInput == 1)
-                velocity.y = realJumpHeight;
+                physicsVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-        velocity.y += gravity * Time.fixedDeltaTime;
-        charController.Move(velocity * Time.fixedDeltaTime);
+        physicsVelocity.y += gravity * Time.fixedDeltaTime;
+
+        // Move player
+        charController.Move((move * speed + physicsVelocity) * Time.fixedDeltaTime);
     }
 }
