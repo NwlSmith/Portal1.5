@@ -20,9 +20,14 @@ public class Portal : MonoBehaviour
         }
     }
 
+    /*
+     * Teleports the player to the other portal.
+     * Called in DestroyPortals() and NewPortal() in PortalManager.cs.
+     */
     public void TeleportPlayer(PlayerMovement playerMovement)
     {
         Debug.Log("Teleported Player.");
+
     }
 
     /*

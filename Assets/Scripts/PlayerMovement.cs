@@ -9,7 +9,8 @@ using UnityEngine;
  */
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 15f;
+    public float moveSpeed = 15f;
+    public float rotSpeed = 15f;
     public float gravity = -9.81f;
     public float jumpHeight = 5f;
     public Transform groundPos;
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         else
             yInput = 0f;
 
-        
+        // Ensure the player is always upright.
     }
 
     private void FixedUpdate()
@@ -63,6 +64,6 @@ public class PlayerMovement : MonoBehaviour
         physicsVelocity.y += gravity * Time.fixedDeltaTime;
 
         // Move player
-        charController.Move((move * speed + physicsVelocity) * Time.fixedDeltaTime);
+        charController.Move((move * moveSpeed + physicsVelocity) * Time.fixedDeltaTime);
     }
 }
