@@ -18,6 +18,7 @@ public class Portal : MonoBehaviour
             Debug.Log("Camera entered trigger");
             TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
         }
+
         if (other.tag == "Player")
         {
             Debug.Log("Player entered trigger");

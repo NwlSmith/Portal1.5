@@ -17,9 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool onGround = false;
-    public Vector3 physicsVelocity;
+    public Vector3 physicsVector;
 
     private CharacterController charController;
+    private PlayerLook playerLook;
     private float xInput = 0f;
     private float yInput = 0f;
     private float zInput = 0f;
@@ -30,15 +31,26 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log(name + " does not contain a Character Controller.");
         }
+        if (GetComponentInChildren<PlayerLook>() == null)
+        {
+            Debug.Log(name + " does not contain a PlayerLook script.");
+        }
+        else
+        {
+            playerLook = GetComponentInChildren<PlayerLook>();
+        }
     }
 
     void Update()
     {
         // Retrieve directional input.
-        xInput = Input.GetAxis("Horizontal");
-        zInput = Input.GetAxis("Vertical");
-        if (onGround && Input.GetButtonDown("Jump") )
-            yInput = 1f;
+        
+        if (onGround)
+        {
+            xInput = Input.GetAxis("Horizontal");
+            zInput = Input.GetAxis("Vertical");
+            yInput = Input.GetAxis("Jump");
+        }
         else
             yInput = 0f;
 
@@ -50,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Calculate movement vector.
-        Vector3 move = transform.right * xInput + transform.forward * zInput;
+        Vector3 moveVector = transform.right * xInput + transform.forward * zInput;
 
         // Calculate physics movement.
         //onGround = Physics.CheckSphere(groundPos.position, groundDistance, groundMask);
@@ -58,15 +70,17 @@ public class PlayerMovement : MonoBehaviour
         //onGround = charController.isGrounded;
         if (onGround)
         {
-            if (physicsVelocity.y < 0f)
-                physicsVelocity.y = -2f;
-            if (yInput == 1)
-                physicsVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            physicsVector.x = 0f;
+            physicsVector.z = 0f;
+            if (physicsVector.y < 0f)
+                physicsVector.y = -2f;
+            if (yInput >= 0.1f)
+                physicsVector.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-        physicsVelocity.y += gravity * Time.fixedDeltaTime;
+        physicsVector.y += gravity * Time.fixedDeltaTime;
 
         // Move player
-        charController.Move((move * moveSpeed + physicsVelocity) * Time.fixedDeltaTime);
+        charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
     }
 
     /*
@@ -76,9 +90,18 @@ public class PlayerMovement : MonoBehaviour
      */
     public void TeleportPlayer(Transform originPortal, Transform targetPortal)
     {
+        // Vector3.Reflect()?
         charController.Move(targetPortal.position - transform.position);
-        transform.rotation = Quaternion.Euler(targetPortal.rotation.eulerAngles + (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) - transform.rotation.eulerAngles));
-     }
+        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles + (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) - transform.rotation.eulerAngles);
+        transform.rotation = Quaternion.Euler(dirTransformVector);
+        physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
+        Debug.Log("physicsVector " + physicsVector);
+    }
+
+    private Vector3 TransformedVector(Vector3 originRot, Vector3 targetRot)
+    {
+        return Vector3.zero;
+    }
 
     /*
      * Checks if the player is entering the portal.
@@ -89,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     public bool VelocityCheck(Vector3 targetNormal)
     {
         Debug.Log("PlayerVel " + charController.velocity + " targetNormal " + targetNormal + " dotted = " + Vector3.Dot(charController.velocity, targetNormal));
-        if (Vector3.Dot(charController.velocity, targetNormal) < 0f)
+        if (Vector3.Dot(charController.velocity.normalized, targetNormal) < 0f)
             return true;
         return false;
     }
