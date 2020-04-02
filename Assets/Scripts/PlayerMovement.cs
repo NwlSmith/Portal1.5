@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
             yInput = 0f;
 
         // Ensure the player is always upright.
+        Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, upright, moveSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
