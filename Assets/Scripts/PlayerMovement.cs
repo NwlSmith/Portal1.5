@@ -53,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * xInput + transform.forward * zInput;
 
         // Calculate physics movement.
-        onGround = Physics.CheckSphere(groundPos.position, groundDistance, groundMask);
+        //onGround = Physics.CheckSphere(groundPos.position, groundDistance, groundMask);
+        onGround = charController.isGrounded;
         //onGround = charController.isGrounded;
         if (onGround)
         {
@@ -70,13 +71,14 @@ public class PlayerMovement : MonoBehaviour
 
     /*
      * Teleports the player to the other portal position.
+     * The angle of the back of the origin teleporter relative to the player added to the angle of the target portal.
      * Called in TeleportPlayer() in Portal.cs.
      */
-    public void TeleportPlayer(Transform target)
+    public void TeleportPlayer(Transform originPortal, Transform targetPortal)
     {
-        charController.Move(target.position - transform.position);
-        transform.rotation = target.rotation;
-    }
+        charController.Move(targetPortal.position - transform.position);
+        transform.rotation = Quaternion.Euler(targetPortal.rotation.eulerAngles + (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) - transform.rotation.eulerAngles));
+     }
 
     /*
      * Checks if the player is entering the portal.

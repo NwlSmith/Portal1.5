@@ -33,7 +33,7 @@ public class Portal : MonoBehaviour
     public void TeleportPlayer(PlayerMovement playerMovement)
     {
         Debug.Log("Teleported Player.");
-        playerMovement.TeleportPlayer(PortalManager.instance.OtherPortal(this).transform);
+        playerMovement.TeleportPlayer(transform, PortalManager.instance.OtherPortal(this).transform);
     }
 
     /*
