@@ -12,22 +12,28 @@ public class Portal : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Something entered trigger...");
+        Debug.Log(other.name + " entered trigger...");
+        if (other.tag == "MainCamera")
+        {
+            Debug.Log("Camera entered trigger");
+            TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
+        }
         if (other.tag == "Player")
         {
             Debug.Log("Player entered trigger");
-            TeleportPlayer(other.GetComponent<PlayerMovement>());
+            if (other.GetComponent<PlayerMovement>().VelocityCheck(transform.forward))
+                TeleportPlayer(other.GetComponent<PlayerMovement>());
         }
     }
 
     /*
-     * Teleports the player to the other portal.
-     * Called in DestroyPortals() and NewPortal() in PortalManager.cs.
+     * Teleports the player teleport function to the other portal.
+     * Called in OnTriggerEnter().
      */
     public void TeleportPlayer(PlayerMovement playerMovement)
     {
         Debug.Log("Teleported Player.");
-
+        playerMovement.TeleportPlayer(PortalManager.instance.OtherPortal(this).transform);
     }
 
     /*

@@ -363,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 655898539}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -4.15, y: -2.68, z: 9.44}
-  m_LocalScale: {x: 2, y: 4, z: 1}
+  m_LocalScale: {x: 2, y: 4, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -560,13 +560,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810221258}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.30070576, z: 0, w: 0.953717}
   m_LocalPosition: {x: 3.35, y: -2.68, z: 9.44}
-  m_LocalScale: {x: 2, y: 4, z: 1}
+  m_LocalScale: {x: 2, y: 4, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 35, z: 0}
 --- !u!1 &865189958
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,8 +689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee56a8970b86b944e9ed57fda689c608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blue: {fileID: 0}
-  orange: {fileID: 0}
+  blue: {fileID: 655898540}
+  orange: {fileID: 810221259}
 --- !u!4 &1319914456
 Transform:
   m_ObjectHideFlags: 0
@@ -928,6 +928,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509860507}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1687258581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4107041440620929195, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4107041441234380158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1687258582
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687258581}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1864801247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1233,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4107041440620929188, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: m_Antialiasing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1279,5 +1303,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: First Person Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4107041440620929193, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}

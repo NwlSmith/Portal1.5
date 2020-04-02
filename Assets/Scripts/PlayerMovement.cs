@@ -26,8 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        charController = GetComponent<CharacterController>();
-        if (charController == null)
+        if (!TryGetComponent(out charController))
         {
             Debug.Log(name + " does not contain a Character Controller.");
         }
@@ -67,5 +66,29 @@ public class PlayerMovement : MonoBehaviour
 
         // Move player
         charController.Move((move * moveSpeed + physicsVelocity) * Time.fixedDeltaTime);
+    }
+
+    /*
+     * Teleports the player to the other portal position.
+     * Called in TeleportPlayer() in Portal.cs.
+     */
+    public void TeleportPlayer(Transform target)
+    {
+        charController.Move(target.position - transform.position);
+        transform.rotation = target.rotation;
+    }
+
+    /*
+     * Checks if the player is entering the portal.
+     * If the velocity of the player dotted with the normal vector of the portal is less than 0,
+     * meaning they are roughly opposite, return true.
+     * Called in OnTriggerEnter() in Portal.cs.
+     */
+    public bool VelocityCheck(Vector3 targetNormal)
+    {
+        Debug.Log("PlayerVel " + charController.velocity + " targetNormal " + targetNormal + " dotted = " + Vector3.Dot(charController.velocity, targetNormal));
+        if (Vector3.Dot(charController.velocity, targetNormal) < 0f)
+            return true;
+        return false;
     }
 }
