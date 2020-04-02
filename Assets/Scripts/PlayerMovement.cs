@@ -5,7 +5,7 @@ using UnityEngine;
  * Date created: 3/31/2020
  * Creator: Nate Smith
  * 
- * Description: Moves the player in the horizontal plane and handles gravity and jumping;
+ * Description: Moves the player in the horizontal plane and handles gravity and jumping.
  */
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool onGround = false;
-    [HideInInspector] public Vector3 physicsVelocity;
+    public Vector3 physicsVelocity;
 
     private CharacterController charController;
     private float xInput = 0f;
