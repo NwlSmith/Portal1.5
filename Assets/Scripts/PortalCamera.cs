@@ -20,9 +20,11 @@ public class PortalCamera : MonoBehaviour
     }
     void Update()
     {
-        Vector3 dirTransformVector =
-            (PortalManager.instance.OtherPortal(parentPortal).transform.rotation.eulerAngles
-            + new Vector3(0, 180, 0) - playerTrans.transform.rotation.eulerAngles);
+        // Rotate the camera in relation to the player.
+        Vector3 dirTransformVector = Quaternion.LookRotation(parentPortal.transform.forward - (transform.position - playerTrans.position).normalized).eulerAngles;
         transform.rotation = Quaternion.Euler(dirTransformVector);
+
+        // Move the camera to correspond to the difference between the player's position and the other portal's position.
+        transform.position = playerTrans.position - PortalManager.instance.OtherPortal(parentPortal).transform.position;
     }
 }
