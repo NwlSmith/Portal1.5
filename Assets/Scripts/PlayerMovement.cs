@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotSpeed = 15f;
     public float gravity = -9.81f;
     public float jumpHeight = 5f;
+    public float inAirMoveMultiplier = .2f;
     public Transform groundPos;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -44,15 +45,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Retrieve directional input.
-        
-        if (onGround)
+        xInput = Input.GetAxis("Horizontal");
+        zInput = Input.GetAxis("Vertical");
+        yInput = Input.GetAxis("Jump");
+        if (!onGround)
         {
-            xInput = Input.GetAxis("Horizontal");
-            zInput = Input.GetAxis("Vertical");
-            yInput = Input.GetAxis("Jump");
+            xInput *= inAirMoveMultiplier;
+            zInput *= inAirMoveMultiplier;
+            yInput = 0;
         }
-        else
-            yInput = 0f;
 
         // Ensure the player is always upright.
         Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -61,25 +62,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Calculate movement vector.
+        // Calculate input movement vector.
         Vector3 moveVector = transform.right * xInput + transform.forward * zInput;
 
         // Calculate physics movement.
-        //onGround = Physics.CheckSphere(groundPos.position, groundDistance, groundMask);
         onGround = charController.isGrounded;
-        //onGround = charController.isGrounded;
         if (onGround)
         {
+            // When on the ground, the player shouldn't have any horizontal velocity other than input movement.
             physicsVector.x = 0f;
             physicsVector.z = 0f;
+            // When on the ground, the player's vertical velocity doesn't need to increase with gravity.
             if (physicsVector.y < 0f)
                 physicsVector.y = -2f;
             if (yInput >= 0.1f)
+            {
+                // Save the player's input movement so it will continue with same velocity while in air.
+                physicsVector += moveVector * moveSpeed;
+                // Jump.
                 physicsVector.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                onGround = false;
+            }
         }
         physicsVector.y += gravity * Time.fixedDeltaTime;
 
-        // Move player
+        // Move player according to its input and physics
         charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
     }
 

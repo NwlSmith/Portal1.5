@@ -10,6 +10,9 @@ using UnityEngine;
  */
 public class Portal : MonoBehaviour
 {
+
+    public GameObject surface;
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name + " entered trigger...");
