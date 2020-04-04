@@ -97,12 +97,16 @@ public class PlayerMovement : MonoBehaviour
      */
     public void TeleportPlayer(Transform originPortal, Transform targetPortal)
     {
-        // Vector3.Reflect()?
-        charController.Move(targetPortal.position - transform.position);
-        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles + (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) - transform.rotation.eulerAngles);
+        Debug.Log("Moving from " + transform.position + " to " + targetPortal.position + " by moving " + (targetPortal.position - transform.position));
+        charController.enabled = false;
+        transform.position = targetPortal.position;
+        charController.enabled = true;
+        //charController.Move(targetPortal.position - transform.position);
+        Debug.Log("new pos:" + transform.position);
+        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles + (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + transform.rotation.eulerAngles);
         transform.rotation = Quaternion.Euler(dirTransformVector);
         physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
-        Debug.Log("physicsVector " + physicsVector);
+        // Debug.Log("physicsVector " + physicsVector);
     }
 
     private Vector3 TransformedVector(Vector3 originRot, Vector3 targetRot)

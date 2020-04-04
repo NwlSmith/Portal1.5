@@ -12,6 +12,12 @@ public class Portal : MonoBehaviour
 {
 
     public GameObject surface;
+    public PortalCamera portalCamera;
+
+    private void Start()
+    {
+        portalCamera = GetComponentInChildren<PortalCamera>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +30,7 @@ public class Portal : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            Debug.Log("Player entered trigger");
+            Debug.Log("Player entered trigger on " + gameObject.name + " at " + transform.position);
             if (other.GetComponent<PlayerMovement>().VelocityCheck(transform.forward))
                 TeleportPlayer(other.GetComponent<PlayerMovement>());
         }
