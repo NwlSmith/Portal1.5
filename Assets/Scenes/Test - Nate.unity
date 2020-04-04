@@ -2665,12 +2665,12 @@ PrefabInstance:
     - target: {fileID: 2804222439179467223, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2804222439179467223, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2804222439179467223, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
@@ -2690,12 +2690,12 @@ PrefabInstance:
     - target: {fileID: 2804222439179467223, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2804222439179467223, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2804222439179467223, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
@@ -2818,7 +2818,7 @@ PrefabInstance:
     - target: {fileID: 5892942847299213575, guid: 753ab23f0c3f76f4ab55185e2f022449,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5892942847299213575, guid: 753ab23f0c3f76f4ab55185e2f022449,
         type: 3}
@@ -2828,7 +2828,7 @@ PrefabInstance:
     - target: {fileID: 5892942847299213575, guid: 753ab23f0c3f76f4ab55185e2f022449,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5892942847299213575, guid: 753ab23f0c3f76f4ab55185e2f022449,
         type: 3}
@@ -2843,7 +2843,7 @@ PrefabInstance:
     - target: {fileID: 5892942847299213575, guid: 753ab23f0c3f76f4ab55185e2f022449,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 5892942847299213575, guid: 753ab23f0c3f76f4ab55185e2f022449,
         type: 3}

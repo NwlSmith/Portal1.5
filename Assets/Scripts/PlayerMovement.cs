@@ -101,12 +101,16 @@ public class PlayerMovement : MonoBehaviour
         charController.enabled = false;
         transform.position = targetPortal.position;
         charController.enabled = true;
-        //charController.Move(targetPortal.position - transform.position);
+
         Debug.Log("new pos:" + transform.position);
-        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles + (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + transform.rotation.eulerAngles);
+
+        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(dirTransformVector);
         physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
-        // Debug.Log("physicsVector " + physicsVector);
+
+        Debug.Log("physicsVector " + physicsVector + " velocity = " + charController.velocity);
+        Debug.Log("new dot product: " + Vector3.Dot(charController.velocity.normalized, targetPortal.forward));
+        //Debug.Break();
     }
 
     private Vector3 TransformedVector(Vector3 originRot, Vector3 targetRot)
