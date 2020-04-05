@@ -2162,6 +2162,11 @@ PrefabInstance:
       propertyPath: m_Antialiasing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4107041440620929190, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.x
