@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,5 +30,17 @@ public class PortalMove : MonoBehaviour
         RB.AddForce(transform.forward * forceVar);
     }
 
-   
+    private void OnCollisionEnter(Collision other)
+    {
+        
+        if (other.gameObject.name == "wallNo")
+        {
+            Destroy(gameObject);
+        }
+
+        if (other.gameObject.name == "wall")
+        {
+            RB.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
 }

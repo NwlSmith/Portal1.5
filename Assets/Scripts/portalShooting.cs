@@ -12,7 +12,6 @@ public class portalShooting : MonoBehaviour
     public GameObject aimer;
 
     private Camera cam;
-
     private bool portalDelay;
 
     
@@ -25,14 +24,13 @@ public class portalShooting : MonoBehaviour
  
     void Update(){
         
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-        transform.Rotate(0, mouseX * 5, 0);
+       // float mouseX = Input.GetAxis("Mouse X");
+       // float mouseY = Input.GetAxis("Mouse Y");
+       // transform.Rotate(0, mouseX * 5, 0);
 
-        Camera.main.transform.Rotate(-mouseY * 5, 0, 0);
+       // Camera.main.transform.Rotate(-mouseY * 5, 0, 0);
         
         
-        Cursor.lockState = CursorLockMode.Locked;
         Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
        
         Debug.DrawRay(myRay.origin,myRay.direction*length,Color.red);
@@ -53,16 +51,24 @@ public class portalShooting : MonoBehaviour
         {
             // myHit.transform.Rotate(1,0,0);
             aimer.transform.position = myHit.point;
+            //if (myHit.collider.gameObject.name != "wallNo")
+           // {
+                if (Input.GetMouseButtonDown(0) && !portalDelay)
+                {
+                    StartCoroutine(delayPortal());
+                     GameObject insBall = Instantiate(portal);
+                    insBall.transform.SetParent(null);
+                    insBall.transform.rotation = transform.rotation;
+                    insBall.transform.position = this.transform.position;
+                   
             
-            if (Input.GetMouseButtonDown(0) && !portalDelay)
-            {
-                StartCoroutine(delayPortal());
-                GameObject insBall = Instantiate(portal);
-                insBall.transform.SetParent(null);
-                insBall.transform.rotation = transform.rotation;
-                insBall.transform.position = this.transform.position;
-            
-            }
+                }
+                
+                
+                
+          //  }
+          
+
         }
     }
 

@@ -7,6 +7,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="MovementTest.cs" t="Include" />
+          <e p="NonPortalable.cs" t="Include" />
           <e p="PortalMove.cs" t="Include" />
           <e p="portalShooting.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
