@@ -66,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveVector = transform.right * xInput + transform.forward * zInput;
 
         // Calculate physics movement.
+        if (onGround && !charController.isGrounded)
+        {
+            physicsVector += moveVector * moveSpeed;
+        }
         onGround = charController.isGrounded;
         if (onGround)
         {

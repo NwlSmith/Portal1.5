@@ -53,6 +53,7 @@ public class Portal : MonoBehaviour
      */
     public void DestroyMe()
     {
-        Destroy(gameObject);
+        GetComponent<Animator>().SetTrigger("Destroy");
+        Destroy(gameObject, .15f);
     }
 }
