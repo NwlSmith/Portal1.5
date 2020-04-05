@@ -13,7 +13,7 @@ public class PickupObject : MonoBehaviour
     bool carrying;
     GameObject carriedObject;
     public float distance = 3;
-    public float smooth = 2;
+    public float smooth = 4;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +74,7 @@ public class PickupObject : MonoBehaviour
     {
         carrying = false;
         //carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-        p.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        carriedObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
         carriedObject = null;
     }
 }
