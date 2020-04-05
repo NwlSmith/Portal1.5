@@ -13,23 +13,32 @@ public class PlayerMovement : MonoBehaviour
     public float rotSpeed = 15f;
     public float gravity = -9.81f;
     public float jumpHeight = 5f;
+    public float inAirMoveMultiplier = .2f;
     public Transform groundPos;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool onGround = false;
-    public Vector3 physicsVelocity;
+    public Vector3 physicsVector;
 
     private CharacterController charController;
+    private PlayerLook playerLook;
     private float xInput = 0f;
     private float yInput = 0f;
     private float zInput = 0f;
 
     void Start()
     {
-        charController = GetComponent<CharacterController>();
-        if (charController == null)
+        if (!TryGetComponent(out charController))
         {
             Debug.Log(name + " does not contain a Character Controller.");
+        }
+        if (GetComponentInChildren<PlayerLook>() == null)
+        {
+            Debug.Log(name + " does not contain a PlayerLook script.");
+        }
+        else
+        {
+            playerLook = GetComponentInChildren<PlayerLook>();
         }
     }
 
@@ -38,10 +47,16 @@ public class PlayerMovement : MonoBehaviour
         // Retrieve directional input.
         xInput = Input.GetAxis("Horizontal");
         zInput = Input.GetAxis("Vertical");
-        if (onGround && Input.GetButtonDown("Jump") )
-            yInput = 1f;
-        else
-            yInput = 0f;
+        yInput = Input.GetAxis("Jump");
+        if (!onGround)
+        {
+            xInput *= inAirMoveMultiplier;
+            zInput *= inAirMoveMultiplier;
+            yInput = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Debug.Break();
 
         // Ensure the player is always upright.
         Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -50,22 +65,77 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Calculate movement vector.
-        Vector3 move = transform.right * xInput + transform.forward * zInput;
+        // Calculate input movement vector.
+        Vector3 moveVector = transform.right * xInput + transform.forward * zInput;
 
         // Calculate physics movement.
-        onGround = Physics.CheckSphere(groundPos.position, groundDistance, groundMask);
-        //onGround = charController.isGrounded;
+        if (onGround && !charController.isGrounded)
+        {
+            physicsVector += moveVector * moveSpeed;
+        }
+        onGround = charController.isGrounded;
         if (onGround)
         {
-            if (physicsVelocity.y < 0f)
-                physicsVelocity.y = -2f;
-            if (yInput == 1)
-                physicsVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            // When on the ground, the player shouldn't have any horizontal velocity other than input movement.
+            physicsVector.x = 0f;
+            physicsVector.z = 0f;
+            // When on the ground, the player's vertical velocity doesn't need to increase with gravity.
+            if (physicsVector.y < 0f)
+                physicsVector.y = -2f;
+            if (yInput >= 0.1f)
+            {
+                // Save the player's input movement so it will continue with same velocity while in air.
+                physicsVector += moveVector * moveSpeed;
+                // Jump.
+                physicsVector.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                onGround = false;
+            }
         }
-        physicsVelocity.y += gravity * Time.fixedDeltaTime;
+        physicsVector.y += gravity * Time.fixedDeltaTime;
 
-        // Move player
-        charController.Move((move * moveSpeed + physicsVelocity) * Time.fixedDeltaTime);
+        // Move player according to its input and physics
+        charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
+    }
+
+    /*
+     * Teleports the player to the other portal position.
+     * The angle of the back of the origin teleporter relative to the player added to the angle of the target portal.
+     * Called in TeleportPlayer() in Portal.cs.
+     */
+    public void TeleportPlayer(Transform originPortal, Transform targetPortal)
+    {
+        Debug.Log("Moving from " + transform.position + " to " + targetPortal.position + " by moving " + (targetPortal.position - transform.position));
+        charController.enabled = false;
+        transform.position = targetPortal.position;
+        charController.enabled = true;
+
+        Debug.Log("new pos:" + transform.position);
+
+        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(dirTransformVector);
+        physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
+
+        Debug.Log("physicsVector " + physicsVector + " velocity = " + charController.velocity);
+        Debug.Log("new dot product: " + Vector3.Dot(charController.velocity.normalized, targetPortal.forward));
+        //Debug.Break();
+    }
+
+    private Vector3 TransformedVector(Vector3 originRot, Vector3 targetRot)
+    {
+        return Vector3.zero;
+    }
+
+    /*
+     * Checks if the player is entering the portal.
+     * If the velocity of the player dotted with the normal vector of the portal is less than 0,
+     * meaning they are roughly opposite, return true.
+     * Called in OnTriggerEnter() in Portal.cs.
+     */
+    public bool VelocityCheck(Vector3 targetNormal)
+    {
+        Debug.Log("PlayerVel " + charController.velocity + " targetNormal " + targetNormal + " dotted = " + Vector3.Dot(charController.velocity, targetNormal));
+        if (Vector3.Dot(charController.velocity.normalized, targetNormal) < 0f)
+            return true;
+        return false;
     }
 }
