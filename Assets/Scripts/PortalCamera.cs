@@ -26,15 +26,12 @@ public class PortalCamera : MonoBehaviour
         // Retrieve the other portal.
         Transform otherPortalTrans = PortalManager.instance.OtherPortal(parentPortal).transform;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Debug.Break();
-
         // The relative local rotation of the player to the other portal's forward vector.
         TransformRotLoc(otherPortalTrans);
         // The relative local position of the player to the other portal's forward vector.
         TransformPosLoc(otherPortalTrans);
     }
-
+    /*
     private void TransformRotLoc1(Transform otherPortalTrans)
     {
         // The angle of the relative rotations of each portal.
@@ -78,8 +75,9 @@ public class PortalCamera : MonoBehaviour
         Quaternion relativePortalQuat = Quaternion.AngleAxis(relativePortalAngle, parentPortal.transform.up);
         // Rotate the camera.
         transform.localRotation = Quaternion.LookRotation(relativePortalQuat * playerCameraTrans.forward, otherPortalTrans.up);
-    }
+    }*/
 
+    
     private void TransformRotLoc(Transform otherPortalTrans)
     {
         Vector3 relativeRot = otherPortalTrans.InverseTransformDirection(Camera.main.transform.forward);
@@ -87,7 +85,7 @@ public class PortalCamera : MonoBehaviour
         transform.forward = parentPortal.transform.TransformDirection(relativeRot);
     }
 
-
+    /*
     private void TransformPosLoc1(Transform otherPortalTrans)
     {
         // Move the camera to correspond to the difference between the player's position and the other portal's position.
@@ -99,7 +97,7 @@ public class PortalCamera : MonoBehaviour
         // Move the camera to correspond to the difference between the player's position and the other portal's position.
         Vector3 tempVec3 = playerCameraTrans.position - otherPortalTrans.position;
         transform.localPosition = parentPortal.transform.rotation * tempVec3;
-    }
+    }*/
 
     private void TransformPosLoc(Transform otherPortalTrans)
     {
@@ -108,7 +106,7 @@ public class PortalCamera : MonoBehaviour
         transform.position = parentPortal.transform.TransformPoint(relativePos);
     }
 
-
+    /*
     private void TransformRotGlo(Transform otherPortalTrans)
     {
         // The angle of the relative rotations of each portal.
@@ -124,5 +122,5 @@ public class PortalCamera : MonoBehaviour
     {
         // Move the camera to correspond to the difference between the player's position and the other portal's position.
         transform.position = parentPortal.transform.position + playerCameraTrans.position - otherPortalTrans.position;
-    }
+    }*/
 }
