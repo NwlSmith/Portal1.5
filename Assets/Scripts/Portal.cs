@@ -10,13 +10,26 @@ using UnityEngine;
  */
 public class Portal : MonoBehaviour
 {
-
+    public bool blue;
     public GameObject surface;
     public PortalCamera portalCamera;
 
     private void Start()
     {
         portalCamera = GetComponentInChildren<PortalCamera>();
+
+        if (blue)
+        {
+            if (PortalManager.instance.blue != null)
+                PortalManager.instance.blue.DestroyMe();
+            PortalManager.instance.blue = this;
+        }
+        else
+        {
+            if (PortalManager.instance.orange != null)
+                PortalManager.instance.orange.DestroyMe();
+            PortalManager.instance.orange = this;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

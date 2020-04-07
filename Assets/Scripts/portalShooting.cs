@@ -22,8 +22,8 @@ public class portalShooting : MonoBehaviour
     
  
     void Start () {
-
-        portal = PortalManager.instance.bluePrefab;
+        if (PortalManager.instance != null)
+            portal = PortalManager.instance.bluePrefab;
         // ball = GetComponent<GameObject>();
     }
  
@@ -58,14 +58,14 @@ public class portalShooting : MonoBehaviour
             aimer.transform.position = myHit.point;
             //if (myHit.collider.gameObject.name != "wallNo")
            // {
-                if (Input.GetMouseButtonDown(0) && !portalDelay)
+                if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
                 {
                     StartCoroutine(delayPortal());
                      GameObject insBall = Instantiate(portal);
                     insBall.transform.SetParent(null);
                     insBall.transform.forward = myHit.normal;
                     insBall.transform.position = myHit.point + .01f * myHit.normal;
-                   
+                insBall.GetComponent<Portal>().surface = myHit.collider.gameObject;
             
                 }
                 

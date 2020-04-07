@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80ef9871f663cf4bb7d50fcc689a54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blue: 1
   surface: {fileID: 0}
   portalCamera: {fileID: 0}
 --- !u!95 &529281112
@@ -377,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dd368d06138734ea2ee1e4faa20545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelMR: {fileID: 5892942847400580383}
 --- !u!1 &5892942847754584466
 GameObject:
   m_ObjectHideFlags: 0

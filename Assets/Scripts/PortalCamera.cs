@@ -10,6 +10,7 @@ using UnityEngine;
  */
 public class PortalCamera : MonoBehaviour
 {
+    public MeshRenderer modelMR;
     private Transform playerCameraTrans;
     private Portal parentPortal;
     private Camera cam;
@@ -27,6 +28,14 @@ public class PortalCamera : MonoBehaviour
         }
 
         cam.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+
+        if (PortalManager.instance.OtherPortal(parentPortal) != null)
+        {
+            NewPairedPortal(PortalManager.instance.OtherPortal(parentPortal).portalCamera);
+            PortalManager.instance.OtherPortal(parentPortal).portalCamera.NewPairedPortal(this);
+        }
+
+        
     }
     void Update()
     {
@@ -39,6 +48,11 @@ public class PortalCamera : MonoBehaviour
             // The relative local position of the player to the other portal's forward vector.
             TransformPosLoc(otherPortal.transform);
         }
+    }
+
+    public void NewPairedPortal(PortalCamera otherPortalCamera)
+    {
+        otherPortalCamera.modelMR.material.mainTexture = cam.targetTexture;
     }
 
     /*
