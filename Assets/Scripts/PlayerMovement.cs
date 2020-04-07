@@ -104,19 +104,19 @@ public class PlayerMovement : MonoBehaviour
      */
     public void TeleportPlayer(Transform originPortal, Transform targetPortal)
     {
-        Debug.Log("Moving from " + transform.position + " to " + targetPortal.position + " by moving " + (targetPortal.position - transform.position));
+        // Debug.Log("Moving from " + transform.position + " to " + targetPortal.position + " by moving " + (targetPortal.position - transform.position));
         charController.enabled = false;
         transform.position = targetPortal.position;
         charController.enabled = true;
 
-        Debug.Log("new pos:" + transform.position);
+        // Debug.Log("new pos:" + transform.position);
 
         Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(dirTransformVector);
         physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
 
-        Debug.Log("physicsVector " + physicsVector + " velocity = " + charController.velocity);
-        Debug.Log("new dot product: " + Vector3.Dot(charController.velocity.normalized, targetPortal.forward));
+        // Debug.Log("physicsVector " + physicsVector + " velocity = " + charController.velocity);
+        // Debug.Log("new dot product: " + Vector3.Dot(charController.velocity.normalized, targetPortal.forward));
         //Debug.Break();
     }
 
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
      */
     public bool VelocityCheck(Vector3 targetNormal)
     {
-        Debug.Log("PlayerVel " + charController.velocity + " targetNormal " + targetNormal + " dotted = " + Vector3.Dot(charController.velocity, targetNormal));
+        // Debug.Log("PlayerVel " + charController.velocity + " targetNormal " + targetNormal + " dotted = " + Vector3.Dot(charController.velocity, targetNormal));
         if (Vector3.Dot(charController.velocity.normalized, targetNormal) < 0f)
             return true;
         return false;

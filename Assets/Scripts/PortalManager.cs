@@ -18,6 +18,9 @@ public class PortalManager : MonoBehaviour
     public Portal blue;
     public Portal orange;
 
+    public Portal bluePrefab;
+    public Portal orangePrefab;
+
     private void Awake()
     {
         // Ensure that there is only one instance of the PortalManager.

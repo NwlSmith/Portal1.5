@@ -58,8 +58,8 @@ public class portalShooting : MonoBehaviour
                     StartCoroutine(delayPortal());
                      GameObject insBall = Instantiate(portal);
                     insBall.transform.SetParent(null);
-                    insBall.transform.rotation = transform.rotation;
-                    insBall.transform.position = this.transform.position;
+                    insBall.transform.forward = myHit.normal;
+                    insBall.transform.position = myHit.point + .01f * myHit.normal;
                    
             
                 }
