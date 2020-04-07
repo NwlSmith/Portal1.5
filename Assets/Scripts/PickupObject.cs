@@ -12,8 +12,8 @@ public class PickupObject : MonoBehaviour
     GameObject mainCamera;
     bool carrying;
     GameObject carriedObject;
-    public float distance = 1;
-    public float smooth = 5;
+    public float distance = 3;
+    public float smooth = 4;
     // Start is called before the first frame update
     void Start()
     {
