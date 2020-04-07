@@ -18,8 +18,8 @@ public class PortalManager : MonoBehaviour
     public Portal blue;
     public Portal orange;
 
-    public Portal bluePrefab;
-    public Portal orangePrefab;
+    public GameObject bluePrefab;
+    public GameObject orangePrefab;
 
     private void Awake()
     {

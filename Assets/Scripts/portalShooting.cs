@@ -1,7 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Date created: 4/2/2020
+ * Creator: Mark Timchenko
+ * 
+ * Description: Allows the player to shoot Blue Portals.
+ */
 public class portalShooting : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,8 +22,8 @@ public class portalShooting : MonoBehaviour
     
  
     void Start () {
-        
 
+        portal = PortalManager.instance.bluePrefab;
         // ball = GetComponent<GameObject>();
     }
  

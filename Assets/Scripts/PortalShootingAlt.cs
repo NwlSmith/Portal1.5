@@ -34,13 +34,11 @@ public class PortalShootingAlt : MonoBehaviour
             aimer.transform.position = myHit.point;
             if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
-                Debug.Log("hit pos " + myHit.point + " normal " + myHit.normal);
                 StartCoroutine(delayPortal());
                 GameObject insBall = Instantiate(portal);
                 insBall.transform.SetParent(null);
                 insBall.transform.forward = myHit.normal;
                 insBall.transform.position = myHit.point + .01f * myHit.normal;
-                Debug.Log("Portal pos " + insBall.transform.position + " normal " + insBall.transform.forward);
             }
         }
     }
