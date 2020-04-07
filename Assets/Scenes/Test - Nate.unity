@@ -2502,10 +2502,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal (Blue)
       objectReference: {fileID: 0}
-    - target: {fileID: 5892942847299213692, guid: 753ab23f0c3f76f4ab55185e2f022449,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 753ab23f0c3f76f4ab55185e2f022449, type: 3}

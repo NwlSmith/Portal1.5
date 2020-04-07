@@ -57,6 +57,7 @@ public class Portal : MonoBehaviour
     {
         Debug.Log("Teleported Player.");
         playerMovement.TeleportPlayer(transform, PortalManager.instance.OtherPortal(this).transform);
+        surface.GetComponent<Collider>().enabled = true;
     }
 
     /*
