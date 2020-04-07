@@ -6,6 +6,7 @@ public class portalShooting : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject portal;
+    public GameObject portalRight;
     public float speed = 50;
 
     public float length = 1000f;
@@ -63,6 +64,18 @@ public class portalShooting : MonoBehaviour
                    
             
                 }
+                if (Input.GetMouseButtonDown(1) && !portalDelay)
+                {
+                    StartCoroutine(delayPortal());
+                    GameObject insportal2 = Instantiate(portalRight);
+                    insportal2.transform.SetParent(null);
+                    insportal2.transform.rotation = transform.rotation;
+                    insportal2.transform.position = this.transform.position;
+                   
+            
+                }
+
+                
                 
                 
                 

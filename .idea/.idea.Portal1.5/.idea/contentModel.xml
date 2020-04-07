@@ -2,23 +2,26 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
-      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="ExampleAssets" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="SimpleCameraController.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Graphics" t="Include">
+          <e p="ScreenCutoutShader.shader" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="MovementTest.cs" t="Include" />
           <e p="NonPortalable.cs" t="Include" />
+          <e p="PlayerLook.cs" t="Include" />
+          <e p="PlayerMovement.cs" t="Include" />
+          <e p="Portal.cs" t="Include" />
+          <e p="PortalCamera.cs" t="Include" />
+          <e p="PortalManager.cs" t="Include" />
           <e p="PortalMove.cs" t="Include" />
           <e p="portalShooting.cs" t="Include" />
-          <e p="SimpleCameraController.cs" t="Include" />
-        </e>
-        <e p="TutorialInfo" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="Editor" t="Include">
-              <e p="ReadmeEditor.cs" t="Include" />
-            </e>
-            <e p="Readme.cs" t="Include" />
-          </e>
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
