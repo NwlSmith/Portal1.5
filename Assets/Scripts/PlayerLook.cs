@@ -43,4 +43,16 @@ public class PlayerLook : MonoBehaviour
         // Rotate player horizontally.
         playerBody.Rotate(Vector3.up * mouseX);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Portal>(out Portal portal))
+            Debug.Log("Camera collided with portal trigger");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Portal portal))
+            Debug.Log("Camera collided with portal collider");
+    }
 }

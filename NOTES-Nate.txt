@@ -5,3 +5,4 @@
 - May need to use rigidbody for physics bc right now it probably won't use in-air physics.
 - Jump key doesn't always work
 - Movement causes stuttering - https://forum.unity.com/threads/update-or-fixedupdate-for-charactercontroller.177705/
+- Portal functionality oh god https://www.youtube.com/watch?v=_SmPR5mvH7w
