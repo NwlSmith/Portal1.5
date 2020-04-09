@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Date created: 4/2/2020
+ * Creator: Mark Timchenko
+ * 
+ * Description: Allows the player to shoot Blue Portals.
+ */
 public class portalShooting : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject portal;
+    public GameObject portalRight;
     public float speed = 50;
 
     public float length = 1000f;
@@ -17,8 +23,9 @@ public class portalShooting : MonoBehaviour
     
  
     void Start () {
-        
-
+        if (PortalManager.instance != null)
+            portal = PortalManager.instance.bluePrefab;
+            portalRight = PortalManager.instance.orangePrefab;
         // ball = GetComponent<GameObject>();
     }
  
@@ -53,21 +60,32 @@ public class portalShooting : MonoBehaviour
             aimer.transform.position = myHit.point;
             //if (myHit.collider.gameObject.name != "wallNo")
            // {
-                if (Input.GetMouseButtonDown(0) && !portalDelay)
+                if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
                 {
                     StartCoroutine(delayPortal());
                      GameObject insBall = Instantiate(portal);
                     insBall.transform.SetParent(null);
-                    insBall.transform.rotation = transform.rotation;
-                    insBall.transform.position = this.transform.position;
-                   
+                    insBall.transform.forward = myHit.normal;
+                    insBall.transform.position = myHit.point + .01f * myHit.normal;
+                insBall.GetComponent<Portal>().surface = myHit.collider.gameObject;
             
                 }
-                
-                
-                
-          //  }
-          
+
+            if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
+            {
+                StartCoroutine(delayPortal());
+                GameObject insportal2 = Instantiate(portalRight);
+                insportal2.transform.SetParent(null);
+                insportal2.transform.forward = myHit.normal;
+                insportal2.transform.position = myHit.point + .01f * myHit.normal;
+                insportal2.GetComponent<Portal>().surface = myHit.collider.gameObject;
+
+            }
+
+
+
+            //  }
+
 
         }
     }
