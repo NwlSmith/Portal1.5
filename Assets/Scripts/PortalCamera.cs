@@ -43,6 +43,7 @@ public class PortalCamera : MonoBehaviour
         Portal otherPortal = PortalManager.instance.OtherPortal(parentPortal);
         if (otherPortal != null)
         {
+            cam.projectionMatrix = Camera.main.projectionMatrix;
             // The relative local rotation of the player to the other portal's forward vector.
             TransformRotLoc(otherPortal.transform);
             // The relative local position of the player to the other portal's forward vector.
@@ -61,9 +62,9 @@ public class PortalCamera : MonoBehaviour
      */
     private void TransformRotLoc(Transform otherPortalTrans)
     {
-        Vector3 relativeRot = otherPortalTrans.InverseTransformDirection(Camera.main.transform.forward);
-        relativeRot = Vector3.Scale(relativeRot, new Vector3(-1, 1, -1));
-        transform.forward = parentPortal.transform.TransformDirection(relativeRot);
+        Quaternion localRot = Quaternion.Inverse(otherPortalTrans.transform.rotation) * Camera.main.transform.rotation;
+        Vector3 relativeRot = localRot.eulerAngles - new Vector3(0, -180, 0);
+        transform.localRotation = Quaternion.Euler(relativeRot);
     }
 
     /*
