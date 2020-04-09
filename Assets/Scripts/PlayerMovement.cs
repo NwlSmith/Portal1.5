@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(dirTransformVector);
 
         // Transfer velocity to new direction.
-        physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
+        physicsVector = targetPortal.forward * physicsVector.magnitude;
     }
 
     /*

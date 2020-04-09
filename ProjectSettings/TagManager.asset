@@ -21,12 +21,12 @@ TagManager:
   - Camera
   - CanPickUp
   - Portal
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NotCollidingWithBluePortalSurface
+  - NotCollidingWithOrangePortalSurface
+  - NotCollidingWithBothPortalSurfaces
+  - BluePortalSurface
+  - OrangePortalSurface
+  - BothPortalSurface
   - 
   - 
   - 

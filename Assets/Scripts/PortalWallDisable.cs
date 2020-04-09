@@ -10,6 +10,14 @@ using UnityEngine;
  */
 public class PortalWallDisable : MonoBehaviour
 {
+    private int portalLayer;
+
+    private void Start()
+    {
+        // Stores the layer that this object should set the player to should they enter the trigger.
+        portalLayer = GetComponentInParent<Portal>().blue ? 12 : 13;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigger entered by " + other.name);
@@ -17,13 +25,15 @@ public class PortalWallDisable : MonoBehaviour
         {
             Debug.Log("Portal wall disable entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
-            GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+            //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+            StopCollidingWithPortalSurface(other.gameObject);
         }
         if (other.tag == "CanPickUp")
         {
             Debug.Log("Portal entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
-            GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+            //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+            StopCollidingWithPortalSurface(other.gameObject);
         }
     }
 
@@ -33,12 +43,36 @@ public class PortalWallDisable : MonoBehaviour
         if (other.tag == "Player")
         {
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
-            PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
+            //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
+            StartCollidingWithPortalSurface(other.gameObject);
         }
         if (other.tag == "CanPickUp")
         {
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
-            PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
+            //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
+            StartCollidingWithPortalSurface(other.gameObject);
         }
+    }
+
+    private void StopCollidingWithPortalSurface(GameObject go)
+    {
+        int otherLayer = GetComponentInParent<Portal>().blue ? 13 : 12;
+        // If the object is already set to not collide with the other portal's surface collider
+        if (go.layer == otherLayer)
+            // don't collide with either
+            go.layer = 14;
+        else
+            go.layer = portalLayer;
+    }
+
+    private void StartCollidingWithPortalSurface(GameObject go)
+    {
+        int otherLayer = GetComponentInParent<Portal>().blue ? 13 : 12;
+        // If the object is already also set to not collide with the other portal's surface collider
+        if (go.layer == 14)
+            // Still don't collide with them
+            go.layer = otherLayer;
+        else
+            go.layer = 0;
     }
 }

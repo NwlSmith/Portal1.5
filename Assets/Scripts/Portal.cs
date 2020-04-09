@@ -31,6 +31,8 @@ public class Portal : MonoBehaviour
                 PortalManager.instance.orange.DestroyMe();
             PortalManager.instance.orange = this;
         }
+
+        SetSurfaceLayer();
     }
 
     /*
@@ -47,15 +49,6 @@ public class Portal : MonoBehaviour
             if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
                 // Teleport the player.
                 TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
-        }
-
-        if (other.tag == "Player")
-        {
-            Debug.Log("Player entered trigger on " + gameObject.name + " at " + transform.position);
-            // Check if the player is moving into the portal.
-            if (other.GetComponent<PlayerMovement>().VelocityCheck(transform.forward))
-                // Teleport the player.
-                TeleportPlayer(other.GetComponent<PlayerMovement>());
         }
 
         if (other.tag == "CanPickUp")
@@ -106,6 +99,25 @@ public class Portal : MonoBehaviour
     public void DestroyMe()
     {
         GetComponent<Animator>().SetTrigger("Destroy");
+        ResetSurfaceLayer();
         Destroy(gameObject, .15f);
+    }
+
+    private void SetSurfaceLayer()
+    {
+        int otherLayer = blue ? 16 : 15;
+        if (surface.layer == otherLayer)
+            surface.layer = 17;
+        else
+            surface.layer = blue ? 15 : 16;
+    }
+
+    private void ResetSurfaceLayer()
+    {
+        int otherLayer = blue ? 16 : 15;
+        if (surface.layer == 17)
+            surface.layer = otherLayer;
+        else
+            surface.layer = 0;
     }
 }
