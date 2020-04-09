@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104461418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2804222439179467223}
@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 0.1}
+  m_Size: {x: 2, y: 4, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2104461420
 MonoBehaviour:
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 2804222439179467220}
   - component: {fileID: 2804222439179467219}
   - component: {fileID: 1212647963745511162}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Portal (Orange)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +735,7 @@ Transform:
   m_GameObject: {fileID: 2804222439179467218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.92, y: -1, z: 10.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 2804222439002593429}
   - {fileID: 2804222437392398513}
@@ -759,8 +759,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 4, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.5}
 --- !u!114 &2804222439179467219
 MonoBehaviour:
   m_ObjectHideFlags: 0

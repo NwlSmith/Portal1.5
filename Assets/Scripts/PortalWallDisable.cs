@@ -14,7 +14,7 @@ public class PortalWallDisable : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Portal entered by " + other.name);
+            Debug.Log("Portal wall disable entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
         }
@@ -28,14 +28,16 @@ public class PortalWallDisable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("Portal " + name + " exited by " + other.name);
         if (other.tag == "Player")
         {
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
+            PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
         }
         if (other.tag == "CanPickUp")
         {
-            Debug.Log("Portal entered by " + other.name);
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
+            PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
         }
     }
 }

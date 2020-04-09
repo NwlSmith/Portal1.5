@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5566102893208049437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5892942847299213575}
@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 0.1}
+  m_Size: {x: 2, y: 4, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2889963258340078060
 MonoBehaviour:
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 5892942847299213690}
   - component: {fileID: 5892942847299213691}
   - component: {fileID: 529281112}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Portal (Blue)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 5892942847299213692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 5892942847478386030}
   - {fileID: 5892942847400580368}
@@ -109,8 +109,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 4, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.5}
 --- !u!114 &5892942847299213691
 MonoBehaviour:
   m_ObjectHideFlags: 0
