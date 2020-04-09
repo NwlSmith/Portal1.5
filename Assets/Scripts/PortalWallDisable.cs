@@ -73,6 +73,12 @@ public class PortalWallDisable : MonoBehaviour
             // Still don't collide with them
             go.layer = otherLayer;
         else
-            go.layer = 0;
+        {
+            if (go.tag == "Player")
+                go.layer = 0;
+            else if (go.tag == "CanPickUp")
+                go.layer = 10;
+        }
+            
     }
 }
