@@ -10,17 +10,16 @@ using UnityEngine;
 public class PickupObject : MonoBehaviour
 {
     GameObject mainCamera;
-    bool carrying;
+    bool carrying; //check if player is carrying object
     GameObject carriedObject;
     public float distance = 3;
     public float smooth = 4;
-    // Start is called before the first frame update
+  
     void Start()
     {
-        mainCamera = GameObject.FindWithTag("MainCamera");
+        mainCamera = GameObject.FindWithTag("MainCamera"); //Find the main camera with "MainCamera" Tag
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(carrying)
@@ -30,32 +29,31 @@ public class PickupObject : MonoBehaviour
         }
         else
         {
-            Pickup();
+            Pickup(); //if player is not carrying object, then it's able to pick up items
         }
     }
     void carry(GameObject o)
     {
         
-        o.transform.position = Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth);
+        o.transform.position = Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth); //"Lerp" can smooth the movement of picked items
         o.transform.rotation = Quaternion.identity;
     }
     void Pickup()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E)) //Press "E" key to pick up and place items
         {
             int x = Screen.width / 2;
-            int y = Screen.height / 2;
+            int y = Screen.height / 2; //Find the middle point of screen and raycast from there
 
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y));
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y)); //assign the origin point to cast a ray
             RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
+            if(Physics.Raycast(ray, out hit, 3)) //Casts a ray(Vector3 origin, Vector3 direction, float maxDistance), against all colliders in the Scene
             {
-                Pickupable p = hit.collider.GetComponent<Pickupable>();
+                Pickupable p = hit.collider.GetComponent<Pickupable>(); //make it able to pick up all the objects with "Pickupable" script
                 if(p != null)
                 {
                     carrying = true;
                     carriedObject = p.gameObject;
-                    //p.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     p.gameObject.GetComponent<Rigidbody>().useGravity = false;
                 }
             }
@@ -73,7 +71,6 @@ public class PickupObject : MonoBehaviour
     void dropObject()
     {
         carrying = false;
-        //carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         carriedObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
         carriedObject = null;
     }
