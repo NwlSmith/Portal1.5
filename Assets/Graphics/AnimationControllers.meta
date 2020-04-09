@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Graphics/AnimationControllers.meta
 guid: 1df6da5cdab5cde49bda6a89acc2dd64
+=======
+guid: 985b3ffdcf62f66449292580ac605d0d
+>>>>>>> ba604b30a9a3eb702cea9eff35d991918d6eca4e:Assets/Audio.meta
+=======
+guid: 4a1a123cdcc770343a159c1823e07c7e
+>>>>>>> ba604b30a9a3eb702cea9eff35d991918d6eca4e
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

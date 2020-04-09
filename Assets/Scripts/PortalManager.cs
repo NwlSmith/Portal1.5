@@ -18,6 +18,9 @@ public class PortalManager : MonoBehaviour
     public Portal blue;
     public Portal orange;
 
+    public GameObject bluePrefab;
+    public GameObject orangePrefab;
+
     private void Awake()
     {
         // Ensure that there is only one instance of the PortalManager.
@@ -44,10 +47,16 @@ public class PortalManager : MonoBehaviour
      */
     public void DestroyPortals()
     {
-        blue.DestroyMe();
-        blue = null;
+        if (blue != null)
+        {
+            blue.DestroyMe();
+            blue = null;
+        }
 
-        orange.DestroyMe();
-        orange = null;
+        if (orange != null)
+        {
+            orange.DestroyMe();
+            orange = null;
+        }
     }
 }

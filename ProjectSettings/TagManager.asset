@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Portal
   - NoPortal
+  - CanHoldPortals
+  - CanPickUp
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - 
   - Ground
   - CullingMask
-  - 
-  - 
-  - 
+  - Camera
+  - CanPickUp
+  - Portal
   - 
   - 
   - 

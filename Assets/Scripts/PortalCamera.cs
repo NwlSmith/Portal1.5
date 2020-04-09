@@ -10,95 +10,73 @@ using UnityEngine;
  */
 public class PortalCamera : MonoBehaviour
 {
+    public MeshRenderer modelMR;
     private Transform playerCameraTrans;
     private Portal parentPortal;
+    private Camera cam;
 
     private void Start()
     {
         playerCameraTrans = FindObjectOfType<PlayerLook>().transform;
         parentPortal = GetComponentInParent<Portal>();
 
-        GetComponent<Camera>().targetTexture.height = Screen.height;
-        GetComponent<Camera>().targetTexture.width = Screen.width;
+        cam = GetComponent<Camera>();
+
+        // Create a new RenderTexture so RT resolution stays the same across portals.
+        if (cam.targetTexture != null)
+        {
+            cam.targetTexture.Release();
+        }
+        cam.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+
+        // Pair with the other portal.
+        if (PortalManager.instance.OtherPortal(parentPortal) != null)
+        {
+            NewPairedPortal(PortalManager.instance.OtherPortal(parentPortal).portalCamera);
+            PortalManager.instance.OtherPortal(parentPortal).portalCamera.NewPairedPortal(this);
+        }
     }
+
     void Update()
     {
         // Retrieve the other portal.
-        Transform otherPortalTrans = PortalManager.instance.OtherPortal(parentPortal).transform;
-
-        // The relative local rotation of the player to the other portal's forward vector.
-        TransformRotLoc(otherPortalTrans);
-        // The relative local position of the player to the other portal's forward vector.
-        TransformPosLoc(otherPortalTrans);
+        Portal otherPortal = PortalManager.instance.OtherPortal(parentPortal);
+        if (otherPortal != null)
+        {
+            cam.projectionMatrix = Camera.main.projectionMatrix;
+            // The relative local rotation of the player to the other portal's forward vector.
+            TransformRotLoc(otherPortal.transform);
+            // The relative local position of the player to the other portal's forward vector.
+            TransformPosLoc(otherPortal.transform);
+            // Update the near clipping plane of the camera so that the backs of objects aren't rendered by the camera.
+            UpdateClippingPlane();
+        }
     }
+
     /*
-    private void TransformRotLoc1(Transform otherPortalTrans)
+     * Sets the other portal's camera's RenderTexture to the images captured on this camera.
+     * Called in Start().
+     */
+    public void NewPairedPortal(PortalCamera otherPortalCamera)
     {
-        // The angle of the relative rotations of each portal.
-        float relativePortalAngle = Quaternion.Angle(parentPortal.transform.rotation, otherPortalTrans.rotation);
-        // The angle of the relative rotations of each portal in quaternion form. (May need to change parentPortal.transform.up to Vector3.up)
-        Quaternion relativePortalQuat = Quaternion.AngleAxis(relativePortalAngle, parentPortal.transform.up);
-        // Rotate the camera.
-        transform.localRotation = Quaternion.LookRotation(relativePortalQuat * playerCameraTrans.forward, parentPortal.transform.up);
-        //transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + new Vector3(0, 180, 0));
+        otherPortalCamera.modelMR.material.mainTexture = cam.targetTexture;
     }
 
-    private void TransformRotLoc2(Transform otherPortalTrans)
-    {
-        // Vector3.Reflect(playerCameraTrans.forward,)
-        
-        Vector3 relativePortalAngle = parentPortal.transform.rotation.eulerAngles - playerCameraTrans.rotation.eulerAngles;
-        transform.localRotation = Quaternion.LookRotation(Quaternion.Euler(relativePortalAngle) * playerCameraTrans.forward, parentPortal.transform.up);
-    }
-
-    private void TransformRotLoc3(Transform otherPortalTrans)
-    {
-        // The angle of the relative rotations of each portal.
-        float relativePortalAngle = Quaternion.Angle(otherPortalTrans.rotation, parentPortal.transform.rotation);
-        // The angle of the relative rotations of each portal in quaternion form. (May need to change parentPortal.transform.up to Vector3.up)
-        Quaternion relativePortalQuat = Quaternion.AngleAxis(relativePortalAngle, parentPortal.transform.up);
-        // Rotate the camera.
-        transform.localRotation = Quaternion.LookRotation(relativePortalQuat * playerCameraTrans.forward, parentPortal.transform.up);
-    }
-
-    private void TransformRotLoc4(Transform otherPortalTrans)
-    {
-        // Rotate the camera.
-        transform.localRotation = playerCameraTrans.rotation;
-    }
-
-    private void TransformRotLoc5(Transform otherPortalTrans)
-    {
-        // The angle of the relative rotations of each portal.
-        float relativePortalAngle = Quaternion.Angle(parentPortal.transform.rotation, otherPortalTrans.rotation);
-        // The angle of the relative rotations of each portal in quaternion form. (May need to change parentPortal.transform.up to Vector3.up)
-        Quaternion relativePortalQuat = Quaternion.AngleAxis(relativePortalAngle, parentPortal.transform.up);
-        // Rotate the camera.
-        transform.localRotation = Quaternion.LookRotation(relativePortalQuat * playerCameraTrans.forward, otherPortalTrans.up);
-    }*/
-
-    
+    /*
+     * Rotates the camera to the rotation of the player relative to the other portal.
+     * Called in Update().
+     */
     private void TransformRotLoc(Transform otherPortalTrans)
     {
-        Vector3 relativeRot = otherPortalTrans.InverseTransformDirection(Camera.main.transform.forward);
-        relativeRot = Vector3.Scale(relativeRot, new Vector3(-1, 1, -1));
-        transform.forward = parentPortal.transform.TransformDirection(relativeRot);
+        Quaternion localRot = Quaternion.Inverse(otherPortalTrans.transform.rotation) * Camera.main.transform.rotation;
+        Vector3 relativeRot = localRot.eulerAngles - new Vector3(0, -180, 0);
+        transform.localRotation = Quaternion.Euler(relativeRot);
     }
 
     /*
-    private void TransformPosLoc1(Transform otherPortalTrans)
-    {
-        // Move the camera to correspond to the difference between the player's position and the other portal's position.
-        transform.localPosition = playerCameraTrans.position - otherPortalTrans.position;
-    }
-
-    private void TransformPosLoc2(Transform otherPortalTrans)
-    {
-        // Move the camera to correspond to the difference between the player's position and the other portal's position.
-        Vector3 tempVec3 = playerCameraTrans.position - otherPortalTrans.position;
-        transform.localPosition = parentPortal.transform.rotation * tempVec3;
-    }*/
-
+     * Transforms the camera at the position of the player relative to the other portal.
+     * Called in Update().
+     */
     private void TransformPosLoc(Transform otherPortalTrans)
     {
         Vector3 relativePos = otherPortalTrans.InverseTransformPoint(Camera.main.transform.position);
@@ -107,20 +85,11 @@ public class PortalCamera : MonoBehaviour
     }
 
     /*
-    private void TransformRotGlo(Transform otherPortalTrans)
+     * Updates the clipping plane so that the camera does not render objects behind the portal.
+     * Called in Update().
+     */
+    private void UpdateClippingPlane()
     {
-        // The angle of the relative rotations of each portal.
-        float relativePortalAngle = Quaternion.Angle(parentPortal.transform.rotation, otherPortalTrans.rotation);
-        // The angle of the relative rotations of each portal in quaternion form. (May need to change parentPortal.transform.up to Vector3.up)
-        Quaternion relativePortalQuat = Quaternion.AngleAxis(relativePortalAngle, parentPortal.transform.up);
-        // Rotate the camera.
-        transform.rotation = Quaternion.LookRotation(relativePortalQuat * playerCameraTrans.forward, parentPortal.transform.up);
-        transform.Rotate(2*transform.rotation.eulerAngles.x, 180, 0);
+        cam.nearClipPlane = Vector3.Distance(transform.position, parentPortal.transform.position);
     }
-
-    private void TransformPosGlo(Transform otherPortalTrans)
-    {
-        // Move the camera to correspond to the difference between the player's position and the other portal's position.
-        transform.position = parentPortal.transform.position + playerCameraTrans.position - otherPortalTrans.position;
-    }*/
 }

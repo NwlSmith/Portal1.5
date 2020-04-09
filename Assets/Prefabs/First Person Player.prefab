@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4107041440620929192}
   - component: {fileID: 4107041440620929188}
   - component: {fileID: 4107041440620929189}
-  m_Layer: 0
+  - component: {fileID: 189482776}
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -101,7 +102,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 1
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -129,6 +130,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 200
+--- !u!114 &189482776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107041440620929195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833dfd3fca1f64d549ce8eeaa4eafebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portal: {fileID: 5892942847299213692, guid: 753ab23f0c3f76f4ab55185e2f022449, type: 3}
+  portalRight: {fileID: 0}
+  speed: 50
+  length: 1000
+  aimer: {fileID: 0}
 --- !u!1 &4107041441102148628
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +159,7 @@ GameObject:
   - component: {fileID: 4107041441102148627}
   - component: {fileID: 4107041441102148626}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,6 +237,8 @@ GameObject:
   - component: {fileID: 4107041441210495498}
   - component: {fileID: 4107041441210495501}
   - component: {fileID: 4107041441210495499}
+  - component: {fileID: 1643188141}
+  - component: {fileID: 139583587}
   m_Layer: 0
   m_Name: First Person Player
   m_TagString: Player
@@ -239,7 +259,6 @@ Transform:
   m_Children:
   - {fileID: 4107041441102148629}
   - {fileID: 4107041440620929191}
-  - {fileID: 4107041441263410719}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,41 +295,43 @@ MonoBehaviour:
   moveSpeed: 15
   rotSpeed: 15
   gravity: -9.81
-  jumpHeight: 5
-  groundPos: {fileID: 4107041441263410719}
+  jumpHeight: 1
+  inAirMoveMultiplier: 0.2
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 256
   onGround: 0
   physicsVector: {x: 0, y: 0, z: 0}
---- !u!1 &4107041441263410718
-GameObject:
+--- !u!114 &1643188141
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4107041441263410719}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4107041441263410719
-Transform:
+  m_GameObject: {fileID: 4107041441210495500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee56a8970b86b944e9ed57fda689c608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blue: {fileID: 0}
+  orange: {fileID: 0}
+  bluePrefab: {fileID: 5892942847299213692, guid: 753ab23f0c3f76f4ab55185e2f022449,
+    type: 3}
+  orangePrefab: {fileID: 2804222439179467218, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
+    type: 3}
+--- !u!114 &139583587
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107041441263410718}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.75, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4107041441210495498}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 4107041441210495500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260de461c3f6d624fa3f6e2b6289c5ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 3
+  smooth: 4
