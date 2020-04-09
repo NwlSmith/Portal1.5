@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 60e0b8689c52cf74cb8bfe83bc8737e0
+=======
+guid: e10ae869d77eb8a468874cf90346bf6c
+>>>>>>> NateBranch
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
