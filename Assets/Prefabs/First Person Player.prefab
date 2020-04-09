@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4107041440620929188}
   - component: {fileID: 4107041440620929189}
   - component: {fileID: 189482776}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portal: {fileID: 5892942847299213692, guid: 753ab23f0c3f76f4ab55185e2f022449, type: 3}
+  portalRight: {fileID: 0}
   speed: 50
   length: 1000
   aimer: {fileID: 0}

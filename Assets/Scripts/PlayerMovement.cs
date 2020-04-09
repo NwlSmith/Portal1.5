@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         xInput = Input.GetAxis("Horizontal");
         zInput = Input.GetAxis("Vertical");
         yInput = Input.GetAxis("Jump");
+        // If the player is in the air, they cannot jump and they shouldn't be able to move super quickly.
         if (!onGround)
         {
             xInput *= inAirMoveMultiplier;
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             yInput = 0;
         }
 
+        // DEBUG: Press escape to pause the editor
         if (Input.GetKeyDown(KeyCode.Escape))
             Debug.Break();
 

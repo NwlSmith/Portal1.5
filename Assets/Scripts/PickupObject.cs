@@ -9,9 +9,9 @@ using UnityEngine;
  */
 public class PickupObject : MonoBehaviour
 {
-    GameObject mainCamera;
-    bool carrying;
-    GameObject carriedObject;
+    public GameObject mainCamera;
+    public bool carrying;
+    public GameObject carriedObject;
     public float distance = 3;
     public float smooth = 4;
     // Start is called before the first frame update
@@ -70,7 +70,7 @@ public class PickupObject : MonoBehaviour
         }
     }
 
-    void dropObject()
+    public void dropObject()
     {
         carrying = false;
         //carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;

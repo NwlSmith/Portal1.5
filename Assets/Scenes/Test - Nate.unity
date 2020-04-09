@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 242322363}
   - component: {fileID: 242322362}
   - component: {fileID: 242322361}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: CanPickUp
   m_Icon: {fileID: 0}
@@ -932,6 +932,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771040723}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &798644449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4107041440620929195, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4107041441234380158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &798644456
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798644449}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &807446517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2294,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal (Orange)
       objectReference: {fileID: 0}
+    - target: {fileID: 2804222439179467218, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2804222439179467219, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
       propertyPath: surface
@@ -2348,6 +2372,11 @@ PrefabInstance:
       propertyPath: aimer
       value: 
       objectReference: {fileID: 57841317}
+    - target: {fileID: 4107041440620929195, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2496,6 +2525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892942847299213692, guid: 753ab23f0c3f76f4ab55185e2f022449,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 753ab23f0c3f76f4ab55185e2f022449, type: 3}

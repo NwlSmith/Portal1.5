@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 5892942847299213690}
   - component: {fileID: 5892942847299213691}
   - component: {fileID: 529281112}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Portal (Blue)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
