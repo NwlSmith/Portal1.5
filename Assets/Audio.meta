@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Audio.meta
 <<<<<<< HEAD:Assets/Graphics/AnimationControllers.meta
 guid: 1df6da5cdab5cde49bda6a89acc2dd64
 =======
 guid: 985b3ffdcf62f66449292580ac605d0d
 >>>>>>> NateBranch:Assets/Audio.meta
+=======
+guid: b3c85474b98ae14439d92e00822f72d1
+>>>>>>> 8dc197b945b2bf30234088522317270f386f3a65:Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -1,13 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
- * Date created: 4/2/2020
- * Creator: Mark Timchenko
- * 
- * Description: Allows the player to shoot Blue Portals.
- */
-public class portalShooting : MonoBehaviour
+//this script shoots portals.  it uses a raycast to detect objects and throw portals.
+//it also handles the crosshairs which swap depending on which portal is out 
+public class PortalShooting : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject portal;
@@ -16,26 +12,24 @@ public class portalShooting : MonoBehaviour
 
     public float length = 1000f;
     public GameObject aimer;
-
+    //left portal is the blue one
+    public bool leftPortal;
+    //right portal is the orange one
+    public bool rightPortal;
     private Camera cam;
     private bool portalDelay;
 
     
  
     void Start () {
-        if (PortalManager.instance != null)
-            portal = PortalManager.instance.bluePrefab;
-            portalRight = PortalManager.instance.orangePrefab;
+        
+
         // ball = GetComponent<GameObject>();
     }
  
     void Update(){
         
-       // float mouseX = Input.GetAxis("Mouse X");
-       // float mouseY = Input.GetAxis("Mouse Y");
-       // transform.Rotate(0, mouseX * 5, 0);
-
-       // Camera.main.transform.Rotate(-mouseY * 5, 0, 0);
+     
         
         
         Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -43,54 +37,49 @@ public class portalShooting : MonoBehaviour
         Debug.DrawRay(myRay.origin,myRay.direction*length,Color.red);
         RaycastHit myHit;
 
-        //RaycastHit hit;
-        // if(Input.GetMouseButtonUp(0)){
-        //  Debug.Log("things");
-        //  Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //  if(Physics.Raycast(myRay, out hit, 400.0f))
-        //  {
-        //     GameObject newBall = Instantiate(ball, transform.position, transform.rotation);
-        //     newBall.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * speed;
-        //  }
-        //  }
-        
+      
+        //constantly check for collisions through rayCast
         if (Physics.Raycast(myRay, out myHit, length))
         {
-            // myHit.transform.Rotate(1,0,0);
             aimer.transform.position = myHit.point;
-            //if (myHit.collider.gameObject.name != "wallNo")
-           // {
-                if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
+            //left click to shoot the blue portal
+                if (Input.GetMouseButtonDown(0) && !portalDelay)
                 {
-                    StartCoroutine(delayPortal());
+                    //delay portal explained below in its coroutine
+                    StartCoroutine(DelayPortal());
                      GameObject insBall = Instantiate(portal);
                     insBall.transform.SetParent(null);
-                    insBall.transform.forward = myHit.normal;
-                    insBall.transform.position = myHit.point + .01f * myHit.normal;
-                insBall.GetComponent<Portal>().surface = myHit.collider.gameObject;
+                    insBall.transform.rotation = transform.rotation;
+                    insBall.transform.position = this.transform.position;
+                   
+            
+                }
+                //right click to shoot orange portal
+                if (Input.GetMouseButtonDown(1) && !portalDelay)
+                {
+                    
+                    StartCoroutine(DelayPortal());
+                    GameObject insportal2 = Instantiate(portalRight);
+                    insportal2.transform.SetParent(null);
+                    insportal2.transform.rotation = transform.rotation;
+                    insportal2.transform.position = this.transform.position;
+                   
             
                 }
 
-            if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
-            {
-                StartCoroutine(delayPortal());
-                GameObject insportal2 = Instantiate(portalRight);
-                insportal2.transform.SetParent(null);
-                insportal2.transform.forward = myHit.normal;
-                insportal2.transform.position = myHit.point + .01f * myHit.normal;
-                insportal2.GetComponent<Portal>().surface = myHit.collider.gameObject;
-
-            }
-
-
-
-            //  }
-
+                
+                
+                
+                
+          //  }
+          
 
         }
     }
+    //this coroutine delays the portals so you cant spam them right after one another.  
+    //change the WaitForSeconds to make a longer delay
 
-    IEnumerator delayPortal()
+    IEnumerator DelayPortal()
     {
         portalDelay = true;
         yield return new WaitForSeconds(.05f);

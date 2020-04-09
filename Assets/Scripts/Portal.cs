@@ -33,19 +33,32 @@ public class Portal : MonoBehaviour
         }
     }
 
+    /*
+     * Teleports gameObjects, either the player or a object that can be picked up, to the other portal
+     * Called when a collider enters the trigger collider.
+     */
     private void OnTriggerEnter(Collider other)
     {
+        //-----------------------ADD COMMENTS
+
+
+
         Debug.Log(other.name + " entered trigger...");
         if (other.tag == "MainCamera")
         {
             Debug.Log("Camera entered trigger");
-            TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
+            // Check if the player is moving into the portal.
+            if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
+                // Teleport the player.
+                TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
         }
 
         if (other.tag == "Player")
         {
             Debug.Log("Player entered trigger on " + gameObject.name + " at " + transform.position);
+            // Check if the player is moving into the portal.
             if (other.GetComponent<PlayerMovement>().VelocityCheck(transform.forward))
+                // Teleport the player.
                 TeleportPlayer(other.GetComponent<PlayerMovement>());
         }
 
@@ -53,22 +66,11 @@ public class Portal : MonoBehaviour
         {
             Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name + " at " + transform.position);
             Rigidbody otherRB = other.GetComponent<Rigidbody>();
+            // Check if the object is moving into the portal.
             if (otherRB.VelocityCheck(transform.forward))
+                // Teleport the object.
                 TeleportObject(otherRB);
         }
-    }
-
-    /*
-     * Checks if the given object is entering the portal.
-     * If the velocity of the object dotted with the normal vector of the portal is less than 0,
-     * meaning they are roughly opposite, return true.
-     * Called in OnTriggerEnter() in Portal.cs.
-     */
-    public bool ObjectVelocityCheck(GameObject obj)
-    {
-        if (Vector3.Dot(obj.GetComponent<Rigidbody>().velocity.normalized, transform.forward) < 0f)
-            return true;
-        return false;
     }
 
     /*
@@ -89,12 +91,12 @@ public class Portal : MonoBehaviour
      */
     public void TeleportObject(Rigidbody otherRB)
     {
-        /* // NEED TO GET ISABELLA TO MAKE THESE THINGS PUBLIC
+        // If the player is carrying the object, drop it.
         PickupObject po = FindObjectOfType<PickupObject>();
         if (po.carriedObject == otherRB.gameObject)
             po.dropObject();
-        */
 
+        // THEN Teleport it.
         Debug.Log("Teleported object" + otherRB.name);
         otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
         surface.GetComponent<Collider>().enabled = true;

@@ -4,10 +4,17 @@ fileFormatVersion: 2
 guid: 1df6da5cdab5cde49bda6a89acc2dd64
 =======
 guid: 985b3ffdcf62f66449292580ac605d0d
+<<<<<<< HEAD
 >>>>>>> NateBranch:Assets/Audio.meta
 =======
 guid: 4a1a123cdcc770343a159c1823e07c7e
 >>>>>>> NateBranch
+=======
+>>>>>>> ba604b30a9a3eb702cea9eff35d991918d6eca4e:Assets/Audio.meta
+=======
+guid: 4a1a123cdcc770343a159c1823e07c7e
+>>>>>>> ba604b30a9a3eb702cea9eff35d991918d6eca4e
+>>>>>>> 8dc197b945b2bf30234088522317270f386f3a65
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
