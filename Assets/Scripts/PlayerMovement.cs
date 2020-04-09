@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpHeight = 5f;
     public float inAirMoveMultiplier = .2f;
-    public Transform groundPos;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool onGround = false;

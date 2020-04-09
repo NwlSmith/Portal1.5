@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 4107041441102148627}
   - component: {fileID: 4107041441102148626}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +258,6 @@ Transform:
   m_Children:
   - {fileID: 4107041441102148629}
   - {fileID: 4107041440620929191}
-  - {fileID: 4107041441263410719}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -297,7 +296,6 @@ MonoBehaviour:
   gravity: -9.81
   jumpHeight: 1
   inAirMoveMultiplier: 0.2
-  groundPos: {fileID: 4107041441263410719}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
@@ -336,33 +334,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 3
   smooth: 4
---- !u!1 &4107041441263410718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4107041441263410719}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4107041441263410719
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107041441263410718}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.75, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4107041441210495498}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
