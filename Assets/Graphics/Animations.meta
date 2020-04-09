@@ -3,7 +3,11 @@ fileFormatVersion: 2
 guid: 60e0b8689c52cf74cb8bfe83bc8737e0
 =======
 guid: e10ae869d77eb8a468874cf90346bf6c
+<<<<<<< HEAD
+>>>>>>> NateBranch
+=======
 >>>>>>> ba604b30a9a3eb702cea9eff35d991918d6eca4e
+>>>>>>> 8dc197b945b2bf30234088522317270f386f3a65
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
