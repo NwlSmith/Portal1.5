@@ -14,7 +14,13 @@ public class PortalWallDisable : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Portal entered " + name);
+            Debug.Log("Portal entered by " + name);
+            // Change this to make it so it's only false to that object? Restructure the collider?
+            GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+        }
+        if (other.tag == "CanPickUp")
+        {
+            Debug.Log("Portal entered by " + name);
             // Change this to make it so it's only false to that object? Restructure the collider?
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
         }
