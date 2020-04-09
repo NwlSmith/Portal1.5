@@ -2372,6 +2372,11 @@ PrefabInstance:
       propertyPath: aimer
       value: 
       objectReference: {fileID: 57841317}
+    - target: {fileID: 4107041440620929188, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4107041440620929195, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_Layer
