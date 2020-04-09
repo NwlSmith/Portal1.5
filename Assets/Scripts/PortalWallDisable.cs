@@ -12,6 +12,7 @@ public class PortalWallDisable : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger entered by " + other.name);
         if (other.tag == "Player")
         {
             Debug.Log("Portal wall disable entered by " + other.name);
