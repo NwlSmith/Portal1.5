@@ -15,6 +15,7 @@ public class PortalManager : MonoBehaviour
     public static PortalManager instance = null;
 
     // Public Variables.
+    public int maxNumRecursions = 4;
     public Portal blue;
     public Portal orange;
 
@@ -29,6 +30,39 @@ public class PortalManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
     }
+
+    /*
+    private void LateUpdate()
+    {
+
+        PortalCamera pcb1 = blue.portalCamera;
+        PortalCamera pco1 = orange.portalCamera;
+        PortalCamera pcb2 = pcb1.GetComponentInChildren<PortalCamera>();
+        PortalCamera pco2 = pco1.GetComponentInChildren<PortalCamera>();
+        PortalCamera pcb3 = pcb2.GetComponentInChildren<PortalCamera>();
+        PortalCamera pco3 = pco2.GetComponentInChildren<PortalCamera>();
+        PortalCamera pcb4 = pcb3.GetComponentInChildren<PortalCamera>();
+        PortalCamera pco4 = pco3.GetComponentInChildren<PortalCamera>();
+        pcb4.Render(3, maxNumRecursions);
+        pco4.Render(3, maxNumRecursions);
+        pcb3.Render(2, maxNumRecursions);
+        pco3.Render(2, maxNumRecursions);
+        pcb2.Render(1, maxNumRecursions);
+        pco2.Render(1, maxNumRecursions);
+        pcb1.Render(0, maxNumRecursions);
+        pco1.Render(0, maxNumRecursions);
+    }*/
+
+    /*private void LateUpdate()
+    {
+        for (int r = 0; r < maxNumRecursions; r++)
+        {
+            PortalCamera pc
+            for (int i = 0)
+                blue.portalCamera.Render(r, maxNumRecursions);
+            orange.portalCamera.Render(r, maxNumRecursions);
+        }
+    }*/
 
     /*
      * Returns the other portal.
