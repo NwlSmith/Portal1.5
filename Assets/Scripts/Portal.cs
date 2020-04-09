@@ -18,6 +18,7 @@ public class Portal : MonoBehaviour
     {
         portalCamera = GetComponentInChildren<PortalCamera>();
 
+        // Update the PortalManager.
         if (blue)
         {
             if (PortalManager.instance.blue != null)

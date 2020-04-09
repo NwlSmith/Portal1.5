@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Ensure the player is always upright.
         Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, upright, moveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, upright, rotSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
                 onGround = false;
             }
         }
+        // Increment physics gravity.
         physicsVector.y += gravity * Time.fixedDeltaTime;
 
         // Move player according to its input and physics
@@ -103,25 +104,17 @@ public class PlayerMovement : MonoBehaviour
      */
     public void TeleportPlayer(Transform originPortal, Transform targetPortal)
     {
-        // Debug.Log("Moving from " + transform.position + " to " + targetPortal.position + " by moving " + (targetPortal.position - transform.position));
+        // Temporarily disable the CharacterController to allow teleportation.
         charController.enabled = false;
         transform.position = targetPortal.position;
         charController.enabled = true;
 
-        // Debug.Log("new pos:" + transform.position);
-
+        // Set the players look direction to the same direction you entered in relation to the new portal.
         Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(dirTransformVector);
+
+        // Transfer velocity to new direction.
         physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
-
-        // Debug.Log("physicsVector " + physicsVector + " velocity = " + charController.velocity);
-        // Debug.Log("new dot product: " + Vector3.Dot(charController.velocity.normalized, targetPortal.forward));
-        //Debug.Break();
-    }
-
-    private Vector3 TransformedVector(Vector3 originRot, Vector3 targetRot)
-    {
-        return Vector3.zero;
     }
 
     /*
@@ -132,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
      */
     public bool VelocityCheck(Vector3 targetNormal)
     {
-        // Debug.Log("PlayerVel " + charController.velocity + " targetNormal " + targetNormal + " dotted = " + Vector3.Dot(charController.velocity, targetNormal));
         if (Vector3.Dot(charController.velocity.normalized, targetNormal) < 0f)
             return true;
         return false;

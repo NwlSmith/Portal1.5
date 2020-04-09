@@ -22,21 +22,21 @@ public class PortalCamera : MonoBehaviour
 
         cam = GetComponent<Camera>();
 
+        // Create a new RenderTexture so RT resolution stays the same across portals.
         if (cam.targetTexture != null)
         {
             cam.targetTexture.Release();
         }
-
         cam.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
 
+        // Pair with the other portal.
         if (PortalManager.instance.OtherPortal(parentPortal) != null)
         {
             NewPairedPortal(PortalManager.instance.OtherPortal(parentPortal).portalCamera);
             PortalManager.instance.OtherPortal(parentPortal).portalCamera.NewPairedPortal(this);
         }
-
-        
     }
+
     void Update()
     {
         // Retrieve the other portal.
@@ -51,6 +51,10 @@ public class PortalCamera : MonoBehaviour
         }
     }
 
+    /*
+     * Sets the other portal's camera's RenderTexture to the images captured on this camera.
+     * Called in Start().
+     */
     public void NewPairedPortal(PortalCamera otherPortalCamera)
     {
         otherPortalCamera.modelMR.material.mainTexture = cam.targetTexture;
