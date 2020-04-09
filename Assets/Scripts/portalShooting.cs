@@ -11,6 +11,7 @@ public class portalShooting : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject portal;
+    public GameObject portalRight;
     public float speed = 50;
 
     public float length = 1000f;
@@ -24,6 +25,7 @@ public class portalShooting : MonoBehaviour
     void Start () {
         if (PortalManager.instance != null)
             portal = PortalManager.instance.bluePrefab;
+            portalRight = PortalManager.instance.orangePrefab;
         // ball = GetComponent<GameObject>();
     }
  
@@ -68,11 +70,22 @@ public class portalShooting : MonoBehaviour
                 insBall.GetComponent<Portal>().surface = myHit.collider.gameObject;
             
                 }
-                
-                
-                
-          //  }
-          
+
+            if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
+            {
+                StartCoroutine(delayPortal());
+                GameObject insportal2 = Instantiate(portalRight);
+                insportal2.transform.SetParent(null);
+                insportal2.transform.forward = myHit.normal;
+                insportal2.transform.position = myHit.point + .01f * myHit.normal;
+                insportal2.GetComponent<Portal>().surface = myHit.collider.gameObject;
+
+            }
+
+
+
+            //  }
+
 
         }
     }
