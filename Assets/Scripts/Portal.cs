@@ -70,7 +70,7 @@ public class Portal : MonoBehaviour
     {
         Debug.Log("Teleported Player.");
         playerMovement.TeleportPlayer(transform, PortalManager.instance.OtherPortal(this).transform);
-
+        GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(playerMovement.gameObject);
     }
 
     /*
@@ -88,7 +88,7 @@ public class Portal : MonoBehaviour
         // THEN Teleport it.
         Debug.Log("Teleported object" + otherRB.name);
         otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
-        //surface.GetComponent<Collider>().enabled = true;
+        GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
     }
 
     /*

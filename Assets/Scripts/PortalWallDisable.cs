@@ -39,7 +39,7 @@ public class PortalWallDisable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Portal " + name + " exited by " + other.name);
+        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name);
         if (other.tag == "Player")
         {
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
@@ -65,7 +65,7 @@ public class PortalWallDisable : MonoBehaviour
             go.layer = portalLayer;
     }
 
-    private void StartCollidingWithPortalSurface(GameObject go)
+    public void StartCollidingWithPortalSurface(GameObject go)
     {
         int otherLayer = GetComponentInParent<Portal>().blue ? 13 : 12;
         // If the object is already also set to not collide with the other portal's surface collider
