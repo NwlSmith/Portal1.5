@@ -506,7 +506,7 @@ Transform:
   m_GameObject: {fileID: 242322360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.3047166, y: 3.547649, z: -2.0929115}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1661,6 +1661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee56a8970b86b944e9ed57fda689c608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxNumRecursions: 4
   blue: {fileID: 2104438076}
   orange: {fileID: 810221259}
   bluePrefab: {fileID: 0}
@@ -2588,6 +2589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107041441210495499, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495500, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
