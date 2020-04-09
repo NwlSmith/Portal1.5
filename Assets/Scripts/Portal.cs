@@ -13,6 +13,7 @@ public class Portal : MonoBehaviour
     public bool blue;
     public GameObject surface;
     public PortalCamera portalCamera;
+    private int cullingLayer;
 
     private void Start()
     {
@@ -31,6 +32,51 @@ public class Portal : MonoBehaviour
                 PortalManager.instance.orange.DestroyMe();
             PortalManager.instance.orange = this;
         }
+
+        // Set the layer culling mask to either the blue culling mask or the orange culling mask.
+        // Culling masks basically say "render this" or "don't render this".
+        cullingLayer = blue ? 12 : 13;
+
+        // Set the surface to be culled by this camera.
+        //CullingMaskCreate();
+    }
+
+    /*
+     * Add this portal's culling to the surface.
+     * Called in Start().
+     */
+    private void CullingMaskCreate()
+    {
+        // Check if surface is being culled by other portal, ie, if both portals on the same object.
+        int otherLayer = cullingLayer == 12 ? 13 : 12;
+        if (surface.layer == otherLayer || surface.layer == 14)
+        {
+            // Set the surface to be culled by both.
+            surface.layer = 14;
+        } else
+        {
+            // Otherwise, make surface be culled by this portal.
+            surface.layer = cullingLayer;
+        }
+    }
+
+    /*
+     * Remove this portal's culling from the surface.
+     * Called in DestroyMe().
+     */
+    private void CullingMaskRemove()
+    {
+        // Check if surface is being culled by both portals.
+        if (surface.layer == 14)
+        {
+            // Set the surface to be culled by the other portal.
+            surface.layer = cullingLayer == 12 ? 13 : 12;
+        }
+        else
+        {
+            // Otherwise, make surface be culled by neither portal.
+            surface.layer = 0;
+        }
     }
 
     /*
@@ -39,10 +85,6 @@ public class Portal : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
-        //-----------------------ADD COMMENTS
-
-
-
         Debug.Log(other.name + " entered trigger...");
         if (other.tag == "MainCamera")
         {
@@ -110,6 +152,7 @@ public class Portal : MonoBehaviour
     public void DestroyMe()
     {
         GetComponent<Animator>().SetTrigger("Destroy");
+        CullingMaskRemove();
         Destroy(gameObject, .15f);
     }
 }

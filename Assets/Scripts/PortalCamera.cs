@@ -48,8 +48,8 @@ public class PortalCamera : MonoBehaviour
             TransformRotLoc(otherPortal.transform);
             // The relative local position of the player to the other portal's forward vector.
             TransformPosLoc(otherPortal.transform);
-            // Update the near clipping plane of the camera so that the backs of objects aren't rendered by the camera.
-            UpdateClippingPlane();
+            // Set the nearest objects that can be rendered to those past the plane formed by the portal.
+            CalculateProjectionMatrix();
         }
     }
 
@@ -85,11 +85,14 @@ public class PortalCamera : MonoBehaviour
     }
 
     /*
-     * Updates the clipping plane so that the camera does not render objects behind the portal.
+     * Distort the near face of the camera so that it only begins rendering as soon as it passes the plane made by the portal.
      * Called in Update().
      */
-    private void UpdateClippingPlane()
+    private void CalculateProjectionMatrix()
     {
-        cam.nearClipPlane = Vector3.Distance(transform.position, parentPortal.transform.position);
+        Plane portalPlane = new Plane(parentPortal.transform.forward, parentPortal.transform.position);
+        Vector4 clipPlane = new Vector4(portalPlane.normal.x, portalPlane.normal.y, portalPlane.normal.z, portalPlane.distance);
+        Vector4 clipPlaneCameraSpace = Matrix4x4.Transpose(Matrix4x4.Inverse(cam.worldToCameraMatrix)) * clipPlane;
+        cam.projectionMatrix = Camera.main.CalculateObliqueMatrix(clipPlaneCameraSpace);
     }
 }

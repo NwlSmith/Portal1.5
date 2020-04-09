@@ -18,12 +18,12 @@ TagManager:
   - 
   - 
   - Ground
-  - CullingMask
   - Camera
   - CanPickUp
   - Portal
-  - 
-  - 
+  - CullingMask-Blue
+  - CullingMask-Orange
+  - CullingMask-Both
   - 
   - 
   - 
