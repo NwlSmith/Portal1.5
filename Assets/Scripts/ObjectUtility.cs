@@ -14,6 +14,7 @@ public class ObjectUtility : MonoBehaviour
     public Portal enteredPortal;
 
     // Private Variables.
+    private Quaternion rotationAdjustment = Quaternion.Euler(0, 180, 0);
     private GameObject clone;
 
     private void Awake()
@@ -43,11 +44,24 @@ public class ObjectUtility : MonoBehaviour
 
     private void LateUpdate()
     {
+        // If there are not two portals, ignore this.
+        if (PortalManager.instance.blue == null && PortalManager.instance.orange == null)
+            return;
+
+        // If there are two portals and the object has entered PortalWallDisable...
         if (enteredPortal != null && PortalManager.instance.blue != null && PortalManager.instance.orange != null)
         {
+            // Activate the clone
             clone.SetActive(true);
+
+            // Reflect its rotation on the opposite portal
+            Quaternion relativeRotation = Quaternion.Inverse(enteredPortal.transform.rotation) * transform.rotation;
+            relativeRotation = rotationAdjustment * relativeRotation;
+            clone.transform.rotation = PortalManager.instance.OtherPortal(enteredPortal).transform.rotation * relativeRotation;
+
+            // Reflect its position on the opposite portal
             Vector3 relativePosition = enteredPortal.transform.InverseTransformPoint(transform.position);
-            relativePosition = Quaternion.Euler(0.0f, 180.0f, 0.0f) * relativePosition;
+            relativePosition = rotationAdjustment * relativePosition;
             clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
         }
         else
