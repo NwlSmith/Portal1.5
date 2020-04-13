@@ -10,12 +10,17 @@ using UnityEngine;
  */
 public class PortalWallDisable : MonoBehaviour
 {
+    private Portal parentPortal;
     private int portalLayer;
+
 
     private void Start()
     {
+        // Stores the portal that this PortalWallDisable is a part of.
+        parentPortal = GetComponentInParent<Portal>();
+
         // Stores the layer that this object should set the player to should they enter the trigger.
-        portalLayer = GetComponentInParent<Portal>().blue ? 12 : 13;
+        portalLayer = parentPortal.blue ? 12 : 13;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +39,7 @@ public class PortalWallDisable : MonoBehaviour
             // Change this to make it so it's only false to that object? Restructure the collider?
             //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
             StopCollidingWithPortalSurface(other.gameObject);
+            other.GetComponent<ObjectUtility>().enteredPortal = parentPortal;
         }
     }
 
@@ -51,12 +57,13 @@ public class PortalWallDisable : MonoBehaviour
             GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
             StartCollidingWithPortalSurface(other.gameObject);
+            other.GetComponent<ObjectUtility>().enteredPortal = null;
         }
     }
 
     private void StopCollidingWithPortalSurface(GameObject go)
     {
-        int otherLayer = GetComponentInParent<Portal>().blue ? 13 : 12;
+        int otherLayer = parentPortal.blue ? 13 : 12;
         // If the object is already set to not collide with the other portal's surface collider
         if (go.layer == otherLayer)
             // don't collide with either
@@ -67,7 +74,7 @@ public class PortalWallDisable : MonoBehaviour
 
     public void StartCollidingWithPortalSurface(GameObject go)
     {
-        int otherLayer = GetComponentInParent<Portal>().blue ? 13 : 12;
+        int otherLayer = parentPortal.blue ? 13 : 12;
         // If the object is already also set to not collide with the other portal's surface collider
         if (go.layer == 14)
             // Still don't collide with them
@@ -79,6 +86,5 @@ public class PortalWallDisable : MonoBehaviour
             else if (go.tag == "CanPickUp")
                 go.layer = 10;
         }
-            
     }
 }
