@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2104461419}
   - component: {fileID: 2104461421}
   - component: {fileID: 2104461420}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PortalWallDisableCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8970391184354463624
 Transform:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 786231
+    m_Bits: 1834807
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 58c5bbb3ba6890143be5caa266adb458, type: 2}
   m_TargetDisplay: 0
@@ -520,7 +520,7 @@ BoxCollider:
   m_GameObject: {fileID: 4428644078190594396}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -588,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2432919346556534599
 Transform:
   m_ObjectHideFlags: 0
@@ -642,7 +642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &979864960452833388
 Transform:
   m_ObjectHideFlags: 0
@@ -696,7 +696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1999756514276110799
 Transform:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ BoxCollider:
   m_GameObject: {fileID: 6719320740398791151}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -870,7 +870,7 @@ BoxCollider:
   m_GameObject: {fileID: 7757854982038100497}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -964,7 +964,7 @@ BoxCollider:
   m_GameObject: {fileID: 8742134221778473388}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

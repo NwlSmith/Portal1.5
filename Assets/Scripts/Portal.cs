@@ -81,7 +81,6 @@ public class Portal : MonoBehaviour
     public void TeleportObject(Rigidbody otherRB)
     {
         // If the player is carrying the object, drop it.
-        Debug.Log("DROPPING OBJECT");
         PickupObject po = FindObjectOfType<PickupObject>();
         if (po.carriedObject == otherRB.gameObject)
             po.dropObject();
@@ -90,6 +89,7 @@ public class Portal : MonoBehaviour
         Debug.Log("Teleported object" + otherRB.name);
         otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
+        PortalManager.instance.OtherPortal(this).GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
         otherRB.GetComponent<ObjectUtility>().enteredPortal = PortalManager.instance.OtherPortal(this);
     }
 

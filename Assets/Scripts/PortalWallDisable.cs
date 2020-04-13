@@ -38,8 +38,8 @@ public class PortalWallDisable : MonoBehaviour
             Debug.Log("Portal entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
             //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
-            StopCollidingWithPortalSurface(other.gameObject);
-            other.GetComponent<ObjectUtility>().enteredPortal = parentPortal;
+            StopCollidingWithPortalSurface(other.transform.parent.gameObject);
+            other.GetComponentInParent<ObjectUtility>().enteredPortal = parentPortal;
         }
     }
 
@@ -48,20 +48,18 @@ public class PortalWallDisable : MonoBehaviour
         Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name);
         if (other.tag == "Player")
         {
-            GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
             StartCollidingWithPortalSurface(other.gameObject);
         }
         if (other.tag == "CanPickUp")
         {
-            GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = true;
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
-            StartCollidingWithPortalSurface(other.gameObject);
-            other.GetComponent<ObjectUtility>().enteredPortal = null;
+            StartCollidingWithPortalSurface(other.transform.parent.gameObject);
+            other.GetComponentInParent<ObjectUtility>().enteredPortal = null;
         }
     }
 
-    private void StopCollidingWithPortalSurface(GameObject go)
+    public void StopCollidingWithPortalSurface(GameObject go)
     {
         int otherLayer = parentPortal.blue ? 13 : 12;
         // If the object is already set to not collide with the other portal's surface collider
@@ -84,7 +82,7 @@ public class PortalWallDisable : MonoBehaviour
             if (go.tag == "Player")
                 go.layer = 0;
             else if (go.tag == "CanPickUp")
-                go.layer = 10;
+                go.layer = 20;
         }
     }
 }

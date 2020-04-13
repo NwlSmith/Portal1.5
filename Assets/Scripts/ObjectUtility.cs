@@ -37,6 +37,7 @@ public class ObjectUtility : MonoBehaviour
         BoxCollider bc = centralColliderChild.AddComponent<BoxCollider>();
         bc.size = Vector3.zero;
         centralColliderChild.transform.parent = gameObject.transform;
+        centralColliderChild.transform.localPosition = Vector3.zero;
         centralColliderChild.tag = "CanPickUp";
         centralColliderChild.layer = 10;
         centralColliderChild.name = "Central Collider";
@@ -66,7 +67,7 @@ public class ObjectUtility : MonoBehaviour
         }
         else
         {
-            clone.SetActive(false);
+            clone.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
         }
     }
 }

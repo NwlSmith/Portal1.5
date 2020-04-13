@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8502743729130804141
 Transform:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2933727837473037405
 Transform:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 7079647985494042770}
   - component: {fileID: 8467834088618451951}
   - component: {fileID: 2889963258340078060}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PortalWallDisableCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2534342798122571693
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ BoxCollider:
   m_GameObject: {fileID: 5892942847368556419}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -544,7 +544,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 524087
+    m_Bits: 1572663
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 6253f8b2dd45d4647acc6071ec002824, type: 2}
   m_TargetDisplay: 0
@@ -722,7 +722,7 @@ BoxCollider:
   m_GameObject: {fileID: 5892942848242748752}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -816,7 +816,7 @@ BoxCollider:
   m_GameObject: {fileID: 5892942848461247511}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -910,7 +910,7 @@ BoxCollider:
   m_GameObject: {fileID: 5892942848715958741}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -978,7 +978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1842648839076946178
 Transform:
   m_ObjectHideFlags: 0
