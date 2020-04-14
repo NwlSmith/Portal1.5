@@ -84,4 +84,20 @@ public class ObjectUtility : MonoBehaviour
         relativePosition = rotationAdjustment * relativePosition;
         clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
     }
+
+    /*
+    * Destroys object.
+    * Plays animation, sound, and destroys gameobject after delay.
+    * Called in ________________ in __________.cs.
+    */
+    public void DestroyMe()
+    {
+        // If the player is carrying the object, drop it.
+        PickupObject po = FindObjectOfType<PickupObject>();
+        if (po.carriedObject == gameObject)
+            po.dropObject();
+
+        // Destroy object after delay.
+        Destroy(gameObject, .5f);
+    }
 }
