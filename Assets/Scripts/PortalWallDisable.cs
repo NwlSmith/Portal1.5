@@ -25,15 +25,15 @@ public class PortalWallDisable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered by " + other.name);
-        if (other.tag == "Player")
+        Debug.Log("Trigger entered by " + other.name + " on layer " + other.gameObject.layer);
+        if (other.CompareTag("Player"))
         {
             Debug.Log("Portal wall disable entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
             //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
             StopCollidingWithPortalSurface(other.gameObject);
         }
-        if (other.tag == "CanPickUp")
+        if (other.CompareTag("CanPickUp"))
         {
             Debug.Log("Portal entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
@@ -45,13 +45,13 @@ public class PortalWallDisable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name);
-        if (other.tag == "Player")
+        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name + " on layer " + other.gameObject.layer);
+        if (other.CompareTag("Player"))
         {
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
             StartCollidingWithPortalSurface(other.gameObject);
         }
-        if (other.tag == "CanPickUp")
+        if (other.CompareTag("CanPickUp"))
         {
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
             StartCollidingWithPortalSurface(other.transform.parent.gameObject);
@@ -80,7 +80,7 @@ public class PortalWallDisable : MonoBehaviour
         else
         {
             if (go.tag == "Player")
-                go.layer = 0;
+                go.layer = 21;
             else if (go.tag == "CanPickUp")
                 go.layer = 20;
         }

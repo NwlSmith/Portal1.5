@@ -2399,7 +2399,7 @@ PrefabInstance:
       objectReference: {fileID: 57841317}
     - target: {fileID: 189482776, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
       propertyPath: layerMask.m_Bits
-      value: 230199
+      value: 230195
       objectReference: {fileID: 0}
     - target: {fileID: 4107041440620929188, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
@@ -2486,15 +2486,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: First Person Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4107041441210495500, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495501, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_Radius
-      value: 0.6
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495501, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_Height
-      value: 3.8
+      value: 3.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
