@@ -43,31 +43,36 @@ public class ObjectUtility : MonoBehaviour
         centralColliderChild.name = "Central Collider";
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         // If there are not two portals, ignore this.
-        if (PortalManager.instance.blue == null && PortalManager.instance.orange == null)
+        if (PortalManager.instance.blue == null || PortalManager.instance.orange == null)
             return;
 
         // If there are two portals and the object has entered PortalWallDisable...
         if (enteredPortal != null && PortalManager.instance.blue != null && PortalManager.instance.orange != null)
         {
-            // Activate the clone
-            clone.SetActive(true);
-
-            // Reflect its rotation on the opposite portal
-            Quaternion relativeRotation = Quaternion.Inverse(enteredPortal.transform.rotation) * transform.rotation;
-            relativeRotation = rotationAdjustment * relativeRotation;
-            clone.transform.rotation = PortalManager.instance.OtherPortal(enteredPortal).transform.rotation * relativeRotation;
-
-            // Reflect its position on the opposite portal
-            Vector3 relativePosition = enteredPortal.transform.InverseTransformPoint(transform.position);
-            relativePosition = rotationAdjustment * relativePosition;
-            clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
+            ReflectClone();
         }
         else
         {
             clone.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
         }
+    }
+
+    public void ReflectClone()
+    {
+        // Activate the clone
+        clone.SetActive(true);
+
+        // Reflect its rotation on the opposite portal
+        Quaternion relativeRotation = Quaternion.Inverse(enteredPortal.transform.rotation) * transform.rotation;
+        relativeRotation = rotationAdjustment * relativeRotation;
+        clone.transform.rotation = PortalManager.instance.OtherPortal(enteredPortal).transform.rotation * relativeRotation;
+
+        // Reflect its position on the opposite portal
+        Vector3 relativePosition = enteredPortal.transform.InverseTransformPoint(transform.position);
+        relativePosition = rotationAdjustment * relativePosition;
+        clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
     }
 }

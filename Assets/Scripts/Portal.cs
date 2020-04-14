@@ -53,7 +53,7 @@ public class Portal : MonoBehaviour
 
         if (other.tag == "CanPickUp")
         {
-            Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name + " at " + transform.position);
+            Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
             Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
             // Check if the object is moving into the portal.
             if (otherRB.VelocityCheck(transform.forward))
@@ -90,7 +90,9 @@ public class Portal : MonoBehaviour
         otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
         PortalManager.instance.OtherPortal(this).GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
-        otherRB.GetComponent<ObjectUtility>().enteredPortal = PortalManager.instance.OtherPortal(this);
+        ObjectUtility ou = otherRB.GetComponent<ObjectUtility>();
+        ou.enteredPortal = PortalManager.instance.OtherPortal(this);
+        ou.ReflectClone();
     }
 
     /*

@@ -33,7 +33,7 @@ public class PortalWallDisable : MonoBehaviour
             //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
             StopCollidingWithPortalSurface(other.gameObject);
         }
-        if (other.CompareTag("CanPickUp"))
+        if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
         {
             Debug.Log("Portal entered by " + other.name);
             // Change this to make it so it's only false to that object? Restructure the collider?
@@ -51,7 +51,7 @@ public class PortalWallDisable : MonoBehaviour
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
             StartCollidingWithPortalSurface(other.gameObject);
         }
-        if (other.CompareTag("CanPickUp"))
+        if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
         {
             //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
             StartCollidingWithPortalSurface(other.transform.parent.gameObject);

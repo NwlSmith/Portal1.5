@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 5f;
     public float inAirMoveMultiplier = .2f;
     public float groundDistance = 0.4f;
-    public LayerMask groundMask;
     public bool onGround = false;
     public Vector3 physicsVector;
     public float maxVelocity = 100f;

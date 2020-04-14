@@ -60,11 +60,12 @@ public class PortalCamera : MonoBehaviour
 
         }
     }
+    /*
 
     private void LateUpdate()
     {
         Graphics.Blit(rt, prevRT);
-    }
+    }*/
 
     public void Render(int index, int maxNumRecursions)
     {
@@ -120,7 +121,7 @@ public class PortalCamera : MonoBehaviour
      */
     public void NewPairedPortal(PortalCamera otherPortalCamera)
     {
-        otherPortalCamera.modelMR.material.mainTexture = prevRT;
+        otherPortalCamera.modelMR.material.mainTexture = rt;
     }
 
     /*
