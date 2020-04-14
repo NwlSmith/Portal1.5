@@ -38,7 +38,7 @@ public static class RigidbodyExt
         rb.rotation = Quaternion.Euler(dirTransformVector);
 
         // Transfer velocity to new direction.
-        rb.velocity = targetPortal.forward.normalized * rb.velocity.magnitude;
+        rb.velocity = targetPortal.forward.normalized * Mathf.Max(rb.velocity.magnitude, 10f);
     }
 
 

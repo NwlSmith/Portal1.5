@@ -31,6 +31,8 @@ public class Portal : MonoBehaviour
                 PortalManager.instance.orange.DestroyMe();
             PortalManager.instance.orange = this;
         }
+
+        SetSurfaceLayer();
     }
 
     /*
@@ -39,10 +41,6 @@ public class Portal : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
-        //-----------------------ADD COMMENTS
-
-
-
         Debug.Log(other.name + " entered trigger...");
         if (other.tag == "MainCamera")
         {
@@ -53,19 +51,10 @@ public class Portal : MonoBehaviour
                 TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
         }
 
-        if (other.tag == "Player")
-        {
-            Debug.Log("Player entered trigger on " + gameObject.name + " at " + transform.position);
-            // Check if the player is moving into the portal.
-            if (other.GetComponent<PlayerMovement>().VelocityCheck(transform.forward))
-                // Teleport the player.
-                TeleportPlayer(other.GetComponent<PlayerMovement>());
-        }
-
         if (other.tag == "CanPickUp")
         {
             Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name + " at " + transform.position);
-            Rigidbody otherRB = other.GetComponent<Rigidbody>();
+            Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
             // Check if the object is moving into the portal.
             if (otherRB.VelocityCheck(transform.forward))
                 // Teleport the object.
@@ -81,7 +70,7 @@ public class Portal : MonoBehaviour
     {
         Debug.Log("Teleported Player.");
         playerMovement.TeleportPlayer(transform, PortalManager.instance.OtherPortal(this).transform);
-        surface.GetComponent<Collider>().enabled = true;
+        GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(playerMovement.gameObject);
     }
 
     /*
@@ -99,7 +88,9 @@ public class Portal : MonoBehaviour
         // THEN Teleport it.
         Debug.Log("Teleported object" + otherRB.name);
         otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
-        surface.GetComponent<Collider>().enabled = true;
+        GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
+        PortalManager.instance.OtherPortal(this).GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
+        otherRB.GetComponent<ObjectUtility>().enteredPortal = PortalManager.instance.OtherPortal(this);
     }
 
     /*
@@ -110,6 +101,25 @@ public class Portal : MonoBehaviour
     public void DestroyMe()
     {
         GetComponent<Animator>().SetTrigger("Destroy");
+        ResetSurfaceLayer();
         Destroy(gameObject, .15f);
+    }
+
+    private void SetSurfaceLayer()
+    {
+        int otherLayer = blue ? 16 : 15;
+        if (surface.layer == otherLayer)
+            surface.layer = 17;
+        else
+            surface.layer = blue ? 15 : 16;
+    }
+
+    private void ResetSurfaceLayer()
+    {
+        int otherLayer = blue ? 16 : 15;
+        if (surface.layer == 17)
+            surface.layer = otherLayer;
+        else
+            surface.layer = 0;
     }
 }

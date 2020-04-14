@@ -18,18 +18,18 @@ TagManager:
   - 
   - 
   - Ground
-  - CullingMask
   - Camera
   - CanPickUp
   - Portal
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NotCollidingWithBluePortalSurface
+  - NotCollidingWithOrangePortalSurface
+  - NotCollidingWithBothPortalSurfaces
+  - BluePortalSurface
+  - OrangePortalSurface
+  - BothPortalSurface
+  - CloneObjectBlue
+  - CloneObjectOrange
+  - ObjectDefault
   - 
   - 
   - 

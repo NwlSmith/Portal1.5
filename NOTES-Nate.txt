@@ -6,3 +6,7 @@
 - Jump key doesn't always work
 - Movement causes stuttering - https://forum.unity.com/threads/update-or-fixedupdate-for-charactercontroller.177705/
 - Portal functionality oh god https://www.youtube.com/watch?v=_SmPR5mvH7w
+- Clipping and projection matrices: https://danielilett.com/2019-12-18-tut4-3-matrix-matching/
+- https://www.reddit.com/r/Unity3D/comments/el11vr/it_only_took_a_week_and_a_half_but_i_finally_got/
+- https://www.reddit.com/r/Unity3D/comments/elj8sn/how_i_made_my_seamless_portals/
+- Portal developers: https://www.youtube.com/watch?v=ivyseNMVt-4&feature=youtu.be&t=3642

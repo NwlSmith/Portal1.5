@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     public bool onGround = false;
     public Vector3 physicsVector;
+    public float maxVelocity = 100f;
+    public float maxRadius = .5f;
 
     private CharacterController charController;
     private PlayerLook playerLook;
@@ -97,6 +99,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Move player according to its input and physics
         charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
+
+        // Resize the collider sphere which is used for calculating when to teleport.
+        // Going faster means the sphere will be larger, thus allowing for more collision detection.
+        playerLook.GetComponent<SphereCollider>().radius =
+            Mathf.Lerp(0, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
     }
 
     /*
@@ -116,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(dirTransformVector);
 
         // Transfer velocity to new direction.
-        physicsVector = targetPortal.forward.normalized * physicsVector.magnitude;
+        physicsVector = targetPortal.forward * physicsVector.magnitude;
     }
 
     /*
