@@ -6,6 +6,8 @@ using UnityEngine;
  * Creator: Nate Smith
  * 
  * Description: Utility function for pickupable portalable objects.
+ * Creates a point collider at the center of the object which triggers the teleport function.
+ * Creates a clone "ghost" mesh that reflects the object across portals to prevent object clipping
  */
 public class ObjectUtility : MonoBehaviour
 {
@@ -43,6 +45,9 @@ public class ObjectUtility : MonoBehaviour
         centralColliderChild.name = "Central Collider";
     }
 
+   /*
+    * Either reflect the clone or do not.
+    */
     private void Update()
     {
         // If there are not two portals, ignore this.
@@ -60,6 +65,10 @@ public class ObjectUtility : MonoBehaviour
         }
     }
 
+    /*
+    * Reflects the clone object's in terms of this objects rotation and position in relation to the entered portal.
+    * Called in Update().
+    */
     public void ReflectClone()
     {
         // Activate the clone

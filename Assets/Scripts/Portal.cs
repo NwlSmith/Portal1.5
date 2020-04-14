@@ -42,7 +42,7 @@ public class Portal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name + " entered trigger...");
-        if (other.tag == "MainCamera")
+        if (other.CompareTag("MainCamera"))
         {
             Debug.Log("Camera entered trigger");
             // Check if the player is moving into the portal.
@@ -51,7 +51,7 @@ public class Portal : MonoBehaviour
                 TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
         }
 
-        if (other.tag == "CanPickUp")
+        if (other.CompareTag("CanPickUp"))
         {
             Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
             Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
@@ -90,9 +90,7 @@ public class Portal : MonoBehaviour
         otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
         PortalManager.instance.OtherPortal(this).GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
-        ObjectUtility ou = otherRB.GetComponent<ObjectUtility>();
-        ou.enteredPortal = PortalManager.instance.OtherPortal(this);
-        ou.ReflectClone();
+        otherRB.GetComponent<ObjectUtility>().enteredPortal = PortalManager.instance.OtherPortal(this);
     }
 
     /*
@@ -107,21 +105,43 @@ public class Portal : MonoBehaviour
         Destroy(gameObject, .15f);
     }
 
+    /*
+     * Sets the physics layer of the surface the portal is on.
+     * The game needs to know which surface the portal is on so that it can turn off collisions between
+     * the surface and the player when it gets close.
+     * Marks the surface as holding a blue portal, an orange portal, or both.
+     * Called in Start().
+     */
     private void SetSurfaceLayer()
     {
+        // Determine what is the layer number of the other portal
+        // 0 is none, 15 is blue, 16 is orange, 17 is both
         int otherLayer = blue ? 16 : 15;
+        // If the surface is already marked as containing the orange portal...
         if (surface.layer == otherLayer)
+            // Mark it as containing both blue and orange
             surface.layer = 17;
         else
+            // Otherwise mark it as containing this portal's color portal.
             surface.layer = blue ? 15 : 16;
     }
 
+    /*
+     * Resets the physics layer of the surface the portal is on.
+     * The game needs to know which surface the portal is on so that it can turn off collisions between
+     * the surface and the player when it gets close.
+     * Called in DestroyMe().
+     */
     private void ResetSurfaceLayer()
     {
+        // Determine what is the layer number of the other portal
         int otherLayer = blue ? 16 : 15;
+        // If the surface is already marked as containing both portals...
         if (surface.layer == 17)
+            // Mark it as only containing the other portal
             surface.layer = otherLayer;
         else
+            // Otherwise mark it as containing no portals.
             surface.layer = 0;
     }
 }
