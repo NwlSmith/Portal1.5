@@ -71,6 +71,10 @@ public class PortalWallDisable : MonoBehaviour
         }
     }
 
+    /*
+     * Failsafe method to ensure objects do not fall through floors when placing new portals.
+     * Called in DestroyMe() in Portal.cs.
+     */
     public void Failsafe()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
