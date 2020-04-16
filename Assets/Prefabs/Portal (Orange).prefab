@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 8970391184354463624}
   - component: {fileID: 7474830198272070848}
   - component: {fileID: 6695521381806973681}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1834807
+    m_Bits: 3931959
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 58c5bbb3ba6890143be5caa266adb458, type: 2}
   m_TargetDisplay: 0
@@ -459,6 +459,8 @@ MonoBehaviour:
   blue: 0
   surface: {fileID: 0}
   portalCamera: {fileID: 0}
+  portalCreation: {fileID: 0}
+  portalTraversal: {fileID: 0}
 --- !u!95 &1212647963745511162
 Animator:
   serializedVersion: 3
@@ -586,7 +588,7 @@ GameObject:
   - component: {fileID: 1150819262839855695}
   - component: {fileID: 6081457049508124158}
   - component: {fileID: 8919672961006213912}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: RightCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -679,7 +681,7 @@ GameObject:
   - component: {fileID: 2432919346556534599}
   - component: {fileID: 5536497934053913472}
   - component: {fileID: 5290323958517715074}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +735,7 @@ GameObject:
   - component: {fileID: 979864960452833388}
   - component: {fileID: 3969053198762689356}
   - component: {fileID: 7529309096021278299}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +789,7 @@ GameObject:
   - component: {fileID: 1999756514276110799}
   - component: {fileID: 4187392057880469858}
   - component: {fileID: 1552667333101127572}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -842,7 +844,7 @@ GameObject:
   - component: {fileID: 4030646776287855088}
   - component: {fileID: 1429163814180959209}
   - component: {fileID: 8422777396283408775}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: TopCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +938,7 @@ GameObject:
   - component: {fileID: 9091843665597012706}
   - component: {fileID: 6564889042010753115}
   - component: {fileID: 3561726307807320945}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: LeftCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1032,7 @@ GameObject:
   - component: {fileID: 4338382231454959804}
   - component: {fileID: 2987533890571587274}
   - component: {fileID: 4173127028337716165}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: BottomCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
