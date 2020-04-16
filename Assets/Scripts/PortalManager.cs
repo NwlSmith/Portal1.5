@@ -16,8 +16,8 @@ public class PortalManager : MonoBehaviour
 
     // Public Variables.
     public int maxNumRecursions = 4;
-    public Portal blue;
-    public Portal orange;
+    [HideInInspector] public Portal blue;
+    [HideInInspector] public Portal orange;
 
     public GameObject bluePrefab;
     public GameObject orangePrefab;

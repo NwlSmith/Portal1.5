@@ -11,8 +11,12 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     public bool blue;
-    public GameObject surface;
-    public PortalCamera portalCamera;
+    [HideInInspector] public GameObject surface;
+    [HideInInspector] public PortalCamera portalCamera;
+    public AudioClip portalCreation;
+    public AudioClip portalTraversal;
+
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -33,6 +37,17 @@ public class Portal : MonoBehaviour
         }
 
         SetSurfaceLayer();
+
+        // Retrieve the audio source.
+        if (!TryGetComponent(out audioSource))
+        {
+            Debug.Log("ERROR: object " + name + " created without AudioSource.");
+        }
+        else
+        {
+            audioSource.clip = portalCreation;
+            audioSource.Play();
+        }
     }
 
     /*
@@ -42,23 +57,35 @@ public class Portal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name + " entered trigger...");
-        if (other.CompareTag("MainCamera"))
+        if (other.CompareTag("MainCamera") || other.CompareTag("CanPickUp"))
         {
-            Debug.Log("Camera entered trigger");
-            // Check if the player is moving into the portal.
-            if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
-                // Teleport the player.
-                TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
-        }
+            // Play teleportation sound.
+            audioSource.pitch = Random.Range(.95f, 1.05f);
+            audioSource.clip = portalTraversal;
+            audioSource.Play();
 
-        if (other.CompareTag("CanPickUp"))
-        {
-            Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
-            Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
-            // Check if the object is moving into the portal.
-            if (otherRB.VelocityCheck(transform.forward))
-                // Teleport the object.
-                TeleportObject(otherRB);
+            if (other.CompareTag("MainCamera"))
+            {
+                Debug.Log("Camera entered trigger");
+                // Check if the player is moving into the portal.
+                if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
+                {
+                    // Teleport the player.
+                    TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
+                }
+            }
+
+            if (other.CompareTag("CanPickUp"))
+            {
+                Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
+                Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
+                // Check if the object is moving into the portal.
+                if (otherRB.VelocityCheck(transform.forward))
+                {
+                    // Teleport the object.
+                    TeleportObject(otherRB);
+                }
+            }
         }
     }
 

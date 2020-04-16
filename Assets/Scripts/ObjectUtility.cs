@@ -13,11 +13,14 @@ public class ObjectUtility : MonoBehaviour
 {
     // Public Variables.
     public int layer;
-    public Portal enteredPortal;
+    [HideInInspector] public Portal enteredPortal;
 
     // Private Variables.
     private Quaternion rotationAdjustment = Quaternion.Euler(0, 180, 0);
     private GameObject clone;
+    private AudioSource audioSource;
+    private Rigidbody rb;
+
 
     private void Awake()
     {
@@ -43,6 +46,18 @@ public class ObjectUtility : MonoBehaviour
         centralColliderChild.tag = "CanPickUp";
         centralColliderChild.layer = 10;
         centralColliderChild.name = "Central Collider";
+
+        // Retrieve the audio source.
+        if (!TryGetComponent(out audioSource))
+        {
+            Debug.Log("ERROR: object " + name + " created without AudioSource.");
+        }
+        
+        // Retrieve the rigidbody.
+        if (!TryGetComponent(out rb))
+        {
+            Debug.Log("ERROR: object " + name + " created without Rigidbody.");
+        }
     }
 
    /*
@@ -62,6 +77,18 @@ public class ObjectUtility : MonoBehaviour
         else
         {
             clone.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
+        }
+    }
+
+    /*
+    * Play collision sound if object hits another with enough speed.
+    */
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (rb.velocity.magnitude >= .5f)
+        {
+            audioSource.pitch = Random.Range(.95f, 1.05f);
+            audioSource.Play();
         }
     }
 
