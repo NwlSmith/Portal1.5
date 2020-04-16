@@ -129,6 +129,7 @@ public class Portal : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("Destroy");
         GetComponentInChildren<PortalWallDisable>().Failsafe();
+
         ResetSurfaceLayer();
         Destroy(gameObject, .15f);
     }
