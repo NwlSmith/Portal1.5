@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/Graphics/RTOrange.renderTexture
+Assets/Graphics/RTBlue.renderTexture
+Assets/Models.meta
+
