@@ -6,6 +6,8 @@ using UnityEngine;
  * Creator: Nate Smith
  * 
  * Description: Utility function for pickupable portalable objects.
+ * Creates a point collider at the center of the object which triggers the teleport function.
+ * Creates a clone "ghost" mesh that reflects the object across portals to prevent object clipping
  */
 public class ObjectUtility : MonoBehaviour
 {
@@ -43,31 +45,59 @@ public class ObjectUtility : MonoBehaviour
         centralColliderChild.name = "Central Collider";
     }
 
-    private void LateUpdate()
+   /*
+    * Either reflect the clone or do not.
+    */
+    private void Update()
     {
         // If there are not two portals, ignore this.
-        if (PortalManager.instance.blue == null && PortalManager.instance.orange == null)
+        if (PortalManager.instance.blue == null || PortalManager.instance.orange == null)
             return;
 
         // If there are two portals and the object has entered PortalWallDisable...
         if (enteredPortal != null && PortalManager.instance.blue != null && PortalManager.instance.orange != null)
         {
-            // Activate the clone
-            clone.SetActive(true);
-
-            // Reflect its rotation on the opposite portal
-            Quaternion relativeRotation = Quaternion.Inverse(enteredPortal.transform.rotation) * transform.rotation;
-            relativeRotation = rotationAdjustment * relativeRotation;
-            clone.transform.rotation = PortalManager.instance.OtherPortal(enteredPortal).transform.rotation * relativeRotation;
-
-            // Reflect its position on the opposite portal
-            Vector3 relativePosition = enteredPortal.transform.InverseTransformPoint(transform.position);
-            relativePosition = rotationAdjustment * relativePosition;
-            clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
+            ReflectClone();
         }
         else
         {
             clone.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
         }
+    }
+
+    /*
+    * Reflects the clone object's in terms of this objects rotation and position in relation to the entered portal.
+    * Called in Update().
+    */
+    public void ReflectClone()
+    {
+        // Activate the clone
+        clone.SetActive(true);
+
+        // Reflect its rotation on the opposite portal
+        Quaternion relativeRotation = Quaternion.Inverse(enteredPortal.transform.rotation) * transform.rotation;
+        relativeRotation = rotationAdjustment * relativeRotation;
+        clone.transform.rotation = PortalManager.instance.OtherPortal(enteredPortal).transform.rotation * relativeRotation;
+
+        // Reflect its position on the opposite portal
+        Vector3 relativePosition = enteredPortal.transform.InverseTransformPoint(transform.position);
+        relativePosition = rotationAdjustment * relativePosition;
+        clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
+    }
+
+    /*
+    * Destroys object.
+    * Plays animation, sound, and destroys gameobject after delay.
+    * Called in ________________ in __________.cs.
+    */
+    public void DestroyMe()
+    {
+        // If the player is carrying the object, drop it.
+        PickupObject po = FindObjectOfType<PickupObject>();
+        if (po.carriedObject == gameObject)
+            po.dropObject();
+
+        // Destroy object after delay.
+        Destroy(gameObject, .5f);
     }
 }

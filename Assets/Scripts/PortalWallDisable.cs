@@ -23,65 +23,95 @@ public class PortalWallDisable : MonoBehaviour
         portalLayer = parentPortal.blue ? 12 : 13;
     }
 
+    /*
+     * React to a collider entering the trigger, meaning it is close to the portal.
+     * If it is an appropriate object, alters the object collisions.
+     */
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered by " + other.name);
-        if (other.tag == "Player")
+        Debug.Log("Trigger entered by " + other.name + " on layer " + other.gameObject.layer);
+        // If the player is entering the trigger...
+        if (other.CompareTag("Player"))
         {
             Debug.Log("Portal wall disable entered by " + other.name);
-            // Change this to make it so it's only false to that object? Restructure the collider?
-            //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+            // Mark it as NOT colliding with this surface.
             StopCollidingWithPortalSurface(other.gameObject);
         }
-        if (other.tag == "CanPickUp")
+        // If an object is entering the trigger...
+        if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
         {
             Debug.Log("Portal entered by " + other.name);
-            // Change this to make it so it's only false to that object? Restructure the collider?
-            //GetComponentInParent<Portal>().surface.GetComponent<Collider>().enabled = false;
+            // Mark it as NOT colliding with this surface.
             StopCollidingWithPortalSurface(other.transform.parent.gameObject);
+            // Make sure the clone object tracks to this portal.
             other.GetComponentInParent<ObjectUtility>().enteredPortal = parentPortal;
         }
     }
 
+    /*
+     * React to a collider leaving the trigger, meaning it is not close to the portal.
+     * If it is an appropriate object, alters the object collisions.
+     */
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name);
-        if (other.tag == "Player")
+        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name + " on layer " + other.gameObject.layer);
+        // If the player is exiting the trigger...
+        if (other.CompareTag("Player"))
         {
-            //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
+            // Mark it as colliding with this surface.
             StartCollidingWithPortalSurface(other.gameObject);
         }
-        if (other.tag == "CanPickUp")
+        // If an object is exiting the trigger...
+        if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
         {
-            //PortalManager.instance.OtherPortal(GetComponentInParent<Portal>()).surface.GetComponent<Collider>().enabled = true;
+            // Mark it as colliding with this surface.
             StartCollidingWithPortalSurface(other.transform.parent.gameObject);
+            // Make sure the clone object does not track to any portal.
             other.GetComponentInParent<ObjectUtility>().enteredPortal = null;
         }
     }
 
+    /*
+     * Stops the object from colliding with certain physics layers.
+     * The game needs to prevent the object from colliding with the surface the portal is on
+     * so that the object passes through it and teleports.
+     * Called in TeleportObject() in Portal.cs and OnTriggerEnter().
+     */
     public void StopCollidingWithPortalSurface(GameObject go)
     {
+        // Determine what is the no-collision layer number of the other portal to set the player/object to.
+        // 0 is none, 12 is blue, 13 is orange, 14 is both
+        // If set to 12, the player will NOT collide with the surface the blue portal is on.
         int otherLayer = parentPortal.blue ? 13 : 12;
-        // If the object is already set to not collide with the other portal's surface collider
+        // If the object is already set to not collide with the other portal's surface collider...
         if (go.layer == otherLayer)
-            // don't collide with either
+            // Don't collide with either.
             go.layer = 14;
         else
+            // Otherwise, don't collide with this portal's surface.
             go.layer = portalLayer;
     }
 
+    /*
+     * Starts the object colliding with certain physics layers again.
+     * The game needs to allow the object to collide with the surface the portal is on
+     * after teleporting, otherwise objects will pass through walls/floors.
+     * Called in TeleportPlayer() and TeleportObject() in Portal.cs and OnTriggerExit().
+     */
     public void StartCollidingWithPortalSurface(GameObject go)
     {
+        // Determine what is the no-collision layer number of the other portal to set the player/object to.
         int otherLayer = parentPortal.blue ? 13 : 12;
-        // If the object is already also set to not collide with the other portal's surface collider
+        // If the object is already ALSO set to not collide with the other portal's surface collider, ie, both...
         if (go.layer == 14)
-            // Still don't collide with them
+            // Still don't collide with the other collider
             go.layer = otherLayer;
         else
         {
-            if (go.tag == "Player")
-                go.layer = 0;
-            else if (go.tag == "CanPickUp")
+            // Otherwise, either set the object to the player's layer or the object layer
+            if (go.CompareTag("Player"))
+                go.layer = 21;
+            else if (go.CompareTag("CanPickUp"))
                 go.layer = 20;
         }
     }
