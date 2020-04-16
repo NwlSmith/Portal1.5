@@ -104,12 +104,12 @@ public class ObjectUtility : MonoBehaviour
         // Reflect its rotation on the opposite portal
         Quaternion relativeRotation = Quaternion.Inverse(enteredPortal.transform.rotation) * transform.rotation;
         relativeRotation = rotationAdjustment * relativeRotation;
-        clone.transform.rotation = PortalManager.instance.OtherPortal(enteredPortal).transform.rotation * relativeRotation;
+        clone.transform.rotation = enteredPortal.Other().transform.rotation * relativeRotation;
 
         // Reflect its position on the opposite portal
         Vector3 relativePosition = enteredPortal.transform.InverseTransformPoint(transform.position);
         relativePosition = rotationAdjustment * relativePosition;
-        clone.transform.position = PortalManager.instance.OtherPortal(enteredPortal).transform.TransformPoint(relativePosition);
+        clone.transform.position = enteredPortal.Other().transform.TransformPoint(relativePosition);
     }
 
     /*

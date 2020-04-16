@@ -50,6 +50,12 @@ public class Portal : MonoBehaviour
         }
     }
 
+    public Portal Other()
+    {
+        return PortalManager.instance.OtherPortal(this);
+    }
+
+
     /*
      * Teleports gameObjects, either the player or a object that can be picked up, to the other portal
      * Called when a collider enters the trigger collider.
@@ -96,7 +102,7 @@ public class Portal : MonoBehaviour
     public void TeleportPlayer(PlayerMovement playerMovement)
     {
         Debug.Log("Teleported Player.");
-        playerMovement.TeleportPlayer(transform, PortalManager.instance.OtherPortal(this).transform);
+        playerMovement.TeleportPlayer(transform, Other().transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(playerMovement.gameObject);
     }
 
@@ -114,10 +120,10 @@ public class Portal : MonoBehaviour
 
         // THEN Teleport it.
         Debug.Log("Teleported object" + otherRB.name);
-        otherRB.TeleportObject(transform, PortalManager.instance.OtherPortal(this).transform);
+        otherRB.TeleportObject(transform, Other().transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
-        PortalManager.instance.OtherPortal(this).GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
-        otherRB.GetComponent<ObjectUtility>().enteredPortal = PortalManager.instance.OtherPortal(this);
+        Other().GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
+        otherRB.GetComponent<ObjectUtility>().enteredPortal = Other();
     }
 
     /*
