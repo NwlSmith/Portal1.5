@@ -71,6 +71,21 @@ public class PortalWallDisable : MonoBehaviour
         }
     }
 
+    public void Failsafe()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player.layer == portalLayer || player.layer == 14)
+            StartCollidingWithPortalSurface(player);
+
+        StartCollidingWithPortalSurface(player);
+        GameObject[] pickupables = GameObject.FindGameObjectsWithTag("CanPickUp");
+        foreach (GameObject obj in pickupables)
+        {
+            if (obj.layer == portalLayer || obj.layer == 14)
+                StartCollidingWithPortalSurface(obj);
+        }
+    }
+
     /*
      * Stops the object from colliding with certain physics layers.
      * The game needs to prevent the object from colliding with the surface the portal is on
