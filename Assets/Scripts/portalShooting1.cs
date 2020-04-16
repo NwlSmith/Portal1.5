@@ -57,6 +57,11 @@ public class portalShooting1 : MonoBehaviour
         //     newBall.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * speed;
         //  }
         //  }
+        Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore);
+
+        Debug.DrawRay(myHit.point, myHit.normal, Color.blue);
+        Debug.DrawRay(myHit.point, transform.rotation * Vector3.right, Color.red);
+        Debug.DrawRay(myHit.point, Vector3.Cross(transform.rotation * Vector3.right, myHit.normal), Color.green);
 
         if (Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore))
         {
@@ -91,11 +96,36 @@ public class portalShooting1 : MonoBehaviour
      */
     private void InstantiatePortal(RaycastHit hit, GameObject p)
     {
+        // Instantiate a new portal.
         GameObject newPortal = Instantiate(p);
+        // Set its parent to the root.
         newPortal.transform.SetParent(null);
-        newPortal.transform.forward = hit.normal;
-        if (hit.normal == Vector3.up ||)
-            newPortal.transform.position = hit.point + .01f * hit.normal;
+        // The portal should face toward the direction perpendicular to the hit.
+
+
+        // If the portal is on the floor (facing upward) or the ceiling (facing downward).
+        if (hit.normal == Vector3.up || hit.normal == -Vector3.up)
+        {
+            Debug.Log("Portal placed on the floor or ceiling.");
+
+            // The portal will face the direction perpendicular to the hit.
+            Vector3 pForward = hit.normal;
+            // The portal will be oriented so its bottom is closest to the player.
+            Vector3 pRight = transform.rotation * Vector3.right;
+            // The top of the portal will be opposite the bottom (kinda, it's complicated).
+            Vector3 pUp = Vector3.Cross(pRight, pForward);
+
+            // Set the portal to this new rotation.
+            newPortal.transform.rotation = Quaternion.LookRotation(pForward, pUp);
+        }
+        // Otherwise, if the portal is on the wall/on a slant (facing anywhere else).
+        else
+        {
+            Debug.Log("Portal placed on a wall.");newPortal.transform.forward = hit.normal;
+        }
+
+        // Set portal position
+        newPortal.transform.position = hit.point + .01f * hit.normal;
         newPortal.GetComponent<Portal>().surface = hit.collider.gameObject;
     }
 
