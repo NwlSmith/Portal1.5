@@ -14,11 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpHeight = 5f;
     public float inAirMoveMultiplier = .2f;
-    public float groundDistance = 0.4f;
-    public bool onGround = false;
-    public Vector3 physicsVector;
     public float maxVelocity = 100f;
     public float maxRadius = .5f;
+    [HideInInspector] public bool onGround = false;
+    [HideInInspector] public Vector3 physicsVector;
 
     private CharacterController charController;
     private PlayerLook playerLook;
