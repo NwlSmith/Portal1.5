@@ -18,7 +18,7 @@ public class portalShooting1 : MonoBehaviour
     public GameObject aimer;
 
     public LayerMask layerMask;
-    public LayerMask wallMask; // NEW
+    public LayerMask wallMask; // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     private Camera cam;
     private bool portalDelay;
@@ -59,14 +59,14 @@ public class portalShooting1 : MonoBehaviour
         //  }
         //  }
 
-        // NEW \/
+        // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \/
         Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore);
 
         Debug.DrawRay(myHit.point, myHit.normal, Color.blue);
         Debug.DrawRay(myHit.point, transform.rotation * Vector3.right, Color.red);
         Debug.DrawRay(myHit.point, Vector3.Cross(transform.rotation * Vector3.right, myHit.normal), Color.green);
 
-        // NEW ^
+        // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ^
 
         if (Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore))
         {
@@ -77,14 +77,14 @@ public class portalShooting1 : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
                 StartCoroutine(delayPortal());
-                InstantiatePortal(myHit, portal); // NEW
+                InstantiatePortal(myHit, portal); // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             }
 
             if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
                 StartCoroutine(delayPortal());
-                InstantiatePortal(myHit, portalRight); // NEW
+                InstantiatePortal(myHit, portalRight); // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             }
 
@@ -112,6 +112,7 @@ public class portalShooting1 : MonoBehaviour
         // Calculate the position of the new portal
         CalculatePosition(hit, newPortal);
 
+        // Assign surface to this portal.
         newPortal.GetComponent<Portal>().surface = hit.collider.gameObject;
     }
 

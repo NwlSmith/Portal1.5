@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         // Resize the collider sphere which is used for calculating when to teleport.
         // Going faster means the sphere will be larger, thus allowing for more collision detection.
         playerLook.GetComponent<SphereCollider>().radius =
-            Mathf.Lerp(0, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
+            Mathf.Lerp(.1f, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
     }
 
     /*

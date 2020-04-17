@@ -613,7 +613,7 @@ MonoBehaviour:
     m_Bits: 230193
   wallMask:
     serializedVersion: 2
-    m_Bits: 229377
+    m_Bits: 229379
 --- !u!1 &318648242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,7 +2638,7 @@ PrefabInstance:
     - target: {fileID: 2804222439002593431, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 786231
+      value: 3931959
       objectReference: {fileID: 0}
     - target: {fileID: 2804222439179467218, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
         type: 3}
@@ -2726,6 +2726,11 @@ PrefabInstance:
     - target: {fileID: 189482776, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107041440620929190, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4107041440620929191, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}

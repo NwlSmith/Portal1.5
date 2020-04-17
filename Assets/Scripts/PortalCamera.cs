@@ -47,9 +47,7 @@ public class PortalCamera : MonoBehaviour
             parentPortal.Other().portalCamera.NewPairedPortal(this);
         }
     }
-
     /*
-
     private void OnEnable()
     {
         RenderPipelineManager.beginCameraRendering += RenderPipelineManager_beginCameraRendering;
@@ -62,12 +60,11 @@ public class PortalCamera : MonoBehaviour
 
     private void RenderPipelineManager_beginCameraRendering(ScriptableRenderContext context, Camera camera)
     {
-        camera = cam;
         OnPreRender();
     }
 
 
-    /* 
+    */
      void Update()
      {
          // Retrieve the other portal.
