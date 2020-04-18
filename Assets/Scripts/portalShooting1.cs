@@ -94,7 +94,7 @@ public class portalShooting1 : MonoBehaviour
         GameObject newPortal = Instantiate(p);
         newPortal.transform.SetParent(null);
         newPortal.transform.forward = hit.normal;
-        if (hit.normal == Vector3.up ||)
+        if (hit.normal == Vector3.up) //||)
             newPortal.transform.position = hit.point + .01f * hit.normal;
         newPortal.GetComponent<Portal>().surface = hit.collider.gameObject;
     }
