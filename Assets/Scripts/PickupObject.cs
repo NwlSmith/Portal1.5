@@ -14,7 +14,7 @@ public class PickupObject : MonoBehaviour
     public GameObject carriedObject;
     public float distance = 3;
     public float smooth = 4;
-  
+
     void Start()
     {
         mainCamera = GameObject.FindWithTag("MainCamera"); 
@@ -23,22 +23,36 @@ public class PickupObject : MonoBehaviour
 
     void Update()
     {
-        if(carrying)
+        if (carrying)
         {
-            carry(carriedObject);
             checkDrop();
         }
         else
         {
-            Pickup(); 
+            Pickup();
             //if player is not carrying object, then it's able to pick up items
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if(carrying)
+        {
+            carry(carriedObject);
         }
     }
     public void carry(GameObject o)
     {
-        
-        o.transform.position = Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth); //"Lerp" can smooth the movement of picked items
-        o.transform.rotation = Quaternion.identity;
+        // Retrieve the rigidbody
+        Rigidbody rb = o.GetComponent<Rigidbody>();
+        // Calculate the direction and magnitude of the difference in position from the object to the target location in front of the camera.
+        Vector3 forceDir = o.transform.position - (mainCamera.transform.position + mainCamera.transform.forward * distance);
+        // Set velocity to zero so we aren't orbiting the target.
+        rb.velocity = Vector3.zero;
+        // Add force in that direction.
+        rb.AddForce(- forceDir * 10000 * Time.fixedDeltaTime);
+        // Make the objects rotate like in the original portal.
+        rb.MoveRotation(Quaternion.LookRotation(transform.forward));
     }
     public void Pickup()
     {
@@ -59,6 +73,7 @@ public class PickupObject : MonoBehaviour
                     carrying = true;
                     carriedObject = p.gameObject;
                     p.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    //p.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
         }
@@ -76,6 +91,7 @@ public class PickupObject : MonoBehaviour
     {
         carrying = false;
         carriedObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        //carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         carriedObject = null;
     }
 }

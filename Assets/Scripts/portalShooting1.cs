@@ -186,6 +186,7 @@ public class portalShooting1 : MonoBehaviour
 
 
         // Fix Intersections.
+
         // Use raycasts from the center to each of the edges, going outward.
         // If the raycasts hit anything, that means the portal is partly colliding with a wall,
         // so move it over by the distance distance to the edge, minus the distance from the origin to the hit.

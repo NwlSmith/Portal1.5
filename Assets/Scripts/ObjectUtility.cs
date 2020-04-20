@@ -65,6 +65,7 @@ public class ObjectUtility : MonoBehaviour
     */
     private void Update()
     {
+        Debug.DrawRay(transform.position, rb.velocity.normalized, Color.cyan);
         // If there are not two portals, ignore this.
         if (PortalManager.instance.blue == null || PortalManager.instance.orange == null)
             return;

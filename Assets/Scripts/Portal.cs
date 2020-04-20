@@ -116,7 +116,10 @@ public class Portal : MonoBehaviour
         // If the player is carrying the object, drop it.
         PickupObject po = FindObjectOfType<PickupObject>();
         if (po.carriedObject == otherRB.gameObject)
+        {
+            Debug.Log("Dropping object!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             po.dropObject();
+        }
 
         // THEN Teleport it.
         Debug.Log("Teleported object" + otherRB.name);

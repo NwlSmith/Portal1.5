@@ -570,12 +570,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1504644855}
     m_Modifications:
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
@@ -590,17 +590,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
@@ -610,7 +610,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bc1e289f184ad2b42a067a16aa650743,
         type: 3}
@@ -2531,6 +2531,7 @@ Transform:
   - {fileID: 829361658}
   - {fileID: 331065524}
   - {fileID: 2131478435}
+  - {fileID: 1807733719}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3411,12 +3412,12 @@ PrefabInstance:
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.68
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
