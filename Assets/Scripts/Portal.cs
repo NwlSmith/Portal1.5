@@ -63,33 +63,36 @@ public class Portal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name + " entered trigger...");
-        if (other.CompareTag("MainCamera") || other.CompareTag("CanPickUp"))
+        if (Other())
         {
-            // Play teleportation sound.
-            audioSource.pitch = Random.Range(.95f, 1.05f);
-            audioSource.clip = portalTraversal;
-            audioSource.Play();
-
-            if (other.CompareTag("MainCamera"))
+            if (other.CompareTag("MainCamera") || other.CompareTag("CanPickUp"))
             {
-                Debug.Log("Camera entered trigger");
-                // Check if the player is moving into the portal.
-                if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
+                // Play teleportation sound.
+                audioSource.pitch = Random.Range(.95f, 1.05f);
+                audioSource.clip = portalTraversal;
+                audioSource.Play();
+
+                if (other.CompareTag("MainCamera"))
                 {
-                    // Teleport the player.
-                    TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
+                    Debug.Log("Camera entered trigger");
+                    // Check if the player is moving into the portal.
+                    if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
+                    {
+                        // Teleport the player.
+                        TeleportPlayer(other.GetComponentInParent<PlayerMovement>());
+                    }
                 }
-            }
 
-            if (other.CompareTag("CanPickUp"))
-            {
-                Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
-                Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
-                // Check if the object is moving into the portal.
-                if (otherRB.VelocityCheck(transform.forward))
+                if (other.CompareTag("CanPickUp"))
                 {
-                    // Teleport the object.
-                    TeleportObject(otherRB);
+                    Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
+                    Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
+                    // Check if the object is moving into the portal.
+                    if (otherRB.VelocityCheck(transform.forward))
+                    {
+                        // Teleport the object.
+                        TeleportObject(otherRB);
+                    }
                 }
             }
         }
@@ -117,7 +120,6 @@ public class Portal : MonoBehaviour
         PickupObject po = FindObjectOfType<PickupObject>();
         if (po.carriedObject == otherRB.gameObject)
         {
-            Debug.Log("Dropping object!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             po.dropObject();
         }
 

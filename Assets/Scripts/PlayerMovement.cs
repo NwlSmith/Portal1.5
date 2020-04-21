@@ -57,7 +57,10 @@ public class PlayerMovement : MonoBehaviour
 
         // DEBUG: Press escape to pause the editor
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             Debug.Break();
+            Application.Quit();
+        }
 
         // Ensure the player is always upright.
         Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);

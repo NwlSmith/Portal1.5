@@ -82,8 +82,8 @@ public class PortalCamera : MonoBehaviour
 
          }
      }
-     /*
 
+     /*
      private void LateUpdate()
      {
          Graphics.Blit(rt, prevRT);
@@ -139,7 +139,7 @@ public class PortalCamera : MonoBehaviour
 
     private void OnPreRender()
     {
-        //Debug.Log("Prerender");
+        Debug.Log("Prerender");
         if (parentPortal.Other() == null)
             return;
 
