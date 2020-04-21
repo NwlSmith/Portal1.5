@@ -1062,36 +1062,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300206626}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &314853591 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4107041440620929195, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-    type: 3}
-  m_PrefabInstance: {fileID: 4107041441234380158}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &314853600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314853591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aa14ee2c026bfb47a03318e438692c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portal: {fileID: 5892942847299213692, guid: 753ab23f0c3f76f4ab55185e2f022449, type: 3}
-  portalRight: {fileID: 2804222439179467218, guid: 21685ab1227c1ab4e82a66b91ac6b56c,
-    type: 3}
-  speed: 50
-  length: 1000
-  aimer: {fileID: 57841317}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 230193
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 229379
 --- !u!1 &318648242
 GameObject:
   m_ObjectHideFlags: 0
@@ -4319,60 +4289,10 @@ PrefabInstance:
       propertyPath: aimer
       value: 
       objectReference: {fileID: 57841317}
-    - target: {fileID: 189482776, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041440620929188, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_Dithering
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041440620929188, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_RendererIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041440620929190, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041440620929191, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041440620929191, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041441102148626, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_ReceiveGI
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041441102148628, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041441102148629, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041441102148629, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041441102148629, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
+    - target: {fileID: 314853600, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
+      propertyPath: aimer
+      value: 
+      objectReference: {fileID: 57841317}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4428,20 +4348,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4107041441210495499, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495500, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_Name
       value: First Person Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107041441210495501, guid: 50a8109d81d88a54f983f6bf80e53fb2,
-        type: 3}
-      propertyPath: m_Height
-      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
