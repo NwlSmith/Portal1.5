@@ -29,20 +29,23 @@ public class PortalWallDisable : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered by " + other.name + " on layer " + other.gameObject.layer);
+        if (GameManager.instance.debug)
+            Debug.Log("Trigger entered by " + other.name + " on layer " + other.gameObject.layer);
         if (parentPortal.Other())
         {
             // If the player is entering the trigger...
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Portal wall disable entered by " + other.name);
+                if (GameManager.instance.debug)
+                    Debug.Log("Portal wall disable entered by " + other.name);
                 // Mark it as NOT colliding with this surface.
                 StopCollidingWithPortalSurface(other.gameObject);
             }
             // If an object is entering the trigger...
             if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
             {
-                Debug.Log("Portal entered by " + other.name);
+                if (GameManager.instance.debug)
+                    Debug.Log("Portal entered by " + other.name);
                 // Mark it as NOT colliding with this surface.
                 StopCollidingWithPortalSurface(other.transform.parent.gameObject);
                 // Make sure the clone object tracks to this portal.
@@ -57,7 +60,8 @@ public class PortalWallDisable : MonoBehaviour
      */
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name + " on layer " + other.gameObject.layer);
+        if (GameManager.instance.debug)
+            Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name + " on layer " + other.gameObject.layer);
         // If the player is exiting the trigger...
         if (other.CompareTag("Player"))
         {

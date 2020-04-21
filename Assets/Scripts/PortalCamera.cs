@@ -139,7 +139,8 @@ public class PortalCamera : MonoBehaviour
 
     private void OnPreRender()
     {
-        Debug.Log("Prerender");
+        if (GameManager.instance.debug)
+            Debug.Log("Prerender");
         if (parentPortal.Other() == null)
             return;
 

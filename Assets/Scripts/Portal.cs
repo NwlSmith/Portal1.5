@@ -62,7 +62,8 @@ public class Portal : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name + " entered trigger...");
+        if (GameManager.instance.debug)
+            Debug.Log(other.name + " entered trigger...");
         if (Other())
         {
             if (other.CompareTag("MainCamera") || other.CompareTag("CanPickUp"))
@@ -74,7 +75,8 @@ public class Portal : MonoBehaviour
 
                 if (other.CompareTag("MainCamera"))
                 {
-                    Debug.Log("Camera entered trigger");
+                    if (GameManager.instance.debug)
+                        Debug.Log("Camera entered trigger");
                     // Check if the player is moving into the portal.
                     if (other.GetComponentInParent<PlayerMovement>().VelocityCheck(transform.forward))
                     {
@@ -85,7 +87,8 @@ public class Portal : MonoBehaviour
 
                 if (other.CompareTag("CanPickUp"))
                 {
-                    Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
+                    if (GameManager.instance.debug)
+                        Debug.Log("Object " + other.name + " entered trigger on " + gameObject.name);
                     Rigidbody otherRB = other.GetComponentInParent<Rigidbody>();
                     // Check if the object is moving into the portal.
                     if (otherRB.VelocityCheck(transform.forward))
@@ -104,7 +107,8 @@ public class Portal : MonoBehaviour
      */
     public void TeleportPlayer(PlayerMovement playerMovement)
     {
-        Debug.Log("Teleported Player.");
+        if (GameManager.instance.debug)
+            Debug.Log("Teleported Player.");
         playerMovement.TeleportPlayer(transform, Other().transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(playerMovement.gameObject);
     }
@@ -124,7 +128,8 @@ public class Portal : MonoBehaviour
         }
 
         // THEN Teleport it.
-        Debug.Log("Teleported object" + otherRB.name);
+        if (GameManager.instance.debug)
+            Debug.Log("Teleported object" + otherRB.name);
         otherRB.TeleportObject(transform, Other().transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
         Other().GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);

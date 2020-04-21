@@ -56,7 +56,7 @@ public class portalShooting : MonoBehaviour
         //  }
         //  }
         
-        if (Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(myRay, out myHit, length, layerMask , QueryTriggerInteraction.Ignore))
         {
             // myHit.transform.Rotate(1,0,0);
             aimer.transform.position = myHit.point;

@@ -45,6 +45,7 @@ public class PlayerLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Portal>(out Portal portal))
@@ -55,5 +56,5 @@ public class PlayerLook : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Portal portal))
             Debug.Log("Camera collided with portal collider");
-    }
+    }*/
 }

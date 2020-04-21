@@ -29,7 +29,8 @@ public static class RigidbodyExt
      */
     public static void TeleportObject(this Rigidbody rb, Transform originPortal, Transform targetPortal)
     {
-        Debug.Log("Functionality unfinished");
+        if (GameManager.instance.debug)
+            Debug.Log("Functionality unfinished");
         // Move the object to the target portal.
         rb.transform.position = targetPortal.position;
 
