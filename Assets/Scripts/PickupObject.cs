@@ -49,6 +49,7 @@ public class PickupObject : MonoBehaviour
         Vector3 forceDir = o.transform.position - (mainCamera.transform.position + mainCamera.transform.forward * distance);
         // Set velocity to zero so we aren't orbiting the target.
         rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         // Add force in that direction.
         rb.AddForce(- forceDir * 10000 * Time.fixedDeltaTime);
         // Make the objects rotate like in the original portal.
