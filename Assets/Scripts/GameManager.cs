@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     // Static instance of the object.
     public static GameManager instance = null;
 
+    // Public Variables.
     public bool debug;
 
     private void Awake()
