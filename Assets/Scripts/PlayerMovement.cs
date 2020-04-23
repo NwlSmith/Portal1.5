@@ -96,8 +96,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Resize the collider sphere which is used for calculating when to teleport.
         // Going faster means the sphere will be larger, thus allowing for more collision detection.
-        playerLook.GetComponent<SphereCollider>().radius =
-            Mathf.Lerp(.1f, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
+        //playerLook.GetComponent<SphereCollider>().radius =
+            //Mathf.Lerp(.1f, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
     }
 
     /*
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Temporarily disable the CharacterController to allow teleportation.
         charController.enabled = false;
-        transform.position = targetPortal.position;
+        transform.position = targetPortal.position + originPortal.InverseTransformPoint(transform.position);
         charController.enabled = true;
 
         // Set the players look direction to the same direction you entered in relation to the new portal.

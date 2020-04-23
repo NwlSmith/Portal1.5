@@ -30,14 +30,31 @@ public static class RigidbodyExt
     public static void TeleportObject(this Rigidbody rb, Transform originPortal, Transform targetPortal)
     {
         // Move the object to the target portal.
-        rb.transform.position = targetPortal.position + originPortal.InverseTransformPoint(rb.position);
+        rb.transform.position = targetPortal.TransformPoint(Quaternion.Euler(0f, 180f, 0f) * originPortal.InverseTransformPoint(rb.position));
 
         // Set the objects rotation direction to the same direction it entered in relation to the new portal.
-        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + targetPortal.rotation.eulerAngles);
-        rb.transform.rotation = Quaternion.Euler(dirTransformVector);
+        Quaternion relativeRotation = Quaternion.Inverse(originPortal.rotation) * rb.transform.rotation;
+        relativeRotation = Quaternion.Euler(0f, 180f, 0f) * relativeRotation;
+        rb.transform.rotation = targetPortal.rotation * relativeRotation;
+
         rb.isKinematic = false;
 
+        bool wasMovingDown = rb.velocity.y < 0f && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x) && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.z);
+
+        rb.velocity = targetPortal.forward.normalized * (rb.velocity.magnitude + 0.1f);
+
+        bool willMoveUp = rb.velocity.y > 0f && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x) && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.z);
+        if (GameManager.instance.debug)
+        {
+            Debug.Log("rb.velocity.y " + rb.velocity.y + " x " + rb.velocity.x + " z " + rb.velocity.z);
+            Debug.Log("rb.velocity.y > 0f " + (rb.velocity.y > 0f) + " Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x) " + (Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x)) + " && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.z);" + (Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.z)));
+            Debug.Log("was moving down? " + wasMovingDown);
+            Debug.Log("will move up? " + willMoveUp);
+        }
         // Transfer velocity to new direction.
-        rb.velocity = targetPortal.forward.normalized * Mathf.Max(rb.velocity.magnitude, 4f);
+        // If the object is going to exit the portal moving upwards, give it a minimum velocity.
+        if (wasMovingDown || willMoveUp)
+            rb.velocity = targetPortal.forward.normalized * Mathf.Max(rb.velocity.magnitude, 4f);
+        
     }
 }
