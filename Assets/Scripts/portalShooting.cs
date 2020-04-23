@@ -13,9 +13,9 @@ public class portalShooting : MonoBehaviour
     public GameObject portal;
     public GameObject portalRight;
     public float speed = 50;
-
+    public GameObject audioCube;
+    //public AudioManager AM;
     
-
     public float length = 1000f;
     //public GameObject aimer;
 
@@ -32,8 +32,8 @@ public class portalShooting : MonoBehaviour
  
     void Start ()
     {
+        
 
-       
 
         //if (PortalManager.instance != null)
         // portal = PortalManager.instance.bluePrefab;
@@ -76,6 +76,8 @@ public class portalShooting : MonoBehaviour
            // {
                 if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
                 {
+                  //  AM.PlaySound("shoot");
+                  //  audioCube.GetComponent<AudioManager>().PlaySound("shoot");
                     Debug.Log("shot blue");
                     shotBlue = true;
                    
