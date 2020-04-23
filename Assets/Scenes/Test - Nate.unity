@@ -3819,10 +3819,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reticle: {fileID: 1919621659}
-  blue: {fileID: -7460036385069480838, guid: 826feac5d931542faa7d091a67c8dfc8, type: 3}
-  orange: {fileID: -1417449254524277941, guid: 826feac5d931542faa7d091a67c8dfc8, type: 3}
-  empty: {fileID: -3732607678476244522, guid: 826feac5d931542faa7d091a67c8dfc8, type: 3}
-  both: {fileID: -7818324999553423149, guid: 826feac5d931542faa7d091a67c8dfc8, type: 3}
+  blue: {fileID: -3053580299711046770, guid: ad560ecdcb2398141adcfcae3d57057b, type: 3}
+  orange: {fileID: -2775537779801874695, guid: ad560ecdcb2398141adcfcae3d57057b, type: 3}
+  empty: {fileID: 4579995741773650463, guid: ad560ecdcb2398141adcfcae3d57057b, type: 3}
+  both: {fileID: 6534376772702668770, guid: ad560ecdcb2398141adcfcae3d57057b, type: 3}
 --- !u!212 &1919621658
 SpriteRenderer:
   m_ObjectHideFlags: 0
