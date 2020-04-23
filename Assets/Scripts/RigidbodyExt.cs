@@ -29,19 +29,15 @@ public static class RigidbodyExt
      */
     public static void TeleportObject(this Rigidbody rb, Transform originPortal, Transform targetPortal)
     {
-        if (GameManager.instance.debug)
-            Debug.Log("Functionality unfinished");
         // Move the object to the target portal.
-        rb.transform.position = targetPortal.position;
+        rb.transform.position = targetPortal.position + originPortal.InverseTransformPoint(rb.position);
 
         // Set the objects rotation direction to the same direction it entered in relation to the new portal.
-        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + targetPortal.rotation.eulerAngles;
+        Vector3 dirTransformVector = targetPortal.rotation.eulerAngles - (originPortal.rotation.eulerAngles + new Vector3(0, 180, 0) + targetPortal.rotation.eulerAngles);
         rb.transform.rotation = Quaternion.Euler(dirTransformVector);
         rb.isKinematic = false;
 
         // Transfer velocity to new direction.
         rb.velocity = targetPortal.forward.normalized * Mathf.Max(rb.velocity.magnitude, 4f);
     }
-
-
 }

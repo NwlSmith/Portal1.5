@@ -51,7 +51,7 @@ public class PickupObject : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         // Add force in that direction.
-        rb.AddForce(- forceDir * 10000 * Time.fixedDeltaTime);
+        rb.AddForce(- forceDir * 10000 * carriedObject.GetComponent<Rigidbody>().mass * Time.fixedDeltaTime);
         // Make the objects rotate like in the original portal.
         rb.MoveRotation(Quaternion.LookRotation(transform.forward));
     }
@@ -67,13 +67,12 @@ public class PickupObject : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit, 3)) //Casts a ray(Vector3 origin, Vector3 direction, float maxDistance), against all colliders in the Scene
             {
-                Pickupable p = hit.collider.GetComponent<Pickupable>(); 
                 //make it able to pick up all the objects with "Pickupable" script
-                if(p != null)
+                if(hit.collider.gameObject.CompareTag("CanPickUp"))
                 {
                     carrying = true;
-                    carriedObject = p.gameObject;
-                    p.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    carriedObject = hit.collider.gameObject;
+                    carriedObject.GetComponent<Rigidbody>().useGravity = false;
                     //p.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }

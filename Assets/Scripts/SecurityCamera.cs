@@ -38,6 +38,14 @@ public class SecurityCamera : MonoBehaviour
             camHolder.rotation = Quaternion.LookRotation(target);
             // Correct for model glitch
             camHolder.Rotate(transform.up, 90);
+
+            Portal orange = PortalManager.instance.orange;
+            Portal blue = PortalManager.instance.blue;
+            if (orange && Vector3.Distance(orange.transform.position, transform.position) <= 2f)
+                Detach();
+            if (blue && Vector3.Distance(blue.transform.position, transform.position) <= 2f)
+                Detach();
+
         }
     }
 
@@ -59,5 +67,14 @@ public class SecurityCamera : MonoBehaviour
             alive = false;
             gameObject.AddComponent<Rigidbody>();
         }
+    }
+
+    private void Detach()
+    {
+        alive = false;
+        gameObject.AddComponent<Rigidbody>().mass = 10;
+        tag = "CanPickUp";
+        gameObject.AddComponent<ObjectUtility>();
+        Destroy(this);
     }
 }

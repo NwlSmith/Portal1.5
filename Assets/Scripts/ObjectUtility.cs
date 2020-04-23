@@ -26,10 +26,17 @@ public class ObjectUtility : MonoBehaviour
     {
         // Create a clone of this object with only its mesh.
         clone = new GameObject();
-        MeshFilter mf = clone.AddComponent<MeshFilter>();
-        MeshRenderer mr = clone.AddComponent<MeshRenderer>();
-        mf.mesh = GetComponent<MeshFilter>().mesh;
-        mr.materials = GetComponent<MeshRenderer>().materials;
+        if (GetComponent<MeshRenderer>())
+        {
+            MeshFilter mf = clone.AddComponent<MeshFilter>();
+            MeshRenderer mr = clone.AddComponent<MeshRenderer>();
+            mf.mesh = GetComponent<MeshFilter>().mesh;
+            mr.materials = GetComponent<MeshRenderer>().materials;
+        }
+        foreach (Transform childTr in transform)
+        {
+            CloneChild(clone, childTr);
+        }
         clone.transform.localScale = transform.localScale;
         clone.name = name + " Clone";
         clone.SetActive(false);
@@ -57,6 +64,29 @@ public class ObjectUtility : MonoBehaviour
         if (!TryGetComponent(out rb))
         {
             Debug.Log("ERROR: object " + name + " created without Rigidbody.");
+        }
+    }
+
+    private void CloneChild(GameObject parent, Transform cloneChildTrans)
+    {
+        GameObject cloneChildGO = new GameObject();
+        cloneChildGO.transform.parent = parent.transform;
+
+        cloneChildGO.transform.localPosition = cloneChildTrans.transform.localPosition;
+        cloneChildGO.transform.localRotation = cloneChildTrans.transform.localRotation;
+        cloneChildGO.transform.localScale = cloneChildTrans.transform.localScale;
+
+        if (cloneChildTrans.TryGetComponent(out MeshFilter mf))
+        {
+            mf = cloneChildGO.AddComponent<MeshFilter>();
+            MeshRenderer mr = cloneChildGO.AddComponent<MeshRenderer>();
+            mf.mesh = cloneChildTrans.GetComponent<MeshFilter>().mesh;
+            mr.materials = cloneChildTrans.GetComponent<MeshRenderer>().materials;
+        }
+        
+        foreach (Transform childTr in cloneChildTrans)
+        {
+            CloneChild(cloneChildGO, childTr);
         }
     }
 
