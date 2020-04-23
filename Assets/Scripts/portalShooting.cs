@@ -14,6 +14,8 @@ public class portalShooting : MonoBehaviour
     public GameObject portalRight;
     public float speed = 50;
 
+    
+
     public float length = 1000f;
     //public GameObject aimer;
 
@@ -24,15 +26,18 @@ public class portalShooting : MonoBehaviour
     //these bools handle if the player shot a blue or orange portal
     public static bool shotBlue;
 
-    public bool shotOrange;
+    public static bool shotOrange;
 
     //was getting a nullreference from these lines in start, so I commented them to test out the reticle
  
-    void Start () {
-        
+    void Start ()
+    {
+
+       
+
         //if (PortalManager.instance != null)
-           // portal = PortalManager.instance.bluePrefab;
-           // portalRight = PortalManager.instance.orangePrefab;
+        // portal = PortalManager.instance.bluePrefab;
+        // portalRight = PortalManager.instance.orangePrefab;
         // ball = GetComponent<GameObject>();
     }
  
@@ -73,6 +78,7 @@ public class portalShooting : MonoBehaviour
                 {
                     Debug.Log("shot blue");
                     shotBlue = true;
+                   
                     StartCoroutine(delayPortal());
                    //  GameObject insBall = Instantiate(portal);
                    // insBall.transform.SetParent(null);
@@ -85,8 +91,9 @@ public class portalShooting : MonoBehaviour
             if (Input.GetMouseButtonDown(1) && !portalDelay&& myHit.collider.gameObject.tag == "CanHoldPortals")
             {
                 Debug.Log("shot orange");
-
+                
                 shotOrange = true;
+               
                 StartCoroutine(delayPortal());
                // GameObject insportal2 = Instantiate(portalRight);
               //  insportal2.transform.SetParent(null);
@@ -103,10 +110,8 @@ public class portalShooting : MonoBehaviour
 
         }
 
-        if (shotBlue)
-        {
-            
-        }
+       
+       
     }
 
     IEnumerator delayPortal()
