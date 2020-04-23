@@ -14,6 +14,9 @@ public class portalShooting1 : MonoBehaviour
     public GameObject portalRight;
     public float speed = 50;
 
+    public static bool shotOrange = false;
+    public static bool shotBlue = false;
+
     public float length = 1000f;
     public GameObject aimer;
 
@@ -77,6 +80,7 @@ public class portalShooting1 : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
                 StartCoroutine(delayPortal());
+                shotBlue = true;
                 InstantiatePortal(myHit, portal); // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             }
@@ -84,6 +88,7 @@ public class portalShooting1 : MonoBehaviour
             if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
                 StartCoroutine(delayPortal());
+                shotOrange = true;
                 InstantiatePortal(myHit, portalRight); // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             }

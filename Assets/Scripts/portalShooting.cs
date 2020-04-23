@@ -14,6 +14,9 @@ public class portalShooting : MonoBehaviour
     public GameObject portalRight;
     public float speed = 50;
 
+    public static bool shotOrange = false;
+    public static bool shotBlue = false;
+
     public float length = 1000f;
     public GameObject aimer;
 
