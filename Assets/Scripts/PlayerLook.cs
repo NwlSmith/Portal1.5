@@ -19,6 +19,7 @@ public class PlayerLook : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         playerBody = GetComponentInParent<CharacterController>().transform;
         if (playerBody == null)
@@ -44,6 +45,7 @@ public class PlayerLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Portal>(out Portal portal))
@@ -54,5 +56,5 @@ public class PlayerLook : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Portal portal))
             Debug.Log("Camera collided with portal collider");
-    }
+    }*/
 }

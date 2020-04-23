@@ -29,22 +29,28 @@ public class PortalWallDisable : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered by " + other.name + " on layer " + other.gameObject.layer);
-        // If the player is entering the trigger...
-        if (other.CompareTag("Player"))
+        if (GameManager.instance.debug)
+            Debug.Log("Trigger entered by " + other.name + " on layer " + other.gameObject.layer);
+        if (parentPortal.Other())
         {
-            Debug.Log("Portal wall disable entered by " + other.name);
-            // Mark it as NOT colliding with this surface.
-            StopCollidingWithPortalSurface(other.gameObject);
-        }
-        // If an object is entering the trigger...
-        if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
-        {
-            Debug.Log("Portal entered by " + other.name);
-            // Mark it as NOT colliding with this surface.
-            StopCollidingWithPortalSurface(other.transform.parent.gameObject);
-            // Make sure the clone object tracks to this portal.
-            other.GetComponentInParent<ObjectUtility>().enteredPortal = parentPortal;
+            // If the player is entering the trigger...
+            if (other.CompareTag("Player"))
+            {
+                if (GameManager.instance.debug)
+                    Debug.Log("Portal wall disable entered by " + other.name);
+                // Mark it as NOT colliding with this surface.
+                StopCollidingWithPortalSurface(other.gameObject);
+            }
+            // If an object is entering the trigger...
+            if (other.CompareTag("CanPickUp") && other.gameObject.layer == 10)
+            {
+                if (GameManager.instance.debug)
+                    Debug.Log("Portal entered by " + other.name);
+                // Mark it as NOT colliding with this surface.
+                StopCollidingWithPortalSurface(other.transform.parent.gameObject);
+                // Make sure the clone object tracks to this portal.
+                other.GetComponentInParent<ObjectUtility>().enteredPortal = parentPortal;
+            }
         }
     }
 
@@ -54,7 +60,8 @@ public class PortalWallDisable : MonoBehaviour
      */
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name + " on layer " + other.gameObject.layer);
+        if (GameManager.instance.debug)
+            Debug.Log("Portalwalldisabler of " + transform.parent.name + " exited by " + other.name + " on layer " + other.gameObject.layer);
         // If the player is exiting the trigger...
         if (other.CompareTag("Player"))
         {
@@ -68,6 +75,25 @@ public class PortalWallDisable : MonoBehaviour
             StartCollidingWithPortalSurface(other.transform.parent.gameObject);
             // Make sure the clone object does not track to any portal.
             other.GetComponentInParent<ObjectUtility>().enteredPortal = null;
+        }
+    }
+
+    /*
+     * Failsafe method to ensure objects do not fall through floors when placing new portals.
+     * Called in DestroyMe() in Portal.cs.
+     */
+    public void Failsafe()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player.layer == portalLayer || player.layer == 14)
+            StartCollidingWithPortalSurface(player);
+
+        StartCollidingWithPortalSurface(player);
+        GameObject[] pickupables = GameObject.FindGameObjectsWithTag("CanPickUp");
+        foreach (GameObject obj in pickupables)
+        {
+            if (obj.layer == portalLayer || obj.layer == 14)
+                StartCollidingWithPortalSurface(obj);
         }
     }
 

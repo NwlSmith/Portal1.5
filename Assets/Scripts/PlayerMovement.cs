@@ -55,10 +55,6 @@ public class PlayerMovement : MonoBehaviour
             yInput = 0;
         }
 
-        // DEBUG: Press escape to pause the editor
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Debug.Break();
-
         // Ensure the player is always upright.
         Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, upright, rotSpeed * Time.deltaTime);
@@ -101,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         // Resize the collider sphere which is used for calculating when to teleport.
         // Going faster means the sphere will be larger, thus allowing for more collision detection.
         playerLook.GetComponent<SphereCollider>().radius =
-            Mathf.Lerp(0, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
+            Mathf.Lerp(.1f, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
     }
 
     /*
