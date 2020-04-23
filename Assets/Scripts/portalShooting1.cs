@@ -18,7 +18,6 @@ public class portalShooting1 : MonoBehaviour
     public static bool shotBlue = false;
 
     public float length = 1000f;
-    public GameObject aimer;
 
     public LayerMask layerMask;
     public LayerMask wallMask; // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -51,17 +50,6 @@ public class portalShooting1 : MonoBehaviour
         Debug.DrawRay(myRay.origin, myRay.direction * length, Color.red);
         RaycastHit myHit;
 
-        //RaycastHit hit;
-        // if(Input.GetMouseButtonUp(0)){
-        //  Debug.Log("things");
-        //  Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //  if(Physics.Raycast(myRay, out hit, 400.0f))
-        //  {
-        //     GameObject newBall = Instantiate(ball, transform.position, transform.rotation);
-        //     newBall.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * speed;
-        //  }
-        //  }
-
         // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \/
         Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore);
 
@@ -73,10 +61,6 @@ public class portalShooting1 : MonoBehaviour
 
         if (Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore))
         {
-            // myHit.transform.Rotate(1,0,0);
-            aimer.transform.position = myHit.point;
-            //if (myHit.collider.gameObject.name != "wallNo")
-            // {
             if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
                 StartCoroutine(delayPortal());
@@ -92,12 +76,6 @@ public class portalShooting1 : MonoBehaviour
                 InstantiatePortal(myHit, portalRight); // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             }
-
-
-
-            //  }
-
-
         }
     }
 

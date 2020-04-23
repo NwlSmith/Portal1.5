@@ -23,9 +23,16 @@ public class StartMenuManager : MonoBehaviour
         blue.transform.position = blueTrans.position;
         blue.transform.rotation = blueTrans.rotation;
 
+        RaycastHit hit;
+
+        Physics.Raycast(blue.transform.position, -blue.transform.forward, out hit);
+        blue.GetComponent<Portal>().surface = hit.collider.gameObject;
+
         GameObject orange = Instantiate(PortalManager.instance.orangePrefab);
         orange.transform.position = orangeTrans.position;
         orange.transform.rotation = orangeTrans.rotation;
+        Physics.Raycast(orange.transform.position, -orange.transform.forward, out hit);
+        orange.GetComponent<Portal>().surface = hit.collider.gameObject;
 
         StartCoroutine(FadeInCO());
     }
@@ -40,7 +47,7 @@ public class StartMenuManager : MonoBehaviour
         foreach (CanvasGroup canvasGroup in textCanvasGroup)
             canvasGroup.alpha = 0f;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // Fade in from black.
         float elapsedTime = 0f;
