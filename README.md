@@ -9,3 +9,5 @@ Development Period: 3/31/2020 - ADD TO THIS
 Tools: Unity, Blender - ADD TO THIS
 
 A clone of Portal 1 by Valve.
+
+Font: Big Noodle Titling by Sentinel Type
