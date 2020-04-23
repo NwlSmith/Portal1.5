@@ -36,7 +36,7 @@ public class MaterialEmancipationGrill : MonoBehaviour
         {
             Debug.Log("Grill is working");
             PortalManager.instance.DestroyPortals();
-            
+            other.CompareTag("CanPickUp") = Destroy;
         }
        
 
