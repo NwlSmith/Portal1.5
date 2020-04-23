@@ -10,11 +10,19 @@ using UnityEngine;
 
 public class MaterialEmancipationGrill : MonoBehaviour
 {
-
+    PortalManager PortalManager;
 
 
     // Start is called before the first frame update
-    
+    void Start()
+    {
+
+        PortalManager = GetComponent<PortalManager>();
+
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -27,8 +35,8 @@ public class MaterialEmancipationGrill : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Grill is working");
+            PortalManager.instance.DestroyPortals();
             
-
         }
        
 
