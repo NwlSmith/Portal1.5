@@ -29,14 +29,17 @@ public class MaterialEmancipationGrill : MonoBehaviour
         
     }
 
-    //Checks if the object passing through the 
+    //Checks that when player passes the collider it destroys all portals any cubes it touches
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Grill is working");
             PortalManager.instance.DestroyPortals();
-            other.CompareTag("CanPickUp") = Destroy;
+
+            if (other.CompareTag("CanPickUp") {
+                other.GetComponent<ObjectUtility>().DestroyMe();
+            }
         }
        
 
