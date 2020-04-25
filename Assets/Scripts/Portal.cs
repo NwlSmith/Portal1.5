@@ -18,7 +18,7 @@ public class Portal : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private void Start()
+    private void Awake()
     {
         portalCamera = GetComponentInChildren<PortalCamera>();
 
@@ -36,8 +36,6 @@ public class Portal : MonoBehaviour
             PortalManager.instance.orange = this;
         }
 
-        SetSurfaceLayer();
-
         // Retrieve the audio source.
         if (!TryGetComponent(out audioSource))
         {
@@ -47,7 +45,12 @@ public class Portal : MonoBehaviour
         {
             audioSource.clip = portalCreation;
             audioSource.Play();
-        }
+        } 
+    }
+
+    private void Start()
+    {
+        SetSurfaceLayer();
     }
 
     public Portal Other()
