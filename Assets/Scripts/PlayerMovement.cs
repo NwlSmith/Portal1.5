@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxVelocity = 100f;
     public float maxRadius = .5f;
     [HideInInspector] public bool onGround = false;
-    [HideInInspector] public Vector3 physicsVector;
+    public Vector3 physicsVector;
 
     private CharacterController charController;
     private PlayerLook playerLook;
@@ -91,13 +91,24 @@ public class PlayerMovement : MonoBehaviour
         // Increment physics gravity.
         physicsVector.y += gravity * Time.fixedDeltaTime;
 
+        // Clamp velocity.
+        physicsVector.y = Mathf.Clamp(physicsVector.y, -100f, 100f);
+
         // Move player according to its input and physics
         charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
+    }
 
-        // Resize the collider sphere which is used for calculating when to teleport.
-        // Going faster means the sphere will be larger, thus allowing for more collision detection.
-        //playerLook.GetComponent<SphereCollider>().radius =
-            //Mathf.Lerp(.1f, maxRadius, Vector3.ClampMagnitude(charController.velocity, maxVelocity).magnitude / maxVelocity);
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (GameManager.instance.debug)
+            Debug.Log("Collision");
+
+        if ((hit.point - transform.position).normalized == Vector3.up)
+        {
+            if (GameManager.instance.debug)
+                Debug.Log("Ooop! ya hit her head there didn't ya?");
+            physicsVector.y = 0f;
+        }
     }
 
     /*
