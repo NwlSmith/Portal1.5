@@ -100,8 +100,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (GameManager.instance.debug)
-            Debug.Log("Collision");
 
         if ((hit.point - transform.position).normalized == Vector3.up)
         {

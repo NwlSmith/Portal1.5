@@ -218,8 +218,19 @@ public class portalShooting1 : MonoBehaviour
 
                 if ((thisUp && otherUp) || (thisDown && otherDown))
                 {
-                    // Make sure they are not intersecting.
+                    if (GameManager.instance.debug)
+                        Debug.Log("on the floor or ceiling.");
+                    Vector3 diff = otherTrans.position - newTrans.position;
+                    if (diff.magnitude > ver)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        newTrans.position = newTrans.position + diff.normalized * (diff.magnitude - ver);
+                    }
                 }
+
                 // If the new portal and other portal are on the vertical plane.
                 else if (newTrans.forward == otherTrans.forward)
                 {
