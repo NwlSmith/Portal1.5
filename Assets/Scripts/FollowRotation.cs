@@ -7,13 +7,7 @@ public class FollowRotation : MonoBehaviour
 
     public Transform target;
     public float speed = 10f;
-    public Quaternion offset;
     private Quaternion lastRotation;
-
-    private void Start()
-    {
-        offset = transform.localRotation;
-    }
 
     // Update is called once per frame
     void Update()
@@ -21,5 +15,12 @@ public class FollowRotation : MonoBehaviour
         transform.rotation = lastRotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, speed * Time.deltaTime);
         lastRotation = transform.rotation;
+    }
+
+
+    public void Teleport()
+    {
+        lastRotation = transform.rotation;
+        transform.rotation = target.rotation;
     }
 }

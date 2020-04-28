@@ -11,18 +11,21 @@ using UnityEngine.Rendering;
  */
 public class PortalCamera : MonoBehaviour
 {
-    public MeshRenderer modelMR;
+    public MeshRenderer[] modelMRs;
     private Transform playerCameraTrans;
     private Portal parentPortal;
     private Camera cam;
-    private Renderer modelRenderer;
+    private Renderer[] modelRenderers;
     private RenderTexture rt;
     private RenderTexture prevRT;
 
     private void Awake()
     {
         cam = GetComponent<Camera>();
-        modelRenderer = modelMR.GetComponent<Renderer>();
+
+        modelRenderers = new Renderer[modelMRs.Length];
+        for (int i = 0; i < modelMRs.Length; i++)
+            modelRenderers[i] = modelMRs[i].GetComponent<Renderer>();
     }
 
     private void Start()
@@ -144,7 +147,7 @@ public class PortalCamera : MonoBehaviour
         if (parentPortal.Other() == null)
             return;
 
-        if (modelRenderer.isVisible)
+        if (modelRenderers[0].isVisible)
         {
             cam.targetTexture = rt; // may need to set to other RT
             for (int i = PortalManager.instance.maxNumRecursions - 1; i >= 0; --i)
@@ -186,7 +189,10 @@ public class PortalCamera : MonoBehaviour
      */
     public void NewPairedPortal(PortalCamera otherPortalCamera)
     {
-        otherPortalCamera.modelMR.material.mainTexture = rt;
+        for (int i = 0; i < otherPortalCamera.modelMRs.Length; i++)
+        {
+            otherPortalCamera.modelMRs[i].material.mainTexture = rt;
+        }
     }
 
     /*
