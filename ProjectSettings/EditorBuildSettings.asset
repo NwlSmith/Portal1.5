@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test - Nate.unity
     guid: 8f624292f18ca91428a40f5be1a492e4
+  - enabled: 1
+    path: Assets/Scenes/Test - Nate 2.unity
+    guid: 7eb62f592be072b4489b99d1b9e83973
   m_configObjects: {}

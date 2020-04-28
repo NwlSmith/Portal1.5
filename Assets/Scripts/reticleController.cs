@@ -36,16 +36,17 @@ shotOrange, and shotBlue, which return which portal has been shot.
            
         }
 
-        if (portalShooting1.shotOrange && !portalShooting1.shotBlue)
+        else  if (portalShooting1.shotOrange && !portalShooting1.shotBlue)
         {
             reticle.sprite = orange;
         }
 
-        if (portalShooting1.shotBlue && portalShooting1.shotOrange)
+        else if (portalShooting1.shotBlue && portalShooting1.shotOrange)
         {
             reticle.sprite = both;
         }
-        if(!(portalShooting.shotBlue) && (!portalShooting.shotOrange))
+
+        else if (!portalShooting1.shotBlue && !portalShooting1.shotOrange)
         {
             reticle.sprite = empty;
         }
