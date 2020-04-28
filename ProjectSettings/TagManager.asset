@@ -8,6 +8,7 @@ TagManager:
   - NoPortal
   - CanHoldPortals
   - CanPickUp
+  - Button
   layers:
   - Default
   - TransparentFX
