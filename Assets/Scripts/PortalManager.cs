@@ -85,14 +85,14 @@ public class PortalManager : MonoBehaviour
         {
             blue.DestroyMe();
             blue = null;
-            portalShooting.shotBlue = false;
+            portalShooting1.shotBlue = false;
         }
 
         if (orange != null)
         {
             orange.DestroyMe();
             orange = null;
-            portalShooting.shotOrange = false;
+            portalShooting1.shotOrange = false;
         }
     }
 }

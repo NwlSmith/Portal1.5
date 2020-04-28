@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController charController;
     private PlayerLook playerLook;
+    private FollowRotation followRotation;
     private float xInput = 0f;
     private float yInput = 0f;
     private float zInput = 0f;
@@ -38,6 +39,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             playerLook = GetComponentInChildren<PlayerLook>();
+        }
+        if (GetComponentInChildren<FollowRotation>() == null)
+        {
+            Debug.Log(name + " does not contain a FollowRotation script.");
+        }
+        else
+        {
+            followRotation = GetComponentInChildren<FollowRotation>();
         }
     }
 
@@ -100,12 +109,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-
-        if ((hit.point - transform.position).normalized == Vector3.up)
+        Vector3 collisionDirection = hit.normal;
+        if (collisionDirection == Vector3.down)
         {
             if (GameManager.instance.debug)
-                Debug.Log("Ooop! ya hit her head there didn't ya?");
+                Debug.Log("Ooop! ya hit yer head there didn't ya?");
             physicsVector.y = 0f;
+        }
+        
+        if (!charController.isGrounded)
+        {
+            if (GameManager.instance.debug)
+                Debug.Log("Ooop! yer not on the ground and ya hit sumthin!");
+
+            
+            if (collisionDirection == Vector3.right || collisionDirection == Vector3.left)
+            {
+                if (GameManager.instance.debug)
+                    Debug.Log("Ooop! ya hit the wall in the x axis there didn't ya?");
+                physicsVector.x = 0f;
+            }
+            else if (collisionDirection == Vector3.forward || collisionDirection == Vector3.back)
+            {
+                if (GameManager.instance.debug)
+                    Debug.Log("Ooop! ya hit the wall in the z axis there didn't ya?");
+                physicsVector.z = 0f;
+            }
         }
     }
 
@@ -118,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Temporarily disable the CharacterController to allow teleportation.
         charController.enabled = false;
-        transform.position = targetPortal.position + originPortal.InverseTransformPoint(transform.position);
+        transform.position = targetPortal.TransformPoint(Quaternion.Euler(0f, 180f, 0f) * originPortal.InverseTransformPoint(transform.position));
         charController.enabled = true;
 
         // Set the players look direction to the same direction you entered in relation to the new portal.
@@ -127,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Transfer velocity to new direction.
         physicsVector = targetPortal.forward * physicsVector.magnitude;
+
+        followRotation.Teleport();
     }
 
     /*

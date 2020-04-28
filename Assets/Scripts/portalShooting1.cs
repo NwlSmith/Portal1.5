@@ -20,7 +20,8 @@ public class portalShooting1 : MonoBehaviour
     public float length = 1000f;
 
     public LayerMask layerMask;
-    public LayerMask wallMask; // NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public LayerMask wallMask;
+    public Animator animator;
 
     private Camera cam;
     private bool portalDelay;
@@ -78,6 +79,9 @@ public class portalShooting1 : MonoBehaviour
      */
     private void InstantiatePortal(RaycastHit hit, GameObject p)
     {
+        // Play animation.
+        animator.SetTrigger("Fire");
+
         // Instantiate a new portal.
         GameObject newPortal = Instantiate(p);
 
