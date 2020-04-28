@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private float yInput = 0f;
     private float zInput = 0f;
 
+    public GameObject button;
+
     void Start()
     {
         if (!TryGetComponent(out charController))
@@ -67,6 +69,45 @@ public class PlayerMovement : MonoBehaviour
         // Ensure the player is always upright.
         Quaternion upright = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, upright, rotSpeed * Time.deltaTime);
+
+
+        Ray toeRay = new Ray(transform.position, Vector3.down * 1.4f);
+        Debug.DrawRay(toeRay.origin, toeRay.direction * 1.4f, Color.blue);
+
+        if (Physics.Raycast(toeRay.origin, toeRay.direction, out RaycastHit toeHit, 1.4f))
+
+        {
+            //GameObject button;
+            if (toeHit.transform.gameObject.tag == "Button" && button == null &&
+               toeHit.transform.gameObject.GetComponent<ButtonPresser>().playerOnButton == false)
+                {
+                    button = toeHit.transform.gameObject; // assign button that we just hit with toes
+                    toeHit.transform.gameObject.GetComponent<ButtonPresser>().playerOnButton = true;
+                button.GetComponent<ButtonPresser>().buttonPressed.SetTrigger("ButtonPressed");
+
+
+                     Debug.Log("You hit"+ toeHit.transform.gameObject);
+                 }
+            else if (toeHit.transform.gameObject.tag != "Button" && button !=null)
+            {
+                button.GetComponent<ButtonPresser>().playerOnButton = false;
+                Debug.Log("You stepped off the button");
+                button.GetComponent<ButtonPresser>().buttonPressed.SetTrigger("ButtonReleased");
+                button = null;
+
+            }
+        }
+
+        // if your midair and already assigned a button, raycast shouldn't be hitting anything
+        if (!Physics.Raycast(toeRay.origin, toeRay.direction, out RaycastHit noHit, 1.4f) && button != null)
+        {
+            button.GetComponent<ButtonPresser>().playerOnButton = false;
+            Debug.Log("You stepped off the button");
+            button.GetComponent<ButtonPresser>().buttonPressed.SetTrigger("ButtonReleased");
+            button = null;
+        }
+
+
     }
 
     private void FixedUpdate()
@@ -109,6 +150,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+       
+
+
         Vector3 collisionDirection = hit.normal;
         if (collisionDirection == Vector3.down)
         {

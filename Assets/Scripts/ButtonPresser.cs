@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class ButtonPresser : MonoBehaviour
 {
-    public Animation ButtonPressed;
+    //public Animation ButtonPressed;
+    public Animator buttonPressed;
+
+    public bool playerOnButton = false;
+
+    public void DoorOpener()
+    {
+
+
+
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +29,25 @@ public class ButtonPresser : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Player" || other.tag == "CanPickUp")
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "CanPickUp")
         {
-            
+            buttonPressed.SetTrigger("ButtonPressed");
 
+            Debug.Log("Button is pressed");
         }
+
+       
+
+    }
+
+
+    private void OnCollisionExit()
+    {
+
+        buttonPressed.SetTrigger("ButtonReleased");
+
     }
 }
