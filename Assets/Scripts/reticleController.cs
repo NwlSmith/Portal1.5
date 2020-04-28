@@ -45,7 +45,7 @@ shotOrange, and shotBlue, which return which portal has been shot.
         {
             reticle.sprite = both;
         }
-        if(!(portalShooting.shotBlue) && (!portalShooting.shotOrange)
+        if(!(portalShooting.shotBlue) && (!portalShooting.shotOrange))
         {
             reticle.sprite = empty;
         }

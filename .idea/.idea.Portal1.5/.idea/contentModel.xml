@@ -10,11 +10,19 @@
           </e>
         </e>
         <e p="Graphics" t="Include">
-          <e p="ScreenCutoutShader.shader" t="Include" />
+          <e p="Fonts" t="Include">
+            <e p="bignoodletitling" t="Include">
+              <e p="big_noodle_titling.txt" t="Include" />
+              <e p="Sentinel_Type_Freefont_EULA.txt" t="Include" />
+            </e>
+          </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="AudioManager.cs" t="Include" />
           <e p="ButtonPresser.cs" t="Include" />
+          <e p="FallThroughLevelFailsafe.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="MaterialEmancipationGrill.cs" t="Include" />
           <e p="MovementTest.cs" t="Include" />
           <e p="NonPortalable.cs" t="Include" />
           <e p="ObjectUtility.cs" t="Include" />
@@ -27,9 +35,12 @@
           <e p="PortalManager.cs" t="Include" />
           <e p="PortalMove.cs" t="Include" />
           <e p="PortalShooting.cs" t="Include" />
+          <e p="portalShooting1.cs" t="Include" />
           <e p="PortalWallDisable.cs" t="Include" />
           <e p="reticleController.cs" t="Include" />
           <e p="RigidbodyExt.cs" t="Include" />
+          <e p="SecurityCamera.cs" t="Include" />
+          <e p="StartMenuManager.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
