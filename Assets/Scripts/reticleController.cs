@@ -30,18 +30,18 @@ shotOrange, and shotBlue, which return which portal has been shot.
     void Update()
     {
         //if only a blue portal is out
-        if (portalShooting.shotBlue && !portalShooting.shotOrange)
+        if (portalShooting1.shotBlue && !portalShooting1.shotOrange)
         {
             reticle.sprite = blue;
            
         }
 
-        if (portalShooting.shotOrange && !portalShooting.shotBlue)
+        if (portalShooting1.shotOrange && !portalShooting1.shotBlue)
         {
             reticle.sprite = orange;
         }
 
-        if (portalShooting.shotBlue && portalShooting.shotOrange)
+        if (portalShooting1.shotBlue && portalShooting1.shotOrange)
         {
             reticle.sprite = both;
         }

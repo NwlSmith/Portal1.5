@@ -10,3 +10,7 @@
 - https://www.reddit.com/r/Unity3D/comments/el11vr/it_only_took_a_week_and_a_half_but_i_finally_got/
 - https://www.reddit.com/r/Unity3D/comments/elj8sn/how_i_made_my_seamless_portals/
 - Portal developers: https://www.youtube.com/watch?v=ivyseNMVt-4&feature=youtu.be&t=3642
+
+
+recursive portal idea:
+Each frame, render a camera to a queue. most recent one in closest portal, next oldest in next portal etc. oldest rendertexture in last recursion

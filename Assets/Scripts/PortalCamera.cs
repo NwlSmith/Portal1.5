@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 /*
  * Date created: 4/2/2020
  * Creator: Nate Smith
@@ -14,15 +15,21 @@ public class PortalCamera : MonoBehaviour
     private Transform playerCameraTrans;
     private Portal parentPortal;
     private Camera cam;
+    private Renderer modelRenderer;
     private RenderTexture rt;
     private RenderTexture prevRT;
+
+    private void Awake()
+    {
+        cam = GetComponent<Camera>();
+        modelRenderer = modelMR.GetComponent<Renderer>();
+    }
 
     private void Start()
     {
         playerCameraTrans = FindObjectOfType<PlayerLook>().transform;
         parentPortal = GetComponentInParent<Portal>();
-
-        cam = GetComponent<Camera>();
+        
 
         // Create a new RenderTexture so RT resolution stays the same across portals.
         if (cam.targetTexture != null)
@@ -34,42 +41,57 @@ public class PortalCamera : MonoBehaviour
         cam.targetTexture = rt;
 
         // Pair with the other portal.
-        if (PortalManager.instance.OtherPortal(parentPortal) != null)
+        if (parentPortal.Other() != null)
         {
-            NewPairedPortal(PortalManager.instance.OtherPortal(parentPortal).portalCamera);
-            PortalManager.instance.OtherPortal(parentPortal).portalCamera.NewPairedPortal(this);
-        }
-    }
-
-    
-    void Update()
-    {
-        // Retrieve the other portal.
-        Portal otherPortal = PortalManager.instance.OtherPortal(parentPortal);
-        if (otherPortal != null)
-        {
-            cam.projectionMatrix = Camera.main.projectionMatrix;
-            // The relative local rotation of the player to the other portal's forward vector.
-            TransformRotLoc(otherPortal.transform);
-            // The relative local position of the player to the other portal's forward vector.
-            TransformPosLoc(otherPortal.transform);
-            // Set the nearest objects that can be rendered to those past the plane formed by the portal.
-            CalculateProjectionMatrix();
-
-            
-
+            NewPairedPortal(parentPortal.Other().portalCamera);
+            parentPortal.Other().portalCamera.NewPairedPortal(this);
         }
     }
     /*
-
-    private void LateUpdate()
+    private void OnEnable()
     {
-        Graphics.Blit(rt, prevRT);
-    }*/
+        RenderPipelineManager.beginCameraRendering += RenderPipelineManager_beginCameraRendering;
+    }
+
+    private void OnDisable()
+    {
+        RenderPipelineManager.beginCameraRendering -= RenderPipelineManager_beginCameraRendering;
+    }
+
+    private void RenderPipelineManager_beginCameraRendering(ScriptableRenderContext context, Camera camera)
+    {
+        OnPreRender();
+    }
+
+
+    */
+     void Update()
+     {
+         // Retrieve the other portal.
+         Portal otherPortal = parentPortal.Other();
+         if (otherPortal != null)
+         {
+             // The relative local rotation of the player to the other portal's forward vector.
+             TransformRotLoc(otherPortal.transform);
+             // The relative local position of the player to the other portal's forward vector.
+             TransformPosLoc(otherPortal.transform);
+             // Set the nearest objects that can be rendered to those past the plane formed by the portal.
+             CalculateProjectionMatrix();
+
+
+
+         }
+     }
+
+     /*
+     private void LateUpdate()
+     {
+         Graphics.Blit(rt, prevRT);
+     }*/
 
     public void Render(int index, int maxNumRecursions)
     {
-        Portal otherPortal = PortalManager.instance.OtherPortal(parentPortal);
+        Portal otherPortal = parentPortal.Other();
         if (otherPortal != null)
         {
             cam.projectionMatrix = Camera.main.projectionMatrix;
@@ -115,6 +137,49 @@ public class PortalCamera : MonoBehaviour
         }
     }
 
+    private void OnPreRender()
+    {
+        if (GameManager.instance.debug)
+            Debug.Log("Prerender");
+        if (parentPortal.Other() == null)
+            return;
+
+        if (modelRenderer.isVisible)
+        {
+            cam.targetTexture = rt; // may need to set to other RT
+            for (int i = PortalManager.instance.maxNumRecursions - 1; i >= 0; --i)
+            {
+                RenderCamera(i);
+            }
+        }
+    }
+
+    private void RenderCamera(int curIndex)
+    {
+        Transform otherPortalTrans = parentPortal.Other().transform;
+
+        cam.transform.position = playerCameraTrans.position;
+        cam.transform.rotation = playerCameraTrans.rotation;
+
+        for (int i = 0; i <= curIndex; ++i)
+        {
+            // Position the camera behind the other portal.
+            Vector3 relativePos = otherPortalTrans.InverseTransformPoint(cam.transform.position);
+            relativePos = Vector3.Scale(relativePos, new Vector3(-1, 1, -1));
+            cam.transform.position = parentPortal.transform.TransformPoint(relativePos);
+
+            // Rotate the camera to look through the other portal.
+            Quaternion localRot = Quaternion.Inverse(otherPortalTrans.rotation) * cam.transform.rotation;
+            localRot = Quaternion.Euler(0.0f, 180.0f, 0.0f) * localRot;
+            cam.transform.rotation = parentPortal.transform.rotation * localRot;
+        }
+
+        CalculateProjectionMatrix();
+
+        // Render the camera to its render target.
+        cam.Render();
+    }
+
     /*
      * Sets the other portal's camera's RenderTexture to the images captured on this camera.
      * Called in Start().
@@ -152,6 +217,7 @@ public class PortalCamera : MonoBehaviour
      */
     private void CalculateProjectionMatrix()
     {
+        cam.projectionMatrix = Camera.main.projectionMatrix;
         Plane portalPlane = new Plane(parentPortal.transform.forward, parentPortal.transform.position);
         Vector4 clipPlane = new Vector4(portalPlane.normal.x, portalPlane.normal.y, portalPlane.normal.z, portalPlane.distance);
         Vector4 clipPlaneCameraSpace = Matrix4x4.Transpose(Matrix4x4.Inverse(cam.worldToCameraMatrix)) * clipPlane;

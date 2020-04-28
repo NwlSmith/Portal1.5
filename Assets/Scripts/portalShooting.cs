@@ -13,31 +13,24 @@ public class portalShooting : MonoBehaviour
     public GameObject portal;
     public GameObject portalRight;
     public float speed = 50;
-    public GameObject audioCube;
-    //public AudioManager AM;
-    
+
+    public static bool shotOrange = false;
+    public static bool shotBlue = false;
+
     public float length = 1000f;
-    //public GameObject aimer;
+    public GameObject aimer;
 
     public LayerMask layerMask;
 
     private Camera cam;
     private bool portalDelay;
-    //these bools handle if the player shot a blue or orange portal
-    public static bool shotBlue;
 
-    public static bool shotOrange;
-
-    //was getting a nullreference from these lines in start, so I commented them to test out the reticle
+    
  
-    void Start ()
-    {
-        
-
-
-        //if (PortalManager.instance != null)
-        // portal = PortalManager.instance.bluePrefab;
-        // portalRight = PortalManager.instance.orangePrefab;
+    void Start () {
+        if (PortalManager.instance != null)
+            portal = PortalManager.instance.bluePrefab;
+            portalRight = PortalManager.instance.orangePrefab;
         // ball = GetComponent<GameObject>();
     }
  
@@ -66,43 +59,32 @@ public class portalShooting : MonoBehaviour
         //  }
         //  }
         
-        //commented out the last 2 parts because they were preventing me from testing the reticle
-        if (Physics.Raycast(myRay, out myHit, length))//, layerMask //QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(myRay, out myHit, length, layerMask , QueryTriggerInteraction.Ignore))
         {
-           
             // myHit.transform.Rotate(1,0,0);
-         
+            aimer.transform.position = myHit.point;
             //if (myHit.collider.gameObject.name != "wallNo")
            // {
                 if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
                 {
-                  //  AM.PlaySound("shoot");
-                  //  audioCube.GetComponent<AudioManager>().PlaySound("shoot");
-                    Debug.Log("shot blue");
-                    shotBlue = true;
-                   
                     StartCoroutine(delayPortal());
-                   //  GameObject insBall = Instantiate(portal);
-                   // insBall.transform.SetParent(null);
-                   // insBall.transform.forward = myHit.normal;
-                   // insBall.transform.position = myHit.point + .01f * myHit.normal;
-              //  insBall.GetComponent<Portal>().surface = myHit.collider.gameObject;
+                     GameObject insBall = Instantiate(portal);
+                    insBall.transform.SetParent(null);
+                    insBall.transform.forward = myHit.normal;
+                    insBall.transform.position = myHit.point + .01f * myHit.normal;
+                insBall.GetComponent<Portal>().surface = myHit.collider.gameObject;
             
                 }
 
-            if (Input.GetMouseButtonDown(1) && !portalDelay&& myHit.collider.gameObject.tag == "CanHoldPortals")
+            if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
-                Debug.Log("shot orange");
-                
-                shotOrange = true;
-               
                 StartCoroutine(delayPortal());
-               // GameObject insportal2 = Instantiate(portalRight);
-              //  insportal2.transform.SetParent(null);
-               // insportal2.transform.forward = myHit.normal;
-               // insportal2.transform.position = myHit.point + .01f * myHit.normal;
-                //insportal2.GetComponent<Portal>().surface = myHit.collider.gameObject;
-//
+                GameObject insportal2 = Instantiate(portalRight);
+                insportal2.transform.SetParent(null);
+                insportal2.transform.forward = myHit.normal;
+                insportal2.transform.position = myHit.point + .01f * myHit.normal;
+                insportal2.GetComponent<Portal>().surface = myHit.collider.gameObject;
+
             }
 
 
@@ -111,9 +93,6 @@ public class portalShooting : MonoBehaviour
 
 
         }
-
-       
-       
     }
 
     IEnumerator delayPortal()
