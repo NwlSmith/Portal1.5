@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2774617925027416861}
   - component: {fileID: 2774617925027416860}
   - component: {fileID: 2774617925027416863}
+  - component: {fileID: 454685652}
   m_Layer: 0
   m_Name: ButtonWireHolder
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2774617925027416858}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: -1.999, z: -8.25}
   m_LocalScale: {x: 0.5, y: 0.05, z: 0.5}
   m_Children:
@@ -96,6 +97,19 @@ MonoBehaviour:
   off: {fileID: 2100000, guid: 3c3c2ca0a14f52d46b735ae8898d866d, type: 2}
   on: {fileID: 2100000, guid: 86d0d587bee6e864f875ddf855d70a6c, type: 2}
   r: {fileID: 2774617924168367594}
+--- !u!65 &454685652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774617925027416858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: -1.8, z: 0}
 --- !u!1001 &4730380790202998933
 PrefabInstance:
   m_ObjectHideFlags: 0

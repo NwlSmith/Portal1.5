@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+/*
+ * Date created: 4/23/2020
+ * Creator: Nate Smith
+ * 
+ * Description: Start Menu Manager.
+ * Manages the buttons and scene transitions in the start menu.
+ */
 public class StartMenuManager : MonoBehaviour
 {
     // Public Variables.
@@ -37,6 +43,10 @@ public class StartMenuManager : MonoBehaviour
         StartCoroutine(FadeInCO());
     }
 
+    /*
+     * Fades the black overlay out and fades in buttons.
+     * Called in Start().
+     */
     private IEnumerator FadeInCO()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -79,12 +89,19 @@ public class StartMenuManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+    /*
+     * Starts the PlayCO coroutine.
+     * Called on a button press in the scene.
+     */
     public void Play()
     {
         StartCoroutine(PlayCO());
-        SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
     }
 
+    /*
+     * Fades in the black overlay and fades out buttons, then starts next scene.
+     * Called in Start().
+     */
     private IEnumerator PlayCO()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -120,11 +137,19 @@ public class StartMenuManager : MonoBehaviour
         SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
     }
 
+    /*
+     * Opens the Itch.io page
+     * Called on a button press in the scene.
+     */
     public void Itch()
     {
         Application.OpenURL("https://nwlsmith.itch.io/portal-15");
     }
 
+    /*
+     * Quits the game.
+     * Called on a button press in the scene.
+     */
     public void Quit()
     {
         Application.Quit();

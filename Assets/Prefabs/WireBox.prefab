@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6500500028016526977}
   - component: {fileID: 651582955102960248}
   - component: {fileID: 7068355789563434834}
+  - component: {fileID: 592794268}
   m_Layer: 0
   m_Name: WireBox
   m_TagString: Untagged
@@ -97,6 +98,19 @@ MonoBehaviour:
   off: {fileID: 2100000, guid: 18a6cdbb05a2c704e9131af2b04a56af, type: 2}
   on: {fileID: 2100000, guid: 70bdff932032b364a8589c6e5f23600d, type: 2}
   r: {fileID: 7068355791066937248}
+--- !u!65 &592794268
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240237237880114852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.19999999}
+  m_Center: {x: 0, y: 0, z: -0.018749997}
 --- !u!1 &7068355791066937251
 GameObject:
   m_ObjectHideFlags: 0
