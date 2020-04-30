@@ -22,6 +22,7 @@
           <e p="ButtonController.cs" t="Include" />
           <e p="ButtonPresser.cs" t="Include" />
           <e p="ButtonWire.cs" t="Include" />
+          <e p="DoorSwitch.cs" t="Include" />
           <e p="FallThroughLevelFailsafe.cs" t="Include" />
           <e p="FollowRotation.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
