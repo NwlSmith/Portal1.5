@@ -26,15 +26,10 @@ public class PlayerMovement : MonoBehaviour
     private float yInput = 0f;
     private float zInput = 0f;
 
-<<<<<<< HEAD
     public GameObject button;
-
-=======
-
     public AudioSource AS;
-
     public AudioClip throughPortalClip;
->>>>>>> 78e0aa3b964121e14152492fcd63e5f98cdb5162
+
     void Start()
     {
         AS = GetComponent<AudioSource>();
