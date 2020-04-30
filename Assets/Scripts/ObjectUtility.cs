@@ -62,7 +62,7 @@ public class ObjectUtility : MonoBehaviour
         {
             Debug.Log("ERROR: object " + name + " created without AudioSource.");
         }
-        
+
         // Retrieve the rigidbody.
         if (!TryGetComponent(out rb))
         {
@@ -86,19 +86,19 @@ public class ObjectUtility : MonoBehaviour
             mf.mesh = cloneChildTrans.GetComponent<MeshFilter>().mesh;
             mr.materials = cloneChildTrans.GetComponent<MeshRenderer>().materials;
         }
-        
+
         foreach (Transform childTr in cloneChildTrans)
         {
             CloneChild(cloneChildGO, childTr);
         }
     }
 
-   /*
-    * Either reflect the clone or do not.
-    */
+    /*
+     * Either reflect the clone or do not.
+     */
     private void Update()
     {
-        
+
         Debug.DrawRay(transform.position, rb.velocity.normalized, Color.cyan);
         // If there are not two portals, ignore this.
         if (PortalManager.instance.blue == null || PortalManager.instance.orange == null)
@@ -120,7 +120,9 @@ public class ObjectUtility : MonoBehaviour
     */
     private void OnCollisionEnter(Collision collision)
     {
-        if (rb.velocity.magnitude >= .5f )
+        int otherLayer = collision.gameObject.layer;
+        bool shouldCollide = (layer == 12 && (otherLayer == 15 || otherLayer == 17)) || (layer == 13 && (otherLayer == 16 || otherLayer == 17)) || (layer == 14 && (otherLayer == 15 || otherLayer == 16 || otherLayer == 17));
+        if (rb.velocity.magnitude >= .5f && shouldCollide)
         {
             audioSource.pitch = Random.Range(.9f, 1.1f);
             audioSource.clip = dropSound;

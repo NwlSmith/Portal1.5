@@ -538,7 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blueTrans: {fileID: 235029753}
   orangeTrans: {fileID: 1639413091}
-  nextLevel: Test - Nate 2
+  nextLevel: Level 1
   imgCanvasGroup: {fileID: 1821056842}
   textCanvasGroup:
   - {fileID: 849835466}

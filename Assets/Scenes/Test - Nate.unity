@@ -2439,6 +2439,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 215065669, guid: dce3fd2cebdf1064c807054721f503ce, type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5076564916017750952, guid: dce3fd2cebdf1064c807054721f503ce,
         type: 3}
       propertyPath: m_Name
