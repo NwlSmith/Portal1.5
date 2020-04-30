@@ -58,45 +58,56 @@ public class portalShooting1 : MonoBehaviour
         Debug.DrawRay(myHit.point, transform.rotation * Vector3.right, Color.red);
         Debug.DrawRay(myHit.point, Vector3.Cross(transform.rotation * Vector3.right, myHit.normal), Color.green);
 
-        if (Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore))
+        Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Collide);
+        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && myHit.collider.GetComponent<MaterialEmancipationGrill>())
         {
-            if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
+            AS.clip = nonPortalClip;
+            AS.Play();
+            StartCoroutine(delayPortal());
+        }
+        else
+        {
+
+            if (Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Ignore))
             {
-                AS.clip = portalClip;
-                AS.Play();
-                StartCoroutine(delayPortal());
-                shotBlue = true;
-                InstantiatePortal(myHit, portal);
+                if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
+                {
+                    AS.clip = portalClip;
+                    AS.Play();
+                    StartCoroutine(delayPortal());
+                    shotBlue = true;
+                    InstantiatePortal(myHit, portal);
 
-            }
+                }
 
-            if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
-            {
-                AS.clip = portalClip;
-                AS.Play();
-                StartCoroutine(delayPortal());
-                shotOrange = true;
-                InstantiatePortal(myHit, portalRight);
+                if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
+                {
+                    AS.clip = portalClip;
+                    AS.Play();
+                    StartCoroutine(delayPortal());
+                    shotOrange = true;
+                    InstantiatePortal(myHit, portalRight);
 
-            }
-            
-            //if the object isn't portable
-            
-            if (Input.GetMouseButtonDown(0) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
-            {
-                AS.clip = nonPortalClip;
-                AS.Play();
-                StartCoroutine(delayPortal());
-                
+                }
 
-            }
-            if (Input.GetMouseButtonDown(1) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
-            {
-                AS.clip = nonPortalClip;
-                AS.Play();
-                StartCoroutine(delayPortal());
-               
+                //if the object isn't portable
 
+                if (Input.GetMouseButtonDown(0) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
+                {
+                    AS.clip = nonPortalClip;
+                    AS.Play();
+                    StartCoroutine(delayPortal());
+
+
+                }
+                if (Input.GetMouseButtonDown(1) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
+                {
+                    AS.clip = nonPortalClip;
+                    AS.Play();
+                    StartCoroutine(delayPortal());
+
+
+                }
             }
         }
     }
