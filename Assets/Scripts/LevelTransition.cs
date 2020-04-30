@@ -15,6 +15,14 @@ public class LevelTransition : MonoBehaviour
 
     public string nextLevel;
 
+    private void Start()
+    {
+        if (nextLevel == "")
+        {
+            Debug.Log("ERROR: Next Level in " + name + " has not been set.");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
