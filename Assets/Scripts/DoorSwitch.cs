@@ -9,10 +9,13 @@ public class DoorSwitch : MonoBehaviour
     ButtonPresser ButtonPresser;
     public ButtonController ButtonController;
 
+    private AudioSource AS;
+
     public void DoorOpener()
     {
         ButtonController.ActivateButton();
         doorControl.SetTrigger("Open");
+        AS.Play();
         Debug.Log("Fwooosh");
 
 
@@ -23,6 +26,7 @@ public class DoorSwitch : MonoBehaviour
     {
         ButtonController.DeactivateButton();
         doorControl.SetTrigger("Close");
+        AS.Play();
         Debug.Log("Reverse Foowsh");
 
     }
@@ -31,7 +35,7 @@ public class DoorSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AS = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

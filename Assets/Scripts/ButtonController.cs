@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
@@ -12,6 +13,8 @@ using UnityEngine;
  */
 public class ButtonController : MonoBehaviour
 {
+
+    private AudioSource AS;
     public ButtonWire[] buttonWires;
 
     /*
@@ -22,6 +25,7 @@ public class ButtonController : MonoBehaviour
     {
         foreach (ButtonWire buttonWire in buttonWires)
         {
+            AS.Play();
             buttonWire.TurnOn();
         }
     }
@@ -34,7 +38,13 @@ public class ButtonController : MonoBehaviour
     {
         foreach (ButtonWire buttonWire in buttonWires)
         {
+            AS.Play();
             buttonWire.TurnOff();
         }
+    }
+
+    public void Start()
+    {
+        AS = GetComponent<AudioSource>();
     }
 }
