@@ -18,6 +18,7 @@ public class PickupObject : MonoBehaviour
     public AudioClip pickupClip;
     public AudioClip dropClip;
 
+
     void Start()
     {
         AS = GetComponent<AudioSource>();
@@ -31,6 +32,7 @@ public class PickupObject : MonoBehaviour
         if (carrying)
         {
             checkDrop();
+            //carry(carriedObject);
         }
         else
         {
@@ -55,12 +57,12 @@ public class PickupObject : MonoBehaviour
         // Calculate the direction and magnitude of the difference in position from the object to the target location in front of the camera.
         Vector3 forceDir = o.transform.position - (mainCamera.transform.position + mainCamera.transform.forward * distance);
         // Set velocity to zero so we aren't orbiting the target.
-        rb.velocity = Vector3.zero;
+        rb.velocity = rb.velocity * .5f;
         rb.angularVelocity = Vector3.zero;
         // Add force in that direction.
-        rb.AddForce(- forceDir * 10000 * carriedObject.GetComponent<Rigidbody>().mass * Time.fixedDeltaTime);
+        rb.AddForce(- forceDir * 100000 * carriedObject.GetComponent<Rigidbody>().mass * Time.fixedDeltaTime);
         // Make the objects rotate like in the original portal.
-        rb.MoveRotation(Quaternion.LookRotation(transform.forward));
+        rb.MoveRotation(Quaternion.LookRotation(Camera.main.transform.forward));
     }
     public void Pickup()
     {
@@ -83,8 +85,6 @@ public class PickupObject : MonoBehaviour
                     AS.Play();
                     carrying = true;
                     carriedObject = hit.collider.gameObject;
-                    carriedObject.GetComponent<Rigidbody>().useGravity = false;
-                    //p.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
         }
@@ -104,7 +104,6 @@ public class PickupObject : MonoBehaviour
     {
         carrying = false;
         carriedObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
-        //carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         carriedObject = null;
     }
 }
