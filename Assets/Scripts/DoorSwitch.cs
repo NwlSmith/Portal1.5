@@ -5,9 +5,14 @@ using UnityEngine;
 public class DoorSwitch : MonoBehaviour
 {
 
+    public Animator doorControl;
+    ButtonPresser ButtonPresser;
+    public ButtonController ButtonController;
+
     public void DoorOpener()
     {
-
+        ButtonController.ActivateButton();
+        doorControl.SetTrigger("Open");
         Debug.Log("Fwooosh");
 
 
@@ -16,6 +21,8 @@ public class DoorSwitch : MonoBehaviour
 
     public void DoorClosed()
     {
+        ButtonController.DeactivateButton();
+        doorControl.SetTrigger("Close");
         Debug.Log("Reverse Foowsh");
 
     }
