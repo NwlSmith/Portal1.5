@@ -15,6 +15,9 @@ public class ObjectUtility : MonoBehaviour
     public int layer;
     [HideInInspector] public Portal enteredPortal;
 
+    public AudioClip dropSound;
+    public AudioClip destroySound;
+
     // Private Variables.
     private Quaternion rotationAdjustment = Quaternion.Euler(0, 180, 0);
     private GameObject clone;
@@ -95,6 +98,7 @@ public class ObjectUtility : MonoBehaviour
     */
     private void Update()
     {
+        
         Debug.DrawRay(transform.position, rb.velocity.normalized, Color.cyan);
         // If there are not two portals, ignore this.
         if (PortalManager.instance.blue == null || PortalManager.instance.orange == null)
@@ -116,9 +120,10 @@ public class ObjectUtility : MonoBehaviour
     */
     private void OnCollisionEnter(Collision collision)
     {
-        if (rb.velocity.magnitude >= .5f)
+        if (rb.velocity.magnitude >= .5f )
         {
             audioSource.pitch = Random.Range(.95f, 1.05f);
+            audioSource.clip = dropSound;
             audioSource.Play();
         }
     }
@@ -150,12 +155,15 @@ public class ObjectUtility : MonoBehaviour
     */
     public void DestroyMe()
     {
+        
         // If the player is carrying the object, drop it.
         PickupObject po = FindObjectOfType<PickupObject>();
         if (po.carriedObject == gameObject)
             po.dropObject();
 
         // Destroy object after delay.
+        audioSource.clip = destroySound;
+        audioSource.Play();
         Destroy(gameObject, .5f);
     }
 }

@@ -13,10 +13,9 @@ public class portalShooting1 : MonoBehaviour
     public GameObject portal;
     public GameObject portalRight;
     public float speed = 50;
-
+    private AudioSource AS;
     public static bool shotOrange = false;
     public static bool shotBlue = false;
-
     public float length = 1000f;
 
     public LayerMask layerMask;
@@ -25,6 +24,10 @@ public class portalShooting1 : MonoBehaviour
 
     private Camera cam;
     private bool portalDelay;
+    
+    public AudioClip nonPortalClip;
+    public AudioClip portalClip;
+
 
     // The horizontal and vertical dimensions of the portal.
     private readonly float hor = 2.1f;
@@ -34,6 +37,7 @@ public class portalShooting1 : MonoBehaviour
 
     void Start()
     {
+        AS = GetComponent<AudioSource>();
         if (PortalManager.instance != null)
             portal = PortalManager.instance.bluePrefab;
         portalRight = PortalManager.instance.orangePrefab;
@@ -58,6 +62,8 @@ public class portalShooting1 : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
+                AS.clip = portalClip;
+                AS.Play();
                 StartCoroutine(delayPortal());
                 shotBlue = true;
                 InstantiatePortal(myHit, portal);
@@ -66,9 +72,30 @@ public class portalShooting1 : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1) && !portalDelay && myHit.collider.gameObject.tag == "CanHoldPortals")
             {
+                AS.clip = portalClip;
+                AS.Play();
                 StartCoroutine(delayPortal());
                 shotOrange = true;
                 InstantiatePortal(myHit, portalRight);
+
+            }
+            
+            //if the object isn't portable
+            
+            if (Input.GetMouseButtonDown(0) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
+            {
+                AS.clip = nonPortalClip;
+                AS.Play();
+                StartCoroutine(delayPortal());
+                
+
+            }
+            if (Input.GetMouseButtonDown(1) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
+            {
+                AS.clip = nonPortalClip;
+                AS.Play();
+                StartCoroutine(delayPortal());
+               
 
             }
         }

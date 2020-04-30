@@ -19,8 +19,11 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="AudioManager.cs" t="Include" />
+          <e p="ButtonController.cs" t="Include" />
           <e p="ButtonPresser.cs" t="Include" />
+          <e p="ButtonWire.cs" t="Include" />
           <e p="FallThroughLevelFailsafe.cs" t="Include" />
+          <e p="FollowRotation.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="MaterialEmancipationGrill.cs" t="Include" />
           <e p="MovementTest.cs" t="Include" />
