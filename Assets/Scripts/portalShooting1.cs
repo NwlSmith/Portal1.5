@@ -64,6 +64,7 @@ public class portalShooting1 : MonoBehaviour
             AS.clip = nonPortalClip;
             AS.Play();
             StartCoroutine(delayPortal());
+            animator.SetTrigger("Fail");
         }
         else
         {
@@ -97,6 +98,7 @@ public class portalShooting1 : MonoBehaviour
                     AS.clip = nonPortalClip;
                     AS.Play();
                     StartCoroutine(delayPortal());
+                    animator.SetTrigger("Fail");
 
 
                 }
@@ -105,6 +107,7 @@ public class portalShooting1 : MonoBehaviour
                     AS.clip = nonPortalClip;
                     AS.Play();
                     StartCoroutine(delayPortal());
+                    animator.SetTrigger("Fail");
 
 
                 }
@@ -182,7 +185,7 @@ public class portalShooting1 : MonoBehaviour
         int iterations = 0;
 
         // Loop until the portal doesn't move or until it loops 3 times.
-        while (moved && iterations < 3)
+        while (moved && iterations < 4)
         {
             moved = false;
             iterations++;
