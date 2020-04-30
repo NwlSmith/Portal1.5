@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class ButtonPresser : MonoBehaviour
 {
+    /*
+     * Date Created: 4/282/20
+     * Creator: Raymond Lothian
+     * 
+     * Description: Checks to see if an object is on top of a button and plays corresponding animation.
+     */
+
     //public Animation ButtonPressed;
+    
+    //
     public Animator buttonPressed;
 
     public bool playerOnButton = false;
 
-    public void DoorOpener()
-    {
-
-
-
-
-    }
+    
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class ButtonPresser : MonoBehaviour
         
     }
 
+    // Checks if a the mesh collider is being touched by anything
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log(other.gameObject.tag);
@@ -43,7 +47,7 @@ public class ButtonPresser : MonoBehaviour
 
     }
 
-
+    //Checks to see if anything has been moved from the mesh collider
     private void OnCollisionExit()
     {
 
