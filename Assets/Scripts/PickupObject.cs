@@ -14,9 +14,14 @@ public class PickupObject : MonoBehaviour
     public GameObject carriedObject;
     public float distance = 3;
     public float smooth = 4;
+    private AudioSource AS;
+    public AudioClip pickupClip;
+    public AudioClip dropClip;
 
     void Start()
     {
+        AS = GetComponent<AudioSource>();
+        
         mainCamera = GameObject.FindWithTag("MainCamera"); 
         //Find the main camera with "MainCamera" Tag
     }
@@ -29,6 +34,8 @@ public class PickupObject : MonoBehaviour
         }
         else
         {
+            //play pickup sound
+            
             Pickup();
             //if player is not carrying object, then it's able to pick up items
         }
@@ -59,6 +66,7 @@ public class PickupObject : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E)) //Press "E" key to pick up and place items
         {
+            
             int x = Screen.width / 2;
             int y = Screen.height / 2; 
             //Find the middle point of screen and raycast from there
@@ -70,6 +78,9 @@ public class PickupObject : MonoBehaviour
                 //make it able to pick up all the objects with "Pickupable" script
                 if(hit.collider.gameObject.CompareTag("CanPickUp"))
                 {
+                    //play pickup sound
+                    AS.clip = pickupClip;
+                    AS.Play();
                     carrying = true;
                     carriedObject = hit.collider.gameObject;
                     carriedObject.GetComponent<Rigidbody>().useGravity = false;
@@ -83,6 +94,8 @@ public class PickupObject : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            AS.clip = dropClip;
+            AS.Play();
             dropObject();
         }
     }

@@ -26,10 +26,19 @@ public class PlayerMovement : MonoBehaviour
     private float yInput = 0f;
     private float zInput = 0f;
 
+<<<<<<< HEAD
     public GameObject button;
 
+=======
+
+    public AudioSource AS;
+
+    public AudioClip throughPortalClip;
+>>>>>>> 78e0aa3b964121e14152492fcd63e5f98cdb5162
     void Start()
     {
+        AS = GetComponent<AudioSource>();
+        
         if (!TryGetComponent(out charController))
         {
             Debug.Log(name + " does not contain a Character Controller.");
@@ -189,6 +198,10 @@ public class PlayerMovement : MonoBehaviour
      */
     public void TeleportPlayer(Transform originPortal, Transform targetPortal)
     {
+        //play portal through sound
+        AS.clip = throughPortalClip;
+        AS.Play();
+        
         // Temporarily disable the CharacterController to allow teleportation.
         charController.enabled = false;
         transform.position = targetPortal.TransformPoint(Quaternion.Euler(0f, 180f, 0f) * originPortal.InverseTransformPoint(transform.position));
