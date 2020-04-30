@@ -122,7 +122,7 @@ public class ObjectUtility : MonoBehaviour
     {
         if (rb.velocity.magnitude >= .5f )
         {
-            audioSource.pitch = Random.Range(.95f, 1.05f);
+            audioSource.pitch = Random.Range(.9f, 1.1f);
             audioSource.clip = dropSound;
             audioSource.Play();
         }
