@@ -385,8 +385,8 @@ MonoBehaviour:
   blue: 1
   surface: {fileID: 0}
   portalCamera: {fileID: 0}
-  portalCreation: {fileID: 0}
-  portalTraversal: {fileID: 0}
+  portalCreation: {fileID: 8300000, guid: 463695fefe3174483a7bba7d133e4fe9, type: 3}
+  portalTraversal: {fileID: 8300000, guid: a0180beb14edc446ab9b5885e58b6d9c, type: 3}
 --- !u!95 &529281112
 Animator:
   serializedVersion: 3

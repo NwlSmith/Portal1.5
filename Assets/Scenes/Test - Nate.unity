@@ -4450,14 +4450,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 189482776, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
-      propertyPath: aimer
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 314853600, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
-      propertyPath: aimer
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4107041441210495498, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4518,6 +4510,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: First Person Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 189482776, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}

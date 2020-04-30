@@ -129,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer: 0
   enteredPortal: {fileID: 0}
+  dropSound: {fileID: 8300000, guid: 2937faef8f94342e1b044c1f5d316079, type: 3}
+  destroySound: {fileID: 8300000, guid: aa66b82b4e04d4660bccebe521333257, type: 3}
 --- !u!82 &215065669
 AudioSource:
   m_ObjectHideFlags: 0
