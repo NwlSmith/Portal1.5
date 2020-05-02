@@ -4,9 +4,9 @@
 
 Intermediate Game Development Final at NYU Game Center
 
-Development Period: 3/31/2020 - ADD TO THIS
+Development Period: 3/31/2020 - 5/3/2020
 
-Tools: Unity, Blender - ADD TO THIS
+Tools: Unity, Blender, Adobe Photoshop, Adobe Illustrator, Audacity
 
 A clone of Portal 1 by Valve.
 

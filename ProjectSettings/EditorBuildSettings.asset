@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Last Level.unity
     guid: c02c055647bde0e4fbbccf1adf0a3fb3
+  - enabled: 1
+    path: Assets/Scenes/TrailerTitleScreen.unity
+    guid: ae19ab620ce97404fb7524670ee5e2fa
   m_configObjects: {}
