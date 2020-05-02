@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6054058774237248251, guid: 1aa499cfa67a9ca4892e0c4083ffee0a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff4b966245ba41d45bf3aab42e08ace2, type: 2}
     - target: {fileID: -5680801420787267438, guid: 1aa499cfa67a9ca4892e0c4083ffee0a,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -227,7 +232,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 1aa499cfa67a9ca4892e0c4083ffee0a,
         type: 3}
       propertyPath: m_Name
-      value: Isabella_button_RayEdit
+      value: WorkingButton
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 1aa499cfa67a9ca4892e0c4083ffee0a,
         type: 3}
