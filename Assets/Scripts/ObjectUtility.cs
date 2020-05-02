@@ -121,7 +121,7 @@ public class ObjectUtility : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         int otherLayer = collision.gameObject.layer;
-        bool shouldCollide = (layer == 12 && (otherLayer == 15 || otherLayer == 17)) || (layer == 13 && (otherLayer == 16 || otherLayer == 17)) || (layer == 14 && (otherLayer == 15 || otherLayer == 16 || otherLayer == 17));
+        bool shouldCollide = true; // (layer == 12 && (otherLayer == 15 || otherLayer == 17)) || (layer == 13 && (otherLayer == 16 || otherLayer == 17)) || (layer == 14 && (otherLayer == 15 || otherLayer == 16 || otherLayer == 17));
         if (rb.velocity.magnitude >= .5f && shouldCollide)
         {
             audioSource.pitch = Random.Range(.9f, 1.1f);

@@ -41,7 +41,6 @@ public class portalShooting1 : MonoBehaviour
         if (PortalManager.instance != null)
             portal = PortalManager.instance.bluePrefab;
         portalRight = PortalManager.instance.orangePrefab;
-        // ball = GetComponent<GameObject>();
     }
 
     void Update()
@@ -61,10 +60,10 @@ public class portalShooting1 : MonoBehaviour
         Physics.Raycast(myRay, out myHit, length, layerMask, QueryTriggerInteraction.Collide);
         if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && myHit.collider.GetComponent<MaterialEmancipationGrill>())
         {
+            ShotFail();
             AS.clip = nonPortalClip;
             AS.Play();
             StartCoroutine(delayPortal());
-            animator.SetTrigger("Fail");
         }
         else
         {
@@ -95,24 +94,25 @@ public class portalShooting1 : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
                 {
+                    ShotFail();
                     AS.clip = nonPortalClip;
                     AS.Play();
                     StartCoroutine(delayPortal());
-                    animator.SetTrigger("Fail");
-
-
                 }
                 if (Input.GetMouseButtonDown(1) && !portalDelay && !(myHit.collider.gameObject.tag == "CanHoldPortals"))
                 {
+                    ShotFail();
                     AS.clip = nonPortalClip;
                     AS.Play();
                     StartCoroutine(delayPortal());
-                    animator.SetTrigger("Fail");
-
-
                 }
             }
         }
+    }
+
+    public void ShotFail()
+    {
+        animator.SetTrigger("Fail");
     }
 
     /*
