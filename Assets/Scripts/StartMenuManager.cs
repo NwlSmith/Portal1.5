@@ -41,6 +41,8 @@ public class StartMenuManager : MonoBehaviour
         orange.GetComponent<Portal>().surface = hit.collider.gameObject;
 
         StartCoroutine(FadeInCO());
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     /*
@@ -126,13 +128,16 @@ public class StartMenuManager : MonoBehaviour
         elapsedTime = 0f;
         startVal = 0f;
         targetVal = 1f;
+        float startVol = audioSource.volume;
         while (elapsedTime < duration)
         {
             elapsedTime += Time.unscaledDeltaTime;
             imgCanvasGroup.alpha = Mathf.SmoothStep(startVal, targetVal, (elapsedTime / duration));
+            audioSource.volume = Mathf.SmoothStep(startVol, 0f, (elapsedTime / duration));
             yield return null;
         }
         imgCanvasGroup.alpha = targetVal;
+        audioSource.volume = 0f;
 
         SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
     }

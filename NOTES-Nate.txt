@@ -1,9 +1,5 @@
 # Nate's Notes
 
-
-- Hide and lock mouse cursor in menu manager type thing
-- May need to use rigidbody for physics bc right now it probably won't use in-air physics.
-- Jump key doesn't always work
 - Movement causes stuttering - https://forum.unity.com/threads/update-or-fixedupdate-for-charactercontroller.177705/
 - Portal functionality oh god https://www.youtube.com/watch?v=_SmPR5mvH7w
 - Clipping and projection matrices: https://danielilett.com/2019-12-18-tut4-3-matrix-matching/
@@ -12,5 +8,4 @@
 - Portal developers: https://www.youtube.com/watch?v=ivyseNMVt-4&feature=youtu.be&t=3642
 
 
-recursive portal idea:
-Each frame, render a camera to a queue. most recent one in closest portal, next oldest in next portal etc. oldest rendertexture in last recursion
+

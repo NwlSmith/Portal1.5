@@ -94,5 +94,7 @@ public class PortalManager : MonoBehaviour
             orange = null;
             portalShooting1.shotOrange = false;
         }
+
+        FindObjectOfType<portalShooting1>().ShotFail();
     }
 }
