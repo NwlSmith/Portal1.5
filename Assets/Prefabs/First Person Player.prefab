@@ -140,6 +140,7 @@ MonoBehaviour:
   maxRadius: 0.5
   onGround: 0
   physicsVector: {x: 0, y: 0, z: 0}
+  walkCycle: {fileID: 6465903576479812493}
   button: {fileID: 0}
   AS: {fileID: 0}
   throughPortalClip: {fileID: 0}
