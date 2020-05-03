@@ -10,8 +10,13 @@ PrefabInstance:
     - target: {fileID: 21729196206588702, guid: 3bacd5e622954814f92deda909592d89,
         type: 3}
       propertyPath: m_Name
-      value: Door 1
+      value: WorkingDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 937093929430623379, guid: 3bacd5e622954814f92deda909592d89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff4b966245ba41d45bf3aab42e08ace2, type: 2}
     - target: {fileID: 3897420511674691853, guid: 3bacd5e622954814f92deda909592d89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,5 +72,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6383700868904640274, guid: 3bacd5e622954814f92deda909592d89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff4b966245ba41d45bf3aab42e08ace2, type: 2}
+    - target: {fileID: 7265275610996209095, guid: 3bacd5e622954814f92deda909592d89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff4b966245ba41d45bf3aab42e08ace2, type: 2}
+    - target: {fileID: 9052994509155071513, guid: 3bacd5e622954814f92deda909592d89,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff4b966245ba41d45bf3aab42e08ace2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bacd5e622954814f92deda909592d89, type: 3}
