@@ -125,15 +125,17 @@ public class PlayerMovement : MonoBehaviour
         if (onGround && !charController.isGrounded)
         {
             physicsVector += moveVector * moveSpeed;
-            walkCycle.SetTrigger("ifMoving");
+            
         }
+        
         onGround = charController.isGrounded;
         if (onGround)
         {
+            //walkCycle.SetTrigger("ifNotMoving");
             // When on the ground, the player shouldn't have any horizontal velocity other than input movement.
             physicsVector.x = 0f;
             physicsVector.z = 0f;
-            walkCycle.SetTrigger("ifNotMoving");
+            
             // When on the ground, the player's vertical velocity doesn't need to increase with gravity.
             if (physicsVector.y < 0f)
                 physicsVector.y = -2f;
@@ -145,6 +147,19 @@ public class PlayerMovement : MonoBehaviour
                 physicsVector.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 onGround = false;
             }
+
+            //if the velocity is more than 0.01f the animation for walking will play
+            if (charController.velocity.magnitude <= 0.01f)
+            {
+                walkCycle.SetBool("ifMovingBool", false);
+
+            }
+
+            //if the player isn't moving then the idle animation will start
+            if (charController.velocity.magnitude > 0.01f)
+            {
+                walkCycle.SetBool("ifMovingBool", true);
+            }
         }
         // Increment physics gravity.
         physicsVector.y += gravity * Time.fixedDeltaTime;
@@ -154,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Move player according to its input and physics
         charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
+        //walkCycle.SetTrigger("ifMoving");
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
