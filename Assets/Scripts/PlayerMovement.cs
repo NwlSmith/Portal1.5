@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool onGround = false;
     public Vector3 physicsVector;
 
+    public Animator walkCycle;
+
     private CharacterController charController;
     private PlayerLook playerLook;
     private FollowRotation followRotation;
@@ -123,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
         if (onGround && !charController.isGrounded)
         {
             physicsVector += moveVector * moveSpeed;
+            walkCycle.SetTrigger("ifMoving");
         }
         onGround = charController.isGrounded;
         if (onGround)
@@ -130,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
             // When on the ground, the player shouldn't have any horizontal velocity other than input movement.
             physicsVector.x = 0f;
             physicsVector.z = 0f;
+            walkCycle.SetTrigger("ifNotMoving");
             // When on the ground, the player's vertical velocity doesn't need to increase with gravity.
             if (physicsVector.y < 0f)
                 physicsVector.y = -2f;
