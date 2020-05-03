@@ -5719,6 +5719,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObservationRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 3716754228432605630, guid: c0c25b0a2ad488e448defa691f68d7af,
+        type: 3}
+      propertyPath: m_TagString
+      value: NoPortal
+      objectReference: {fileID: 0}
     - target: {fileID: 4662770776832359106, guid: c0c25b0a2ad488e448defa691f68d7af,
         type: 3}
       propertyPath: m_Range
