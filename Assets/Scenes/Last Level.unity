@@ -1525,6 +1525,11 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 7.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4107041441210495499, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+        type: 3}
+      propertyPath: walkCycle
+      value: 
+      objectReference: {fileID: 151820356}
     - target: {fileID: 4107041441210495500, guid: 50a8109d81d88a54f983f6bf80e53fb2,
         type: 3}
       propertyPath: m_Name
@@ -1552,6 +1557,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50a8109d81d88a54f983f6bf80e53fb2, type: 3}
+--- !u!95 &151820356 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6465903576479812493, guid: 50a8109d81d88a54f983f6bf80e53fb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 151820355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &153566476
 Mesh:
   m_ObjectHideFlags: 0
