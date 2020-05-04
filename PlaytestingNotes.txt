@@ -1,0 +1,3 @@
+5/4/20
+-if making two portals on the ground, it's possible to use momentum to gain higher altitude.
+-the cube detection is a little messed up when trying to pick up.
