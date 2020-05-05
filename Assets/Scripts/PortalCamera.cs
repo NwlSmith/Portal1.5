@@ -139,7 +139,7 @@ public class PortalCamera : MonoBehaviour
             DestroyImmediate(cube);
         }
     }
-
+    /*
     private void OnPreRender()
     {
         if (GameManager.instance.debug)
@@ -181,7 +181,7 @@ public class PortalCamera : MonoBehaviour
 
         // Render the camera to its render target.
         cam.Render();
-    }
+    }*/
 
     /*
      * Sets the other portal's camera's RenderTexture to the images captured on this camera.

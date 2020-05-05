@@ -133,10 +133,11 @@ public class Portal : MonoBehaviour
         // THEN Teleport it.
         if (GameManager.instance.debug)
             Debug.Log("Teleported object" + otherRB.name);
-        otherRB.TeleportObject(transform, Other().transform);
+        ObjectUtility oU = otherRB.GetComponent<ObjectUtility>();
+        oU.TeleportObject(transform, Other().transform);
         GetComponentInChildren<PortalWallDisable>().StartCollidingWithPortalSurface(otherRB.gameObject);
         Other().GetComponentInChildren<PortalWallDisable>().StopCollidingWithPortalSurface(otherRB.gameObject);
-        otherRB.GetComponent<ObjectUtility>().enteredPortal = Other();
+        oU.enteredPortal = Other();
     }
 
     /*

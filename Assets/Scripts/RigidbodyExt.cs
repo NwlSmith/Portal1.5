@@ -29,6 +29,7 @@ public static class RigidbodyExt
      */
     public static void TeleportObject(this Rigidbody rb, Transform originPortal, Transform targetPortal)
     {
+        Vector3 vel = rb.velocity;
         // Move the object to the target portal.
         rb.transform.position = targetPortal.TransformPoint(Quaternion.Euler(0f, 180f, 0f) * originPortal.InverseTransformPoint(rb.position));
 
@@ -41,7 +42,18 @@ public static class RigidbodyExt
 
         bool wasMovingDown = rb.velocity.y < 0f && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x) && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.z);
 
-        rb.velocity = targetPortal.forward.normalized * (rb.velocity.magnitude + 0.1f);
+        Debug.Log("velocity = " + rb.velocity + " vel = "+vel);
+
+        if (rb.velocity.magnitude < 2f)
+        {
+            Debug.Log("vel < 2");
+            rb.velocity = targetPortal.forward.normalized * (rb.velocity.magnitude + 0.1f);
+        }
+        else
+        {
+            Debug.Log("vel NOT < 2");
+            rb.velocity = targetPortal.forward.normalized * (rb.velocity.magnitude + 0.1f);
+        }
 
         bool willMoveUp = rb.velocity.y > 0f && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x) && Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.z);
         if (GameManager.instance.debug)
@@ -54,7 +66,10 @@ public static class RigidbodyExt
         // Transfer velocity to new direction.
         // If the object is going to exit the portal moving upwards, give it a minimum velocity.
         if (wasMovingDown || willMoveUp)
+        {
+            Debug.Log("vel was moving down / will move up");
             rb.velocity = targetPortal.forward.normalized * Mathf.Max(rb.velocity.magnitude, 4f);
+        }
         
     }
 }

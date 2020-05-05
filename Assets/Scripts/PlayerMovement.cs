@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         physicsVector.y += gravity * Time.fixedDeltaTime;
 
         // Clamp velocity.
-        physicsVector.y = Mathf.Clamp(physicsVector.y, -100f, 100f);
+        physicsVector.y = Mathf.Clamp(physicsVector.y, -maxVelocity, maxVelocity);
 
         // Move player according to its input and physics
         charController.Move((moveVector * moveSpeed + physicsVector) * Time.fixedDeltaTime);
@@ -216,7 +216,10 @@ public class PlayerMovement : MonoBehaviour
         //play portal through sound
         AS.clip = throughPortalClip;
         AS.Play();
-        
+
+        //float speed = physicsVector.magnitude;
+        float speed = charController.velocity.magnitude;
+
         // Temporarily disable the CharacterController to allow teleportation.
         charController.enabled = false;
         transform.position = targetPortal.TransformPoint(Quaternion.Euler(0f, 180f, 0f) * originPortal.InverseTransformPoint(transform.position));
@@ -227,7 +230,12 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(dirTransformVector);
 
         // Transfer velocity to new direction.
-        physicsVector = targetPortal.forward * physicsVector.magnitude;
+        physicsVector = targetPortal.forward * speed;
+
+        if (originPortal.forward == Vector3.up && targetPortal.forward == Vector3.up)
+        {
+            physicsVector.y += 35 * gravity * Time.fixedDeltaTime;
+        }
 
         followRotation.Teleport();
     }

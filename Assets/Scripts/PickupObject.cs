@@ -17,6 +17,7 @@ public class PickupObject : MonoBehaviour
     private AudioSource AS;
     public AudioClip pickupClip;
     public AudioClip dropClip;
+    public LayerMask layerMask;
 
 
     void Start()
@@ -75,7 +76,9 @@ public class PickupObject : MonoBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y)); //assign the origin point to cast a ray
             RaycastHit hit;
-            if(Physics.Raycast(ray, out hit, 3)) //Casts a ray(Vector3 origin, Vector3 direction, float maxDistance), against all colliders in the Scene
+            
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.cyan);
+            if(Physics.Raycast(ray, out hit, 3, layerMask, QueryTriggerInteraction.Ignore)) //Casts a ray(Vector3 origin, Vector3 direction, float maxDistance), against all colliders in the Scene
             {
                 //make it able to pick up all the objects with "Pickupable" script
                 if(hit.collider.gameObject.CompareTag("CanPickUp"))
