@@ -3442,7 +3442,7 @@ ReflectionProbe:
   m_BoxSize: {x: 1, y: 1, z: 1}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: 0.3
-  m_FarClip: 30
+  m_FarClip: 60
   m_ShadowDistance: 100
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.45603418, g: 0.4929991, b: 0.5283019, a: 0}
