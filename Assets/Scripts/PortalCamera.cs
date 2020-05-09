@@ -76,9 +76,6 @@ public class PortalCamera : MonoBehaviour
         Portal otherPortal = parentPortal.Other();
         if (otherPortal != null)
         {
-            cam.projectionMatrix = Camera.main.projectionMatrix;
-
-
             // The relative local position of the player to the other portal's forward vector.
             TransformPosLoc(otherPortal.transform);
 
@@ -102,15 +99,8 @@ public class PortalCamera : MonoBehaviour
             transform.Translate(originalLocalPos);
             transform.rotation *= originalLocalRot;
 
-            Debug.Log("transform.localRot " + transform.localEulerAngles + "transform.localPos " + transform.localPosition);
-
-
             // Set the nearest objects that can be rendered to those past the plane formed by the portal.
             CalculateProjectionMatrix();
-
-
-            Debug.DrawRay(transform.position, transform.forward, Color.red);
-
 
             if (index == 0)
             {
