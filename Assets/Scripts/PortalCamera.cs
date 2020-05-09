@@ -69,12 +69,6 @@ public class PortalCamera : MonoBehaviour
 
 
          }
-     }
-
-     /*
-     private void LateUpdate()
-     {
-         Graphics.Blit(rt, prevRT);
      }*/
 
     public void Render(int index, int maxNumRecursions)
@@ -86,16 +80,12 @@ public class PortalCamera : MonoBehaviour
 
 
             // The relative local position of the player to the other portal's forward vector.
-            Vector3 relativePos = otherPortal.transform.InverseTransformPoint(Camera.main.transform.position);
-            Vector3 adjustedRelativePos = Vector3.Scale(relativePos, new Vector3(-1, 1, -1));
-            transform.localPosition = relativePos;
+            TransformPosLoc(otherPortal.transform);
 
             // The relative local rotation of the player to the other portal's forward vector.
-            Quaternion localRot = Quaternion.Inverse(otherPortal.transform.rotation) * Camera.main.transform.rotation;
-            transform.localRotation = localRot;
-            transform.RotateAround(parentPortal.transform.position, parentPortal.transform.up, 180);
+            TransformRotLoc(otherPortal.transform);
 
-            adjustedRelativePos = parentPortal.transform.InverseTransformPoint(otherPortal.transform.position);
+            Vector3 adjustedRelativePos = parentPortal.transform.InverseTransformPoint(otherPortal.transform.position);
             Quaternion adjustedRelativeRot = parentPortal.transform.rotation * Quaternion.Inverse(otherPortal.transform.rotation * Quaternion.Euler(0, 180, 0));
             
             Vector3 originalLocalPos = transform.localPosition;
@@ -116,10 +106,7 @@ public class PortalCamera : MonoBehaviour
 
 
             // Set the nearest objects that can be rendered to those past the plane formed by the portal.
-            Plane portalPlane = new Plane(parentPortal.transform.forward, parentPortal.transform.position + parentPortal.transform.forward * .02f);
-            Vector4 clipPlane = new Vector4(portalPlane.normal.x, portalPlane.normal.y, portalPlane.normal.z, portalPlane.distance);
-            Vector4 clipPlaneCameraSpace = Matrix4x4.Transpose(Matrix4x4.Inverse(cam.worldToCameraMatrix)) * clipPlane;
-            cam.projectionMatrix = Camera.main.CalculateObliqueMatrix(clipPlaneCameraSpace);
+            CalculateProjectionMatrix();
 
 
             Debug.DrawRay(transform.position, transform.forward, Color.red);
@@ -129,56 +116,7 @@ public class PortalCamera : MonoBehaviour
             {
                 RenderTexture previousActive = RenderTexture.active;
                 RenderTexture.active = rt;
-                GL.Clear(true, true, Color.red);
-                RenderTexture.active = previousActive;
-            }
-            cam.Render();
-
-        }
-    }
-
-    public void Render1(int index, int maxNumRecursions)
-    {
-        Portal otherPortal = parentPortal.Other();
-        if (otherPortal != null)
-        {
-            cam.projectionMatrix = Camera.main.projectionMatrix;
-
-
-            // The relative local position of the player to the other portal's forward vector.
-            Vector3 relativePos = otherPortal.transform.InverseTransformPoint(Camera.main.transform.position);
-            Vector3 adjustedRelativePos = Vector3.Scale(relativePos, new Vector3(-1, 1, -1));
-            transform.localPosition = adjustedRelativePos;
-
-            // The relative local rotation of the player to the other portal's forward vector.
-            Quaternion localRot = Quaternion.Inverse(otherPortal.transform.rotation) * Camera.main.transform.rotation;
-            Vector3 adjustedLocalRot = localRot.eulerAngles - new Vector3(0, -180, 0);
-            transform.localRotation = Quaternion.Euler(adjustedLocalRot);
-
-            for(int i = 0; i < (maxNumRecursions - 1 - index); i++)
-            {
-                transform.localRotation *= Quaternion.Euler(adjustedLocalRot);
-                transform.localPosition += adjustedRelativePos;
-            }
-
-            Debug.Log("transform.localRot " + transform.localEulerAngles + "transform.localPos " + transform.localPosition);
-
-
-            // Set the nearest objects that can be rendered to those past the plane formed by the portal.
-            Plane portalPlane = new Plane(parentPortal.transform.forward, parentPortal.transform.position);
-            Vector4 clipPlane = new Vector4(portalPlane.normal.x, portalPlane.normal.y, portalPlane.normal.z, portalPlane.distance);
-            Vector4 clipPlaneCameraSpace = Matrix4x4.Transpose(Matrix4x4.Inverse(cam.worldToCameraMatrix)) * clipPlane;
-            cam.projectionMatrix = Camera.main.CalculateObliqueMatrix(clipPlaneCameraSpace);
-            
-
-            Debug.DrawRay(transform.position, transform.forward, Color.red);
-
-
-            if (index == 0)
-            {
-                RenderTexture previousActive = RenderTexture.active;
-                RenderTexture.active = rt;
-                GL.Clear(true, true, Color.red);
+                GL.Clear(true, true, Color.black);
                 RenderTexture.active = previousActive;
             }
             cam.Render();
@@ -205,8 +143,8 @@ public class PortalCamera : MonoBehaviour
     private void TransformRotLoc(Transform otherPortalTrans)
     {
         Quaternion localRot = Quaternion.Inverse(otherPortalTrans.rotation) * Camera.main.transform.rotation;
-        Vector3 relativeRot = localRot.eulerAngles - new Vector3(0, -180, 0);
-        transform.localRotation = Quaternion.Euler(relativeRot);
+        transform.localRotation = localRot;
+        transform.RotateAround(transform.position, parentPortal.transform.up, 180f);
     }
 
     /*
